@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+  @layer base {
+    :root {
+      --background: 240 10% 3.9%; /* Representação HSL do zinc-950 */
+      --foreground: 0 0% 98%;
+    }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-zinc-950 text-zinc-100 antialiased;
+    /* Melhora a renderização de fontes */
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Scrollbar personalizada minimalista */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-zinc-950;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-zinc-800 rounded-full hover:bg-zinc-700 transition-colors;
+}
