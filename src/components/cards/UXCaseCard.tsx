@@ -1,12 +1,20 @@
 import { motion } from "framer-motion";
-import type { UX_CASES } from "../../data/content";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
+import type { UX_CASES } from "../../data/content";
 
 export const UXCase = ({ data }: { data: typeof UX_CASES[0] }) => {
     const [isHovered, setIsHovered] = useState(false);
+    const navigate = useNavigate();
+
+
+    const handleCardClick = () => {
+        navigate(`/case/${data.id}`); 
+    };
 
     return (
         <motion.div
+            onClick={handleCardClick} // Adicionado o clique aqui
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             className="relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer group border border-white/5"
