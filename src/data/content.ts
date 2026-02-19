@@ -6,7 +6,7 @@ export const CAREER_DATA = [
     sector: "Agronegócio & Indústria",
     stack: ["Análise de requisitos", "Prototipação", "Desenvolvimento Front-end"],
     impact:
-        "Refatoração de interfaces legadas para ecossistemas modernos, reuniões com stakeholders para baseados nos principios do design thinking.",
+        "Refatoração de interfaces legadas visando alta performance e UX, definições estratégicas junto a stakeholders guiadas por Design Thinking.",
     },
     {
     company: "Prodan Software",
@@ -15,7 +15,7 @@ export const CAREER_DATA = [
     sector: "Software House",
     stack: ["React", "Tailwind", "Figma", "Postman", "Git"],
     impact:
-        "Desenvolvimento de dashboards, cadastros e experiências para o sistema de gestão comercial, integração com API's para captação de dados.",
+        "Construção de ecossistema front-end para gestão comercial, incluindo painéis de decisão interativos e integração de dados em tempo real via APIs.",
     },
 ];
 
