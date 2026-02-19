@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { SectionTitle } from '../components/ui/SectionTitle';
 import { CareerCard } from '../components/cards/CareerCard';
 import { CAREER_DATA } from '../data/content';

@@ -1,73 +1,27 @@
-# React + TypeScript + Vite
+# Portfolio - João Samuel Gomes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um portfólio interativo desenvolvido com **React**, **TypeScript** e **Framer Motion**, utilizando **Sanity.io** como Headless CMS para gerenciamento dinâmico de conteúdo (como a seção Playground).
 
-Currently, two official plugins are available:
+## 🏗 Arquitetura do Projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+O projeto está dividido em duas partes principais:
 
-## React Compiler
+1.  **Frontend (Raiz):** Aplicação React + Vite (Porta `3000`).
+2.  **CMS (Pasta `/studio`):** Painel administrativo Sanity V3 (Porta `3333`).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Como Rodar o Projeto
 
-## Expanding the ESLint configuration
+Para desenvolver, você precisará de **dois terminais** abertos simultaneamente (um para o site e outro para o CMS).
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1. Instalação das Dependências
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Primeiro, instale as dependências de ambas as partes:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+```bash
+# 1. Instalar dependências do Frontend (Raiz)
+npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+# 2. Instalar dependências do Sanity (Studio)
+cd studio
+npm install
+cd ..
