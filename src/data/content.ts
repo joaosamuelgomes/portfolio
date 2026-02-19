@@ -9,28 +9,79 @@ export const CAREER_DATA = [
         "Refatoração de interfaces legadas visando alta performance e UX, definições estratégicas junto a stakeholders guiadas por Design Thinking.",
     },
     {
-    company: "Prodan Software",
-    role: "Desenvolvedor Front-end",
-    period: "2019 - 2023",
-    sector: "Software House",
-    stack: ["React", "Tailwind", "Figma", "Postman", "Git"],
-    impact:
+        company: "Prodan Software",
+        role: "Desenvolvedor Front-end",
+        period: "2019 - 2023",
+        sector: "Software House",
+        stack: ["React", "Tailwind", "Figma", "Postman", "Git"],
+        impact:
         "Construção de ecossistema front-end para gestão comercial, incluindo painéis de decisão interativos e integração de dados em tempo real via APIs.",
     },
 ];
 
+// src/data/content.ts
+
 export const UX_CASES = [
     {
         id: 1,
-        title: "AgroFlow System",
+        title: "LogiTrack (AgroFlow)",
         category: "SaaS Complexo",
-        process: ["Imersão em campo", "Definição de Personas", "Prototipação em Alta", "Testes de Usabilidade"],
+        process: ["Imersão", "Personas", "Prototipação", "Testes"],
+
+        // --- NOVOS DADOS PARA A PÁGINA DE DETALHES ---
+        details: {
+        heroSubtitle: "Como a reestruturação visual diminuiu o tempo de triagem em 40%.",
+        role: "UX/UI Designer & Front-end",
+        timeline: "8 Semanas",
+        platform: "Desktop SaaS",
+        sector: "Logística & Supply Chain",
+
+        challenge:
+            "A plataforma exibia uma tabela de dados densa, sem hierarquia visual, contendo mais de 25 colunas. O despachante levava em média 3 minutos para encontrar a frota.",
+        painPoints: ["Falta de contraste entre status", "Scroll horizontal excessivo", "Necessidade de abrir novas abas"],
+
+        strategy:
+            "Iniciamos mapeando a jornada para entender os gargalos. Estruturamos a arquitetura de informação, priorizando dados emergenciais e validamos os padrões de interação com a equipe da central de controle.",
+
+        features: [
+            {
+            title: "Progressive Disclosure",
+            desc: "Reduzimos as 25 colunas para 8. Dados secundários foram movidos para um Side-sheet.",
+            },
+            {
+            title: "Ações Contextuais",
+            desc: "Implementamos ações rápidas ativadas por hover na tabela para comunicação rápida.",
+            },
+        ],
+
+        results: [
+            { value: "40%", label: "Redução no tempo de triagem" },
+            { value: "Zero", label: "Necessidade de abas paralelas" },
+            { value: "+85%", label: "Satisfação no SUS" },
+        ],
+        conclusion:
+            "O projeto reforçou que a tecnologia não deve apenas processar dados, mas curá-los para o consumo humano.",
+        },
     },
     {
         id: 2,
         title: "Finance App Redesign",
         category: "Mobile App",
-        process: ["Análise Heurística", "Jornada do Usuário", "Design System", "Hand-off"],
+        process: ["Análise Heurística", "Jornada", "Design System", "Hand-off"],
+        details: {
+        // Preencha com os dados do segundo case...
+        heroSubtitle: "Simplificando a gestão financeira pessoal.",
+        role: "Product Designer",
+        timeline: "4 Semanas",
+        platform: "iOS & Android",
+        sector: "Fintech",
+        challenge: "O aplicativo antigo tinha uma taxa de abandono de 60% no onboarding...",
+        painPoints: ["Onboarding longo", "Linguagem muito técnica"],
+        strategy: "Redesenhamos o fluxo usando gamificação...",
+        features: [],
+        results: [],
+        conclusion: "A simplificação aumentou a retenção.",
+        },
     },
 ];
 
