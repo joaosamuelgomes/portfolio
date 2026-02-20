@@ -31,7 +31,7 @@ export const Header = () => {
                     onClick={(e) => handleScroll(e, '#hero')}
                     className="font-bold text-xl tracking-tighter text-white cursor-pointer hover:opacity-80 transition-opacity"
                 >
-                    JOAO<span className="text-blue-500">.</span>SAMUEL<span className="text-blue-500">.</span>GOMES
+                    JOAO<span className="text-blue-500">.</span>GOMES
                 </span>
 
                 <nav className="hidden md:flex gap-8 text-sm font-medium text-zinc-400">
