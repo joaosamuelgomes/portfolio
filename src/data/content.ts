@@ -19,10 +19,8 @@ export const CAREER_DATA = [
     },
 ];
 
-// src/data/content.ts
-
 export const UX_CASES = [
-{
+    {
         id: 1,
         title: "LogiTrack",
         category: "SaaS Complexo B2B",
@@ -38,6 +36,8 @@ export const UX_CASES = [
             challenge:
                 "Em operações logísticas de escala nacional, o tempo de resposta é o ativo mais valioso. O módulo de monitoramento legado exibia uma tabela de dados densa, sem hierarquia visual, contendo mais de 25 colunas cruas. Em momentos de crise, os controladores de tráfego levavam em média 3 minutos apenas para cruzar dados, encontrar o contato do motorista e identificar o gargalo de uma frota, resultando em multas por atraso de entrega e estresse operacional extremo.",
 
+            challengeImage: "/logitrack-1.png",
+
             painPoints: [
                 "Carga cognitiva altíssima devido à falta de priorização visual dos dados.",
                 "Ausência de indicadores claros para status críticos (quebras, acidentes ou atrasos).",
@@ -48,10 +48,14 @@ export const UX_CASES = [
             strategy:
                 "A abordagem foi fundamentada em Design Thinking e imersão real no problema. Conduzimos sessões de observação in loco com os controladores de tráfego para mapear a jornada e identificar os microssegundos perdidos na interface. A solução técnica focou em reestruturar a arquitetura de informação, escondendo o 'ruído' e elevando os dados acionáveis através do princípio de Progressive Disclosure (revelação progressiva).",
 
+            strategyImage: "/logitrack-2.png",
+            solutionImage: "/logitrack-3.png",
+
             features: [
                 {
                     title: "Progressive Disclosure (Side-sheets)",
-                    desc: "Reduzimos as 25 colunas iniciais para as 8 estritamente essenciais. Dados secundários, como histórico do motorista e detalhes da nota fiscal, foram movidos para um painel lateral contextual que desliza sem tirar o usuário da tela principal."
+                    desc: "Reduzimos as 25 colunas iniciais para as 8 estritamente essenciais. Dados secundários, como histórico do motorista e detalhes da nota fiscal, foram movidos para um painel lateral contextual que desliza sem tirar o usuário da tela principal.",
+                    image: "/logitrack-4.png"
                 },
                 {
                     title: "Sistema de Triagem Visual",

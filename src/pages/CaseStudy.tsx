@@ -2,16 +2,16 @@ import { useEffect } from 'react';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { ArrowLeft, AlertCircle, CheckCircle2, LayoutDashboard } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { UX_CASES } from '../data/content'; 
 
 export const CaseStudy = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    // Busca o case correto baseado no ID da URL
     const caseData = UX_CASES.find((item) => item.id.toString() === id);
 
+    // Indicador de progresso no topo
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
@@ -19,141 +19,160 @@ export const CaseStudy = () => {
         window.scrollTo(0, 0);
     }, [id]);
 
-    // Se o usuário digitar uma URL de um case que não existe, redireciona para a home
     if (!caseData || !caseData.details) {
         return <Navigate to="/" replace />;
     }
 
-    const { details } = caseData; // Desestruturando para facilitar o uso
+    const { details } = caseData; 
 
+    // Animação padrão e limpa
     const fadeUp: Variants = {
-        hidden: { opacity: 0, y: 40 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
     };
 
     return (
-        <div className="min-h-screen bg-zinc-950 text-zinc-300 font-sans pb-32">
-            <motion.div className="fixed top-0 left-0 right-0 h-1 bg-blue-500 origin-left z-50" style={{ scaleX }} />
+        <article className="min-h-screen bg-zinc-950 text-zinc-300 font-sans pb-32">
+            {/* Barra de Progresso */}
+            <motion.div className="fixed top-0 left-0 right-0 h-1 bg-white origin-left z-50" style={{ scaleX }} />
 
+            {/* Botão Voltar */}
             <motion.button
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
                 onClick={() => navigate('/')}
-                className="fixed top-8 left-6 md:top-12 md:left-12 z-40 group flex items-center justify-center w-12 h-12 bg-zinc-900/80 backdrop-blur-md border border-white/10 rounded-full hover:bg-white hover:text-zinc-950 transition-all duration-300 shadow-2xl"
+                className="fixed top-8 left-6 md:top-12 md:left-12 z-40 group flex items-center gap-3 text-zinc-500 hover:text-white transition-colors duration-300"
             >
-                <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+                <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white/10 group-hover:bg-white/10 transition-colors">
+                    <ArrowLeft size={18} />
+                </div>
+                <span className="text-sm font-medium tracking-wide uppercase hidden md:block">Voltar</span>
             </motion.button>
 
-            {/* Hero Dinâmico */}
-            <header className="relative pt-32 pb-20 px-6 max-w-4xl mx-auto border-b border-white/5">
-                <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-                    <span className="text-blue-400 text-sm font-semibold tracking-widest uppercase mb-4 block">
-                        {caseData.category}
-                    </span>
-                    <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tighter leading-tight">
-                        {caseData.title}
-                    </h1>
-                    <p className="text-xl text-zinc-400 leading-relaxed mb-10">
-                        {details.heroSubtitle}
-                    </p>
+            {/* HEADER: Centralizado e Tipográfico */}
+            <header className="pt-32 pb-20 border-b border-zinc-900">
+                <div className="max-w-3xl mx-auto px-6 text-center">
+                    <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+                        <span className="text-zinc-500 text-xs font-semibold tracking-[0.2em] uppercase mb-6 block">
+                            {caseData.category}
+                        </span>
+                        <h1 className="text-4xl md:text-6xl font-light text-white mb-6 tracking-tight leading-tight">
+                            {caseData.title}
+                        </h1>
+                        <p className="text-xl md:text-2xl text-zinc-400 font-light leading-relaxed mb-16">
+                            {details.heroSubtitle}
+                        </p>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-white/5 text-sm">
-                        <div>
-                            <span className="block text-zinc-500 mb-1 uppercase tracking-wider text-xs">Papel</span>
-                            <span className="text-zinc-200 font-medium">{details.role}</span>
+                        <div className="flex flex-wrap justify-center gap-8 md:gap-16 pt-12 border-t border-zinc-900 text-left">
+                            <div><span className="block text-zinc-600 mb-2 uppercase tracking-widest text-[10px]">Papel</span><span className="text-zinc-300 text-sm">{details.role}</span></div>
+                            <div><span className="block text-zinc-600 mb-2 uppercase tracking-widest text-[10px]">Timeline</span><span className="text-zinc-300 text-sm">{details.timeline}</span></div>
+                            <div><span className="block text-zinc-600 mb-2 uppercase tracking-widest text-[10px]">Plataforma</span><span className="text-zinc-300 text-sm">{details.platform}</span></div>
                         </div>
-                        <div>
-                            <span className="block text-zinc-500 mb-1 uppercase tracking-wider text-xs">Timeline</span>
-                            <span className="text-zinc-200 font-medium">{details.timeline}</span>
-                        </div>
-                        <div>
-                            <span className="block text-zinc-500 mb-1 uppercase tracking-wider text-xs">Plataforma</span>
-                            <span className="text-zinc-200 font-medium">{details.platform}</span>
-                        </div>
-                        <div>
-                            <span className="block text-zinc-500 mb-1 uppercase tracking-wider text-xs">Setor</span>
-                            <span className="text-zinc-200 font-medium">{details.sector}</span>
-                        </div>
-                    </div>
-                </motion.div>
+                    </motion.div>
+                </div>
             </header>
 
-            {/* Conteúdo Injetado Dinamicamente */}
-            <main className="max-w-4xl mx-auto px-6 mt-20 space-y-32">
+            {/* CONTEÚDO PRINCIPAL: Ritmo Editorial */}
+            <main className="mt-24">
                 
-                {/* 1. O Desafio e Pain Points */}
-                <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
-                    <h2 className="text-3xl font-bold text-white mb-6">O Desafio</h2>
-                    <div className="prose prose-invert max-w-none text-lg leading-relaxed text-zinc-400">
-                        <p>{details.challenge}</p>
-                    </div>
+                {/* 1. O Desafio */}
+                <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="max-w-3xl mx-auto px-6 mb-16">
+                    <h2 className="text-2xl text-white font-medium mb-6">01. O Desafio</h2>
+                    <p className="text-lg leading-relaxed text-zinc-400 font-light">
+                        {details.challenge}
+                    </p>
 
-                    {/* Renderiza a caixa de Pain Points apenas se houver algum cadastrado */}
+                    {/* Lista Limpa de Pain Points */}
                     {details.painPoints && details.painPoints.length > 0 && (
-                        <div className="mt-8 p-6 bg-red-500/5 border border-red-500/20 rounded-xl">
-                            <h3 className="flex items-center gap-2 text-red-400 font-semibold mb-4">
-                                <AlertCircle size={20} /> Pain Points (Auditoria)
-                            </h3>
-                            <ul className="space-y-3 text-zinc-400 text-sm md:text-base">
+                        <div className="mt-12 pl-6 border-l border-zinc-800">
+                            <span className="block text-xs uppercase tracking-widest text-zinc-500 mb-4">Pain Points Identificados</span>
+                            <ul className="space-y-4">
                                 {details.painPoints.map((point, i) => (
-                                    <li key={i}>• {point}</li>
+                                    <li key={i} className="text-zinc-400 font-light text-md flex gap-4">
+                                        <span className="text-zinc-600">—</span> {point}
+                                    </li>
                                 ))}
                             </ul>
                         </div>
                     )}
                 </motion.section>
 
-                {/* 2. Estratégia */}
+                {/* IMAGEM: Quebra o grid (max-w-6xl) para ganhar destaque */}
+                {details.challengeImage && (
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-6xl mx-auto px-6 mb-24">
+                        <img src={(details as any).challengeImage} alt="O Desafio" className="w-full rounded-sm opacity-90 hover:opacity-100 transition-opacity duration-500" />
+                    </motion.div>
+                )}
+
+                {/* 2. A Estratégia */}
                 {details.strategy && (
-                    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
-                        <h2 className="text-3xl font-bold text-white mb-6">A Estratégia</h2>
-                        <div className="text-lg leading-relaxed text-zinc-400">
+                    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="max-w-3xl mx-auto px-6 mb-16">
+                        <h2 className="text-2xl text-white font-medium mb-6">02. A Estratégia</h2>
+                        <p className="text-lg leading-relaxed text-zinc-400 font-light">
                             {details.strategy}
-                        </div>
+                        </p>
                     </motion.section>
                 )}
 
-                {/* 3. Features / Solução */}
+                {/* IMAGEM: Estratégia */}
+                {details.strategyImage && (
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-6xl mx-auto px-6 mb-24">
+                        <img src={(details as any).strategyImage} alt="Estratégia e Wireframes" className="w-full rounded-sm opacity-90 hover:opacity-100 transition-opacity duration-500" />
+                    </motion.div>
+                )}
+
+                {/* 3. A Solução e Features */}
                 {details.features && details.features.length > 0 && (
-                    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
-                        <h2 className="text-3xl font-bold text-white mb-6">A Solução</h2>
-                        <div className="grid md:grid-cols-2 gap-12 mt-12">
+                    <>
+                        <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="max-w-3xl mx-auto px-6 mb-16">
+                            <h2 className="text-2xl text-white font-medium mb-6">03. A Solução</h2>
+                        </motion.section>
+
+                        {/* IMAGEM: Tela Principal Hero Shot */}
+                        {details.solutionImage && (
+                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-7xl mx-auto px-6 mb-24">
+                                <img src={(details as any).solutionImage} alt="Interface Final" className="w-full rounded-md shadow-2xl shadow-black/50 border border-white/5" />
+                            </motion.div>
+                        )}
+
+                        {/* Features List - Minimalista */}
+                        <div className="max-w-3xl mx-auto px-6 space-y-24 mb-24">
                             {details.features.map((feature, i) => (
-                                <div key={i}>
-                                    <div className="w-12 h-12 bg-blue-500/10 border border-blue-500/20 rounded-xl flex items-center justify-center mb-6">
-                                        <LayoutDashboard className="text-blue-400" size={24} />
-                                    </div>
-                                    <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-                                    <p className="text-zinc-400 leading-relaxed">{feature.desc}</p>
-                                </div>
+                                <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUp}>
+                                    <h3 className="text-xl text-white font-medium mb-4">{feature.title}</h3>
+                                    <p className="text-lg leading-relaxed text-zinc-400 font-light mb-8">{feature.desc}</p>
+                                    
+                                    {(feature as any).image && (
+                                        <div className="w-full overflow-hidden rounded-sm bg-zinc-900 border border-white/5">
+                                            <img src={(feature as any).image} alt={feature.title} className="w-full object-cover" />
+                                        </div>
+                                    )}
+                                </motion.div>
                             ))}
                         </div>
-                    </motion.section>
+                    </>
                 )}
 
                 {/* 4. Resultados e Conclusão */}
-                <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
-                    <h2 className="text-3xl font-bold text-white mb-6">Resultados e Impacto</h2>
+                <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="max-w-3xl mx-auto px-6">
                     
+                    {/* Resultados Tipográficos (Sem fundos ou bordas pesadas) */}
                     {details.results && details.results.length > 0 && (
-                        <div className="grid md:grid-cols-3 gap-6 mb-12">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 py-16 my-16 border-y border-zinc-900">
                             {details.results.map((result, i) => (
-                                <div key={i} className="p-6 bg-zinc-900/50 border border-white/5 rounded-xl text-center">
-                                    <span className="block text-4xl font-bold text-blue-400 mb-2">{result.value}</span>
-                                    <span className="text-sm text-zinc-400">{result.label}</span>
+                                <div key={i} className="text-center md:text-left">
+                                    <span className="block text-5xl md:text-6xl font-light text-white mb-4 tracking-tighter">{result.value}</span>
+                                    <span className="text-xs tracking-widest uppercase text-zinc-500 leading-relaxed block">{result.label}</span>
                                 </div>
                             ))}
                         </div>
                     )}
 
                     {details.conclusion && (
-                        <div className="p-8 bg-zinc-900 border border-white/10 rounded-2xl">
-                            <h3 className="flex items-center gap-2 text-white font-bold mb-4">
-                                <CheckCircle2 className="text-emerald-500" size={24} />
-                                Conclusão
-                            </h3>
-                            <p className="text-zinc-400 leading-relaxed">
+                        <div className="mb-32">
+                            <h2 className="text-2xl text-white font-medium mb-6">Conclusão</h2>
+                            <p className="text-lg leading-relaxed text-zinc-400 font-light">
                                 {details.conclusion}
                             </p>
                         </div>
@@ -161,6 +180,6 @@ export const CaseStudy = () => {
                 </motion.section>
 
             </main>
-        </div>
+        </article>
     );
 };

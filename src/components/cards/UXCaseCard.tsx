@@ -1,49 +1,74 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
-import type { UX_CASES } from "../../data/content";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { UX_CASES } from '../../data/content'; 
 
 export const UXCase = ({ data }: { data: typeof UX_CASES[0] }) => {
-    const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
-
-
-    const handleCardClick = () => {
-        navigate(`/case/${data.id}`); 
-    };
+    const thumbnail = (data.details as any)?.solutionImage || (data.details as any)?.challengeImage;
 
     return (
         <motion.div
-            onClick={handleCardClick} // Adicionado o clique aqui
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            className="relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer group border border-white/5"
+            onClick={() => navigate(`/case/${data.id}`)}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            // Container idêntico ao CareerCard
+            className="relative group p-6 rounded-2xl border border-white/5 bg-zinc-900/50 backdrop-blur-sm hover:bg-zinc-900/80 transition-all duration-500 cursor-pointer flex flex-col gap-6 overflow-hidden"
         >
-            {/* Background Image Placeholder */}
-            <div className="absolute inset-0 bg-zinc-800 group-hover:scale-105 transition-transform duration-700 ease-out flex items-center justify-center">
-                <span className="text-zinc-600 font-bold text-4xl opacity-20 select-none">{data.title}</span>
+            {/* Gradiente de fundo no Hover (Herdado do CareerCard) */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+            {/* 1. Área Visual (Thumbnail emoldurada) */}
+            <div className="relative z-10 aspect-[16/10] w-full overflow-hidden rounded-xl bg-zinc-950 border border-white/5">
+                {thumbnail ? (
+                    <img 
+                        src={thumbnail} 
+                        alt={data.title} 
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                    />
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-zinc-950 transition-transform duration-700 ease-out group-hover:scale-105">
+                        <span className="text-zinc-800 font-semibold text-3xl tracking-tighter uppercase px-6 text-center">
+                            {data.title}
+                        </span>
+                    </div>
+                )}
             </div>
 
-            {/* Overlay Info */}
-            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent opacity-80" />
-
-            <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
-                <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
-                    <p className="text-blue-400 text-sm font-medium tracking-wider uppercase mb-2">{data.category}</p>
-                    <h3 className="text-2xl font-bold text-white mb-4">{data.title}</h3>
-
-                    <div className={`overflow-hidden transition-all duration-500 ${isHovered ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
-                        <div className="flex flex-col gap-2 pt-2 border-t border-white/10">
-                            <span className="text-xs text-zinc-500 uppercase tracking-widest">Processo (Design Thinking)</span>
-                            <div className="flex flex-wrap gap-2">
-                                {data.process.map((step, i) => (
-                                    <span key={i} className="text-xs text-zinc-300 bg-white/10 px-2 py-1 rounded">
-                                        {step}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
+            {/* 2. Área de Informação */}
+            <div className="relative z-10 flex flex-col gap-4 flex-grow">
+                
+                {/* Cabeçalho do Card */}
+                <div className="flex justify-between items-start">
+                    <div>
+                        <h3 className="text-2xl font-semibold text-zinc-100 group-hover:text-blue-400 transition-colors duration-300">
+                            {data.title}
+                        </h3>
+                        <p className="text-sm font-medium text-blue-400/80 uppercase tracking-wider mt-1">
+                            {data.category}
+                        </p>
                     </div>
+                    {/* Botão de ação que reage ao hover */}
+                    <div className="w-10 h-10 shrink-0 flex items-center justify-center rounded-full bg-white/5 border border-white/5 group-hover:bg-blue-500/20 group-hover:border-blue-500/30 transition-all duration-300">
+                        <ArrowRight size={18} className="text-zinc-400 group-hover:text-blue-400 transition-colors" />
+                    </div>
+                </div>
+                
+                {/* Resumo */}
+                <p className="text-sm text-zinc-400 leading-relaxed line-clamp-2">
+                    {data.details.heroSubtitle}
+                </p>
+
+                {/* Tags de Processo (Estilo idêntico ao stack do CareerCard) */}
+                <div className="flex flex-wrap gap-2 mt-auto pt-4">
+                    {data.process.slice(0, 3).map((step, i) => (
+                        <span key={i} className="text-xs font-medium text-zinc-300 bg-zinc-800/50 px-3 py-1.5 rounded-md border border-white/5">
+                            {step}
+                        </span>
+                    ))}
                 </div>
             </div>
         </motion.div>
