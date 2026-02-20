@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import type {Variants} from 'framer-motion';
-import { ArrowLeft,AlertCircle } from 'lucide-react';
+import type { Variants } from 'framer-motion';
+import { ArrowLeft, AlertCircle, CheckCircle2, LayoutDashboard } from 'lucide-react';
 import { UX_CASES } from '../data/content'; 
 
 export const CaseStudy = () => {
@@ -79,27 +79,86 @@ export const CaseStudy = () => {
                 </motion.div>
             </header>
 
-            {/* Restante do conteúdo injetado dinamicamente... */}
+            {/* Conteúdo Injetado Dinamicamente */}
             <main className="max-w-4xl mx-auto px-6 mt-20 space-y-32">
+                
+                {/* 1. O Desafio e Pain Points */}
                 <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
                     <h2 className="text-3xl font-bold text-white mb-6">O Desafio</h2>
                     <div className="prose prose-invert max-w-none text-lg leading-relaxed text-zinc-400">
                         <p>{details.challenge}</p>
                     </div>
 
-                    <div className="mt-8 p-6 bg-red-500/5 border border-red-500/20 rounded-xl">
-                        <h3 className="flex items-center gap-2 text-red-400 font-semibold mb-4">
-                            <AlertCircle size={20} /> Pain Points
-                        </h3>
-                        <ul className="space-y-3 text-zinc-400 text-sm md:text-base">
-                            {details.painPoints.map((point, i) => (
-                                <li key={i}>• {point}</li>
-                            ))}
-                        </ul>
-                    </div>
+                    {/* Renderiza a caixa de Pain Points apenas se houver algum cadastrado */}
+                    {details.painPoints && details.painPoints.length > 0 && (
+                        <div className="mt-8 p-6 bg-red-500/5 border border-red-500/20 rounded-xl">
+                            <h3 className="flex items-center gap-2 text-red-400 font-semibold mb-4">
+                                <AlertCircle size={20} /> Pain Points (Auditoria)
+                            </h3>
+                            <ul className="space-y-3 text-zinc-400 text-sm md:text-base">
+                                {details.painPoints.map((point, i) => (
+                                    <li key={i}>• {point}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </motion.section>
 
-                {/* ... você aplica a mesma lógica para as seções 'strategy', 'features' e 'results' */}
+                {/* 2. Estratégia */}
+                {details.strategy && (
+                    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
+                        <h2 className="text-3xl font-bold text-white mb-6">A Estratégia</h2>
+                        <div className="text-lg leading-relaxed text-zinc-400">
+                            {details.strategy}
+                        </div>
+                    </motion.section>
+                )}
+
+                {/* 3. Features / Solução */}
+                {details.features && details.features.length > 0 && (
+                    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
+                        <h2 className="text-3xl font-bold text-white mb-6">A Solução</h2>
+                        <div className="grid md:grid-cols-2 gap-12 mt-12">
+                            {details.features.map((feature, i) => (
+                                <div key={i}>
+                                    <div className="w-12 h-12 bg-blue-500/10 border border-blue-500/20 rounded-xl flex items-center justify-center mb-6">
+                                        <LayoutDashboard className="text-blue-400" size={24} />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                                    <p className="text-zinc-400 leading-relaxed">{feature.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.section>
+                )}
+
+                {/* 4. Resultados e Conclusão */}
+                <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
+                    <h2 className="text-3xl font-bold text-white mb-6">Resultados e Impacto</h2>
+                    
+                    {details.results && details.results.length > 0 && (
+                        <div className="grid md:grid-cols-3 gap-6 mb-12">
+                            {details.results.map((result, i) => (
+                                <div key={i} className="p-6 bg-zinc-900/50 border border-white/5 rounded-xl text-center">
+                                    <span className="block text-4xl font-bold text-blue-400 mb-2">{result.value}</span>
+                                    <span className="text-sm text-zinc-400">{result.label}</span>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
+                    {details.conclusion && (
+                        <div className="p-8 bg-zinc-900 border border-white/10 rounded-2xl">
+                            <h3 className="flex items-center gap-2 text-white font-bold mb-4">
+                                <CheckCircle2 className="text-emerald-500" size={24} />
+                                Conclusão
+                            </h3>
+                            <p className="text-zinc-400 leading-relaxed">
+                                {details.conclusion}
+                            </p>
+                        </div>
+                    )}
+                </motion.section>
 
             </main>
         </div>
