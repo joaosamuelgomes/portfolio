@@ -6,7 +6,8 @@ import { UX_CASES } from '../../data/content';
 
 export const UXCase = ({ data }: { data: typeof UX_CASES[0] }) => {
     const navigate = useNavigate();
-    const thumbnail = (data.details as any)?.solutionImage || (data.details as any)?.challengeImage;
+    
+    const thumbnail = (data as any)?.thumbnail || (data.details as any)?.solutionImage || (data.details as any)?.challengeImage;
 
     return (
         <motion.div

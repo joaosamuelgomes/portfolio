@@ -23,12 +23,13 @@ export const UX_CASES = [
     {
         id: 1,
         title: "LogiTrack",
-        category: "SaaS Complexo B2B",
+        category: "SaaS",
         process: ["Imersão em Campo", "Mapeamento de Jornada", "Design Thinking", "Prototipação"],
+        thumbnail: "/logitrack-thumbnail.png",
         
         details: {
             heroSubtitle: "Otimizando a triagem de frotas e reduzindo a carga cognitiva em operações logísticas de alta pressão.",
-            role: "UX/UI Designer & Engenheiro Front-end",
+            role: "UX/UI Designer & UI Engineer",
             timeline: "8 Semanas",
             platform: "Desktop Web App",
             sector: "Logística & Gestão de Frotas",

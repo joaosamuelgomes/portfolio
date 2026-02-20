@@ -129,28 +129,36 @@ export const CaseStudy = () => {
                             <h2 className="text-2xl text-white font-medium mb-6">03. A Solução</h2>
                         </motion.section>
 
-                        {/* IMAGEM: Tela Principal Hero Shot */}
+                        {/* IMAGEM: Tela Principal Hero Shot (Final da seção) */}
                         {details.solutionImage && (
-                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-7xl mx-auto px-6 mb-24">
-                                <img src={(details as any).solutionImage} alt="Interface Final" className="w-full rounded-md shadow-2xl shadow-black/50 border border-white/5" />
+                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-6xl mx-auto px-6 mb-24">
+                                <img src={(details as any).solutionImage} alt="Interface Final" className="w-full rounded-sm opacity-90 hover:opacity-100 transition-opacity duration-500" />
                             </motion.div>
                         )}
 
-                        {/* Features List - Minimalista */}
-                        <div className="max-w-3xl mx-auto px-6 space-y-24 mb-24">
+                        {/* Features List - Grid Horizontal (Apenas Texto) */}
+                        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-24 text-left">
                             {details.features.map((feature, i) => (
                                 <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUp}>
                                     <h3 className="text-xl text-white font-medium mb-4">{feature.title}</h3>
-                                    <p className="text-lg leading-relaxed text-zinc-400 font-light mb-8">{feature.desc}</p>
-                                    
-                                    {(feature as any).image && (
-                                        <div className="w-full overflow-hidden rounded-sm bg-zinc-900 border border-white/5">
-                                            <img src={(feature as any).image} alt={feature.title} className="w-full object-cover" />
-                                        </div>
-                                    )}
+                                    <p className="text-lg leading-relaxed text-zinc-400 font-light">{feature.desc}</p>
+                                    {/* O bloco de imagem pequeno que existia aqui foi removido */}
                                 </motion.div>
                             ))}
                         </div>
+
+                        {/* IMAGEM ESPECÍFICA (Ex: Side-sheet): Movida para cá com tamanho grande */}
+                        {/* Procura se alguma feature tem imagem e a renderiza aqui embaixo */}
+                        {details.features.find(f => (f as any).image) && (
+                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-6xl mx-auto px-6 mb-24">
+                                <img 
+                                    src={(details.features.find(f => (f as any).image) as any).image} 
+                                    alt="Detalhe da funcionalidade" 
+                                    className="w-full rounded-sm opacity-90 hover:opacity-100 transition-opacity duration-500" 
+                                />
+                            </motion.div>
+                        )}
+
                     </>
                 )}
 
