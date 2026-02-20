@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom'; // 1. Importando o hook
 import { SectionTitle } from '../components/ui/SectionTitle';
 import { UX_CASES } from '../data/content'; 
-
 
 // --- COMPONENTE DO CARD (Internal Helper) ---
 const UXCase = ({ data }: { data: typeof UX_CASES[0] }) => {
     const [isHovered, setIsHovered] = useState(false);
+    const navigate = useNavigate(); // 2. Inicializando a navegação
+
+    // 3. Função que executa a rota dinâmica
+    const handleCardClick = () => {
+        navigate(`/case/${data.id}`); 
+    };
 
     return (
         <motion.div
+            onClick={handleCardClick} // 4. Adicionando o evento de clique
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             className="relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer group border border-white/5"
