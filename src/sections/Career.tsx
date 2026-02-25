@@ -6,7 +6,7 @@ import { CAREER_DATA } from '../data/content';
 
 export const CareerSection = () => {
     return (
-        <section id="career" className="max-w-4xl mx-auto px-6 mb-24 md:mb-40">
+        <section id="career" className="max-w-7xl mx-auto px-6 mb-24 md:mb-40">
             <SectionTitle subtitle="Trajetória focada em impacto técnico e de negócio.">
                 Carreira
             </SectionTitle>

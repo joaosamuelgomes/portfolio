@@ -23,13 +23,15 @@ export const UX_CASES = [
     {
         id: 1,
         title: "LogiTrack",
-        category: "SaaS",
+        category: "SaaS Logística & Fleet Management",
         process: ["Imersão em Campo", "Mapeamento de Jornada", "Design Thinking", "Prototipação"],
-        thumbnail: "/logitrack-thumbnail.png",
+        
+        // Imagem de Capa do Card da Home
+        thumbnail: "/logitrack-thumbnail.png", 
         
         details: {
             heroSubtitle: "Otimizando a triagem de frotas e reduzindo a carga cognitiva em operações logísticas de alta pressão.",
-            role: "UX/UI Designer & UI Engineer",
+            role: "UX/UI Designer & Engenheiro Front-end",
             timeline: "8 Semanas",
             platform: "Desktop Web App",
             sector: "Logística & Gestão de Frotas",
@@ -78,54 +80,69 @@ export const UX_CASES = [
                 "O projeto comprovou que interfaces corporativas complexas não precisam ser planilhas glorificadas. Ao traduzir os requisitos brutos do setor de transportes em fluxos limpos e focados no ser humano, transformamos o sistema de um mero banco de dados em uma verdadeira ferramenta de suporte à decisão ativa."
         }
     },
-    {
+{
         id: 2,
-        title: "Lumina Pay Redesign",
-        category: "Mobile App",
-        process: ["Análise Heurística", "Mapeamento de Jornada", "UX Writing", "Design System"],
+        title: "Iron Tracker",
+        category: "App Health & Fitness",
+        process: ["Mobile First Design", "Gamification Strategy", "Cloud Architecture", "Prototipagem"],
+        
+        // Capa: O celular mostrando o Dashboard ou a tela de Login com a marca
+        thumbnail: "/irontracker-thumbnail.png", 
+        
         details: {
-            heroSubtitle: "Transformando a ansiedade financeira em controle através do design comportamental.",
-            role: "UX/UI Designer & Front-end",
-            timeline: "6 Semanas",
-            platform: "iOS & Android",
-            sector: "Fintech",
+            heroSubtitle: "Transformando a rotina de musculação em uma experiência digital imersiva, gamificada e livre de distrações.",
+            role: "Product Designer & Full Stack Dev",
+            timeline: "4 Semanas",
+            platform: "PWA (iOS, Android e Web)",
+            sector: "Health & Fitness",
             
             challenge: 
-                "O aplicativo Lumina Pay sofria com uma taxa crítica de abandono (drop-off) de 60% logo no processo de onboarding. A interface legada exigia que o usuário preenchesse 15 campos de dados em um único formulário infinito antes de ver qualquer valor no app. Além disso, o uso excessivo de jargões financeiros gerava ansiedade e paralisia cognitiva no público leigo.",
+                "O ambiente de academia é inerentemente hostil ao uso de tecnologia complexa: mãos suadas, fadiga mental e a necessidade de cronometrar descansos criam um cenário onde qualquer clique extra é uma barreira. O desafio foi desenhar uma interface que não apenas registrasse dados, mas que induzisse o usuário ao estado de 'flow', eliminando a carga cognitiva de lembrar cargas passadas ou calcular tempos de descanso, tudo isso enquanto mantinha a motivação alta através de gatilhos comportamentais.",
             
+            // Imagem: Mostrando a "Desordem" vs "Ordem" ou o App em uso no ambiente de academia
+            challengeImage: "/irontracker-challenge.png", 
+
             painPoints: [
-                "Onboarding exaustivo gerando fadiga no usuário", 
-                "Sobrecarga cognitiva causada por jargões bancários complexos", 
-                "Categorização manual de gastos repetitiva e propensa a erros",
-                "Falta de feedback visual e reforço positivo ao concluir transações"
+                "Fricção de Interação: Interfaces padrão exigem muita atenção visual durante a execução de séries pesadas.", 
+                "Perda de Continuidade: A falta de sincronização na nuvem impedia o usuário de alternar entre dispositivos.", 
+                "Baixa Retenção: Sem visualização de progresso (gamificação), a disciplina tende a cair ao longo das semanas.", 
+                "Ansiedade de Performance: A incerteza sobre qual carga usar baseada no treino anterior."
             ],
             
             strategy: 
-                "Iniciei com uma auditoria heurística para identificar quebras de usabilidade. Em seguida, redesenhamos a jornada aplicando o conceito de 'Progressive Profiling' (perfilamento progressivo), solicitando apenas os dados estritamente necessários para a abertura da conta e adiando informações complementares. Substituímos os formulários longos por uma interface conversacional e reescrevemos o microcopy para guiar o usuário de forma empática.",
+                "A estratégia de UX foi centrada no conceito de 'Focus Mode'. Ao invés de apresentar uma lista infinita de tarefas, o aplicativo guia o usuário exercício por exercício, como um personal trainer digital. Arquiteturalmente, a escolha pelo Supabase garantiu que essa experiência fosse fluida e persistente em qualquer dispositivo, enquanto a implementação de PWA proporcionou a ergonomia nativa (full screen, gestos) necessária para uso confortável em dispositivos móveis.",
+            
+            // Imagem: Design System, mostrando a tipografia grande, botões de fácil toque e paleta Dark Mode
+            strategyImage: "/irontracker-design-system.png",
+            
+            // Imagem: O Dashboard principal com o gráfico de Heatmap/Streak e perfil do usuário
+            solutionImage: "/irontracker-dashboard.png", 
             
             features: [
                 {
-                    title: "Onboarding Conversacional",
-                    desc: "Formulários estáticos foram substituídos por interações focadas (uma pergunta por tela), reduzindo a carga cognitiva e aumentando o senso de progresso do usuário."
+                    title: "Active Workout (Focus Mode)",
+                    desc: "O coração da experiência. Uma interface imersiva que isola o exercício atual, apresenta cronômetros automáticos de descanso e exibe mídias de execução, removendo qualquer distração visual da tela.",
+                    // Imagem: A tela de execução do exercício (com timer rodando e botões grandes)
+                    image: "/irontracker-focus.png"
                 },
                 {
-                    title: "Categorização Inteligente (Swipe)",
-                    desc: "Inspirado em padrões de aplicativos de relacionamento, criamos uma mecânica de 'swipe' (deslizar) para categorizar transações pendentes rapidamente, gamificando uma tarefa que antes era tediosa."
+                    title: "Gamificação e Hábitos",
+                    desc: "Implementação de 'Streaks' (fogo), badges de consistência e um calendário de calor (heatmap). Utilizamos psicologia comportamental para transformar o treino diário em uma conquista visual, aumentando drasticamente a retenção."
                 },
                 {
-                    title: "Linguagem Centrada no Usuário",
-                    desc: "Implementação de um novo guia de UX Writing, traduzindo jargões técnicos para uma linguagem acessível e humana, focada em ações claras e diretas."
+                    title: "Ecossistema Cloud Seguro",
+                    desc: "Autenticação robusta e sincronização em tempo real via Supabase. O usuário tem liberdade total para começar o treino no iPhone e analisar suas métricas de evolução de carga no Desktop."
                 }
             ],
             
             results: [
-                { value: "-75%", label: "Queda na taxa de abandono do onboarding" },
-                { value: "3x", label: "Mais rapidez na categorização de despesas" },
-                { value: "+40%", label: "Aumento no engajamento semanal (WAU)" }
+                { value: "PWA", label: "Experiência Nativa (Installable & Fullscreen)" },
+                { value: "100%", label: "Sincronização em Tempo Real (Cloud)" },
+                { value: "Focus", label: "Interface Otimizada para Ergonomia Mobile" }
             ],
             
             conclusion: 
-                "O case do Lumina Pay provou que o bom design é a ponte entre a complexidade de sistemas financeiros e a psicologia do usuário. Ao reduzir o atrito e aplicar empatia estrutural, não apenas melhoramos as métricas de negócio, mas também a relação das pessoas com seu próprio dinheiro."
+                "O Iron Tracker prova que um aplicativo utilitário pode ser envolvente. Ao combinar a robustez técnica da nuvem com uma interface sensível ao contexto do usuário (o caos da academia), entregamos um produto que não serve apenas para anotar números, mas atua como um parceiro ativo na construção de hábitos saudáveis."
         }
     }
 ];
