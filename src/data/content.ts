@@ -31,8 +31,8 @@ export const UX_CASES = [
         
         details: {
             heroSubtitle: "Otimizando a triagem de frotas e reduzindo a carga cognitiva em operações logísticas de alta pressão.",
-            role: "UX/UI Designer & Engenheiro Front-end",
-            timeline: "8 Semanas",
+            role: "UX/UI Designer",
+            timeline: "6 Semanas",
             platform: "Desktop Web App",
             sector: "Logística & Gestão de Frotas",
 
@@ -80,27 +80,27 @@ export const UX_CASES = [
                 "O projeto comprovou que interfaces corporativas complexas não precisam ser planilhas glorificadas. Ao traduzir os requisitos brutos do setor de transportes em fluxos limpos e focados no ser humano, transformamos o sistema de um mero banco de dados em uma verdadeira ferramenta de suporte à decisão ativa."
         }
     },
-{
+    {
         id: 2,
         title: "Iron Tracker",
         category: "App Health & Fitness",
         process: ["Mobile First Design", "Gamification Strategy", "Cloud Architecture", "Prototipagem"],
         
-        // Capa: O celular mostrando o Dashboard ou a tela de Login com a marca
-        thumbnail: "/irontracker-thumbnail.png", 
+        // Imagem de Capa do Card da Home
+        thumbnail: "/irontracker-thumb.png", 
         
         details: {
             heroSubtitle: "Transformando a rotina de musculação em uma experiência digital imersiva, gamificada e livre de distrações.",
-            role: "Product Designer & Full Stack Dev",
-            timeline: "4 Semanas",
+            role: "Product Designer & Developer",
+            timeline: "8 Semanas",
             platform: "PWA (iOS, Android e Web)",
             sector: "Health & Fitness",
             
             challenge: 
                 "O ambiente de academia é inerentemente hostil ao uso de tecnologia complexa: mãos suadas, fadiga mental e a necessidade de cronometrar descansos criam um cenário onde qualquer clique extra é uma barreira. O desafio foi desenhar uma interface que não apenas registrasse dados, mas que induzisse o usuário ao estado de 'flow', eliminando a carga cognitiva de lembrar cargas passadas ou calcular tempos de descanso, tudo isso enquanto mantinha a motivação alta através de gatilhos comportamentais.",
             
-            // Imagem: Mostrando a "Desordem" vs "Ordem" ou o App em uso no ambiente de academia
-            challengeImage: "/irontracker-challenge.png", 
+            // Imagem do Desafio (ex: Login ou contexto do problema)
+            challengeImage: "/irontracker-login.png", 
 
             painPoints: [
                 "Fricção de Interação: Interfaces padrão exigem muita atenção visual durante a execução de séries pesadas.", 
@@ -112,18 +112,18 @@ export const UX_CASES = [
             strategy: 
                 "A estratégia de UX foi centrada no conceito de 'Focus Mode'. Ao invés de apresentar uma lista infinita de tarefas, o aplicativo guia o usuário exercício por exercício, como um personal trainer digital. Arquiteturalmente, a escolha pelo Supabase garantiu que essa experiência fosse fluida e persistente em qualquer dispositivo, enquanto a implementação de PWA proporcionou a ergonomia nativa (full screen, gestos) necessária para uso confortável em dispositivos móveis.",
             
-            // Imagem: Design System, mostrando a tipografia grande, botões de fácil toque e paleta Dark Mode
-            strategyImage: "/irontracker-design-system.png",
+            // Imagem da Estratégia (ex: Dashboard/Visão Geral)
+            strategyImage: "/irontracker-dashboard.png",
             
-            // Imagem: O Dashboard principal com o gráfico de Heatmap/Streak e perfil do usuário
-            solutionImage: "/irontracker-dashboard.png", 
+            // Imagem da Solução (ex: Tela de Exercício Principal)
+            solutionImage: "/irontracker-exercise.png", 
             
             features: [
                 {
                     title: "Active Workout (Focus Mode)",
                     desc: "O coração da experiência. Uma interface imersiva que isola o exercício atual, apresenta cronômetros automáticos de descanso e exibe mídias de execução, removendo qualquer distração visual da tela.",
-                    // Imagem: A tela de execução do exercício (com timer rodando e botões grandes)
-                    image: "/irontracker-focus.png"
+                    // Imagem Específica da Feature (ex: Timer de Descanso)
+                    image: "/irontracker-rest.png"
                 },
                 {
                     title: "Gamificação e Hábitos",
