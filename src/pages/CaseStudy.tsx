@@ -11,7 +11,6 @@ export const CaseStudy = () => {
 
     const caseData = UX_CASES.find((item) => item.id.toString() === id);
 
-    // Indicador de progresso no topo
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
@@ -25,7 +24,6 @@ export const CaseStudy = () => {
 
     const { details } = caseData; 
 
-    // Animação padrão e limpa
     const fadeUp: Variants = {
         hidden: { opacity: 0, y: 30 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
@@ -33,10 +31,9 @@ export const CaseStudy = () => {
 
     return (
         <article className="min-h-screen bg-zinc-950 text-zinc-300 font-sans pb-32">
-            {/* Barra de Progresso */}
+
             <motion.div className="fixed top-0 left-0 right-0 h-1 bg-white origin-left z-50" style={{ scaleX }} />
 
-            {/* Botão Voltar */}
             <motion.button
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -50,7 +47,6 @@ export const CaseStudy = () => {
                 <span className="text-sm font-medium tracking-wide uppercase hidden md:block">Voltar</span>
             </motion.button>
 
-            {/* HEADER: Centralizado e Tipográfico */}
             <header className="pt-32 pb-20 border-b border-zinc-900">
                 <div className="max-w-3xl mx-auto px-6 text-center">
                     <motion.div initial="hidden" animate="visible" variants={fadeUp}>
@@ -73,17 +69,14 @@ export const CaseStudy = () => {
                 </div>
             </header>
 
-            {/* CONTEÚDO PRINCIPAL: Ritmo Editorial */}
             <main className="mt-24">
-                
-                {/* 1. O Desafio */}
+
                 <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="max-w-3xl mx-auto px-6 mb-16">
                     <h2 className="text-2xl text-white font-medium mb-6">01. O Desafio</h2>
                     <p className="text-lg leading-relaxed text-zinc-400 font-light">
                         {details.challenge}
                     </p>
 
-                    {/* Lista Limpa de Pain Points */}
                     {details.painPoints && details.painPoints.length > 0 && (
                         <div className="mt-12 pl-6 border-l border-zinc-800">
                             <span className="block text-xs uppercase tracking-widest text-zinc-500 mb-4">Pain Points Identificados</span>
@@ -98,14 +91,12 @@ export const CaseStudy = () => {
                     )}
                 </motion.section>
 
-                {/* IMAGEM: Quebra o grid (max-w-6xl) para ganhar destaque */}
                 {details.challengeImage && (
                     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-6xl mx-auto px-6 mb-24">
                         <img src={(details as any).challengeImage} alt="O Desafio" className="w-full rounded-sm opacity-90 hover:opacity-100 transition-opacity duration-500" />
                     </motion.div>
                 )}
 
-                {/* 2. A Estratégia */}
                 {details.strategy && (
                     <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="max-w-3xl mx-auto px-6 mb-16">
                         <h2 className="text-2xl text-white font-medium mb-6">02. A Estratégia</h2>
@@ -115,14 +106,12 @@ export const CaseStudy = () => {
                     </motion.section>
                 )}
 
-                {/* IMAGEM: Estratégia */}
                 {details.strategyImage && (
                     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-6xl mx-auto px-6 mb-24">
                         <img src={(details as any).strategyImage} alt="Estratégia e Wireframes" className="w-full rounded-sm opacity-90 hover:opacity-100 transition-opacity duration-500" />
                     </motion.div>
                 )}
 
-                {/* 3. A Solução e Features */}
                 {details.features && details.features.length > 0 && (
                     <>
                         <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="max-w-3xl mx-auto px-6 mb-16">
