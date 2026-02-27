@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Fingerprint, Ghost, X } from 'lucide-react';
-import { client, urlFor } from '../../sanity'; // Ajuste o caminho conforme seu projeto
+import { client, urlFor } from '../../sanity'; 
 
 export interface PlaygroundItem {
     _id: string;
@@ -20,7 +20,6 @@ export const PlaygroundGrid = ({ limit }: { limit?: number }) => {
     const [selectedItem, setSelectedItem] = useState<PlaygroundItem | null>(null);
 
     useEffect(() => {
-        // Limitamos a busca caso estejamos na Home
         const limitQuery = limit ? `[0...${limit}]` : '';
         const query = `*[_type == "playground"] | order(_createdAt desc) ${limitQuery} {
             _id, title, type, heightClass, image, context, challenge, stack
@@ -32,7 +31,6 @@ export const PlaygroundGrid = ({ limit }: { limit?: number }) => {
             .finally(() => setLoading(false));
     }, [limit]);
 
-    // Previne o scroll do body quando o modal está aberto
     useEffect(() => {
         if (selectedItem) document.body.style.overflow = 'hidden';
         else document.body.style.overflow = 'auto';
@@ -63,16 +61,20 @@ export const PlaygroundGrid = ({ limit }: { limit?: number }) => {
                 {items.map((item) => (
                     <motion.div
                         key={item._id}
-                        layoutId={`container-${item._id}`} // Chave para a transição mágica
                         onClick={() => setSelectedItem(item)}
                         className={`w-full ${item.heightClass || 'h-64'} relative group rounded-2xl overflow-hidden border border-white/5 bg-zinc-900 break-inside-avoid cursor-pointer`}
                         whileHover={{ y: -5, scale: 0.98 }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     >
                         {item.image ? (
-                            <>
-                                <motion.img
-                                    layoutId={`image-${item._id}`}
+                            /* A MÁGICA ACONTECE AQUI: Controlamos a opacidade de todo o bloco interno */
+                            <motion.div
+                                initial={false}
+                                animate={{ opacity: selectedItem?._id === item._id ? 0 : 1 }}
+                                transition={{ duration: 0.8, ease: "easeInOut" }} // Duração longa para o efeito "esmaecer"
+                                className="w-full h-full relative"
+                            >
+                                <img
                                     src={urlFor(item.image).width(800).url()}
                                     alt={item.title}
                                     className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
@@ -83,7 +85,7 @@ export const PlaygroundGrid = ({ limit }: { limit?: number }) => {
                                         <p className="text-xs text-blue-400 uppercase tracking-widest">{item.type}</p>
                                     </div>
                                 </div>
-                            </>
+                            </motion.div>
                         ) : (
                             <div className="w-full h-full flex items-center justify-center">
                                 <Fingerprint size={32} strokeWidth={1} className="text-zinc-700" />
@@ -93,33 +95,35 @@ export const PlaygroundGrid = ({ limit }: { limit?: number }) => {
                 ))}
             </div>
 
-            {/* O Modal de Vidro com Shared Element Transition */}
+            {/* O Modal de Vidro */}
             <AnimatePresence>
                 {selectedItem && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        exit={{ opacity: 0, transition: { duration: 0.3 } }} // Modal some um pouco mais rápido
                         className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12 bg-zinc-950/80 backdrop-blur-xl"
-                        onClick={() => setSelectedItem(null)} // Fecha ao clicar fora
+                        onClick={() => setSelectedItem(null)}
                     >
                         <motion.div
-                            layoutId={`container-${selectedItem._id}`}
+                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                             className="bg-zinc-900/90 border border-white/10 rounded-3xl overflow-hidden w-full max-w-5xl max-h-[90vh] flex flex-col md:flex-row shadow-2xl"
-                            onClick={(e) => e.stopPropagation()} // Previne fechar ao clicar dentro
+                            onClick={(e) => e.stopPropagation()} 
                         >
-                            {/* Imagem Expandida */}
-                            <div className="w-full md:w-[55%] h-64 md:h-[80vh] bg-zinc-950 relative">
-                                <motion.img
-                                    layoutId={`image-${selectedItem._id}`}
+                            {/* Imagem Expandida - Removido o layoutId */}
+                            <div className="w-full md:w-[55%] h-64 md:h-[80vh] bg-black relative flex items-center justify-center p-4">
+                                <img
                                     src={urlFor(selectedItem.image).width(1200).url()}
                                     alt={selectedItem.title}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-contain"
                                 />
                             </div>
 
-                            {/* Detalhes (Staggered Reveal) */}
-                            <div className="w-full md:w-[45%] p-8 md:p-12 overflow-y-auto custom-scrollbar flex flex-col justify-center">
+                            {/* Detalhes do Modal */}
+                            <div className="w-full md:w-[45%] p-8 md:p-12 overflow-y-auto custom-scrollbar flex flex-col justify-center relative">
                                 <motion.button
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
