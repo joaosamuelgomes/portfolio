@@ -26,7 +26,6 @@ export const UX_CASES = [
         category: "SaaS Logística & Fleet Management",
         process: ["Imersão em Campo", "Mapeamento de Jornada", "Design Thinking", "Prototipação"],
         
-        // Imagem de Capa do Card da Home
         thumbnail: "/logitrack-thumbnail.png", 
         
         details: {
@@ -37,27 +36,28 @@ export const UX_CASES = [
             sector: "Logística & Gestão de Frotas",
 
             challenge:
-                "Em operações logísticas de escala nacional, o tempo de resposta é o ativo mais valioso. O módulo de monitoramento legado exibia uma tabela de dados densa, sem hierarquia visual, contendo mais de 25 colunas cruas. Em momentos de crise, os controladores de tráfego levavam em média 3 minutos apenas para cruzar dados, encontrar o contato do motorista e identificar o gargalo de uma frota, resultando em multas por atraso de entrega e estresse operacional extremo.",
+                "Em operações logísticas, o tempo de resposta é o ativo mais valioso. O módulo de monitoramento legado exibia uma tabela de dados densa, sem hierarquia visual, contendo mais de 25 colunas cruas. Em momentos de crise, os controladores de tráfego levavam em média 3 minutos apenas para cruzar dados, encontrar o contato do motorista e identificar o gargalo de uma frota, resultando em multas por atraso de entrega e estresse operacional extremo.",
 
             challengeImage: "/logitrack-1.png",
 
             painPoints: [
-                "Carga cognitiva altíssima devido à falta de priorização visual dos dados.",
-                "Ausência de indicadores claros para status críticos (quebras, acidentes ou atrasos).",
+                "Carga cognitiva alta devido à falta de priorização visual dos dados.",
+                "Ausência de indicadores claros para status críticos.",
                 "Rolagem horizontal exaustiva para encontrar informações de contato e placa.",
                 "Perda de contexto, exigindo que o usuário abrisse múltiplas abas para ver o manifesto da carga."
             ],
 
             strategy:
-                "A abordagem foi fundamentada em Design Thinking e imersão real no problema. Conduzimos sessões de observação in loco com os controladores de tráfego para mapear a jornada e identificar os microssegundos perdidos na interface. A solução técnica focou em reestruturar a arquitetura de informação, escondendo o 'ruído' e elevando os dados acionáveis através do princípio de Progressive Disclosure (revelação progressiva).",
+                "A abordagem foi fundamentada em Design Thinking e imersão real no problema. Conduzimos sessões de observação in loco com os controladores de tráfego para mapear a jornada e identificar o tempo perdido na interface. A solução focou em reestruturar a arquitetura de informação, escondendo o 'ruído' e elevando os dados acionáveis através do princípio de Progressive Disclosure (revelação progressiva).",
 
             strategyImage: "/logitrack-2.png",
+
             solutionImage: "/logitrack-3.png",
 
             features: [
                 {
                     title: "Progressive Disclosure (Side-sheets)",
-                    desc: "Reduzimos as 25 colunas iniciais para as 8 estritamente essenciais. Dados secundários, como histórico do motorista e detalhes da nota fiscal, foram movidos para um painel lateral contextual que desliza sem tirar o usuário da tela principal.",
+                    desc: "Reduzimos as 25 colunas iniciais para as 8 estritamente essenciais. Dados secundários foram movidos para um painel lateral (side-sheet) que desliza sem tirar o usuário da tela principal.",
                     image: "/logitrack-4.png"
                 },
                 {
@@ -66,7 +66,7 @@ export const UX_CASES = [
                 },
                 {
                     title: "Ações Contextuais Integradas",
-                    desc: "Criação de atalhos de ação rápida ativados por hover na tabela, permitindo o acionamento direto do motorista via WhatsApp Web com um único clique, eliminando a troca constante de telas."
+                    desc: "Criação de atalhos de ação rápida ativados por hover na tabela, permitindo o acionamento direto do motorista via WhatsApp Web com um único clique."
                 }
             ],
 
@@ -77,7 +77,7 @@ export const UX_CASES = [
             ],
 
             conclusion:
-                "O projeto comprovou que interfaces corporativas complexas não precisam ser planilhas glorificadas. Ao traduzir os requisitos brutos do setor de transportes em fluxos limpos e focados no ser humano, transformamos o sistema de um mero banco de dados em uma verdadeira ferramenta de suporte à decisão ativa."
+                "O projeto de estudo comprovou que interfaces corporativas complexas não precisam de planilhas gigantes. Ao traduzir os requisitos brutos do setor de transportes a ferramentas se tornou um aliado no suporte à decisão ativa."
         }
     },
     {
@@ -85,44 +85,39 @@ export const UX_CASES = [
         title: "Iron Tracker",
         category: "App Health & Fitness",
         process: ["Mobile First Design", "Gamification Strategy", "Cloud Architecture", "Prototipagem"],
-        
-        // Imagem de Capa do Card da Home
+
         thumbnail: "/irontracker-thumb.png", 
         
         details: {
-            heroSubtitle: "Transformando a rotina de musculação em uma experiência digital imersiva, gamificada e livre de distrações.",
+            heroSubtitle: "Transformando a rotina de musculação em uma experiência imersiva e livre de distrações.",
             role: "Product Designer & Developer",
             timeline: "8 Semanas",
             platform: "PWA (iOS, Android e Web)",
             sector: "Health & Fitness",
             
             challenge: 
-                "O ambiente de academia é inerentemente hostil ao uso de tecnologia complexa: mãos suadas, fadiga mental e a necessidade de cronometrar descansos criam um cenário onde qualquer clique extra é uma barreira. O desafio foi desenhar uma interface que não apenas registrasse dados, mas que induzisse o usuário ao estado de 'flow', eliminando a carga cognitiva de lembrar cargas passadas ou calcular tempos de descanso, tudo isso enquanto mantinha a motivação alta através de gatilhos comportamentais.",
+                "O ambiente de academia é hostil ao uso de tecnologia complexa: mãos suadas, fadiga mental e a necessidade de cronometrar descansos criam um cenário onde qualquer clique extra é uma barreira. O desafio foi desenhar uma interface que registrasse dados e induzisse o usuário ao estado de 'flow', eliminando a carga cognitiva de lembrar cargas passadas ou calcular tempos de descanso, tudo isso enquanto mantinha a motivação alta através de gatilhos comportamentais.",
             
-            // Imagem do Desafio (ex: Login ou contexto do problema)
             challengeImage: "/irontracker-login.png", 
 
             painPoints: [
-                "Fricção de Interação: Interfaces padrão exigem muita atenção visual durante a execução de séries pesadas.", 
+                "Fricção de Interação: Interfaces padrão exigem muita atenção visual durante a execução.", 
                 "Perda de Continuidade: A falta de sincronização na nuvem impedia o usuário de alternar entre dispositivos.", 
-                "Baixa Retenção: Sem visualização de progresso (gamificação), a disciplina tende a cair ao longo das semanas.", 
+                "Baixa Retenção: Sem visualização de progresso, a disciplina tende a cair ao longo das semanas.", 
                 "Ansiedade de Performance: A incerteza sobre qual carga usar baseada no treino anterior."
             ],
             
             strategy: 
-                "A estratégia de UX foi centrada no conceito de 'Focus Mode'. Ao invés de apresentar uma lista infinita de tarefas, o aplicativo guia o usuário exercício por exercício, como um personal trainer digital. Arquiteturalmente, a escolha pelo Supabase garantiu que essa experiência fosse fluida e persistente em qualquer dispositivo, enquanto a implementação de PWA proporcionou a ergonomia nativa (full screen, gestos) necessária para uso confortável em dispositivos móveis.",
-            
-            // Imagem da Estratégia (ex: Dashboard/Visão Geral)
+                "A estratégia de UX foi centrada no conceito de 'Focus Mode'. Ao invés de apresentar uma lista infinita de tarefas, o aplicativo guia o usuário exercício por exercício, como um personal trainer digital. Arquiteturalmente, a escolha pelo Supabase garantiu que essa experiência fosse fluida e persistente em qualquer dispositivo, enquanto a implementação de PWA proporcionou a ergonomia nativa necessária para uso confortável em dispositivos móveis.",
+
             strategyImage: "/irontracker-dashboard.png",
-            
-            // Imagem da Solução (ex: Tela de Exercício Principal)
+
             solutionImage: "/irontracker-exercise.png", 
             
             features: [
                 {
                     title: "Active Workout (Focus Mode)",
                     desc: "O coração da experiência. Uma interface imersiva que isola o exercício atual, apresenta cronômetros automáticos de descanso e exibe mídias de execução, removendo qualquer distração visual da tela.",
-                    // Imagem Específica da Feature (ex: Timer de Descanso)
                     image: "/irontracker-rest.png"
                 },
                 {
@@ -142,7 +137,7 @@ export const UX_CASES = [
             ],
             
             conclusion: 
-                "O Iron Tracker prova que um aplicativo utilitário pode ser envolvente. Ao combinar a robustez técnica da nuvem com uma interface sensível ao contexto do usuário (o caos da academia), entregamos um produto que não serve apenas para anotar números, mas atua como um parceiro ativo na construção de hábitos saudáveis."
+                "O Iron Tracker prova que um aplicativo utilitário pode ser envolvente. Ao combinar a robustez técnica da nuvem com uma interface sensível ao contexto do usuário, entregamos um produto que atua como um parceiro ativo na construção de hábitos saudáveis."
         }
     }
 ];
