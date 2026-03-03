@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { SectionTitle } from '../components/ui/SectionTitle';
 import { CareerCard } from '../components/cards/CareerCard';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { SectionTitle } from '../components/ui/SectionTitle';
 import { UXCase } from '../components/cards/UXCaseCard';
 import { UX_CASES } from '../data/content'; 
