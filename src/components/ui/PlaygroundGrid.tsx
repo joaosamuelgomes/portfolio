@@ -101,7 +101,7 @@ export const PlaygroundGrid = ({ limit }: { limit?: number }) => {
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, transition: { duration: 0.3 } }} // Modal some um pouco mais rápido
+                        exit={{ opacity: 0, transition: { duration: 0.3 } }}
                         className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12 bg-zinc-950/80 backdrop-blur-xl"
                         onClick={() => setSelectedItem(null)}
                     >
@@ -110,11 +110,23 @@ export const PlaygroundGrid = ({ limit }: { limit?: number }) => {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 10 }}
                             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                            className="bg-zinc-900/90 border border-white/10 rounded-3xl overflow-hidden w-full max-w-5xl max-h-[90vh] flex flex-col md:flex-row shadow-2xl"
+                            // Adicionamos relative e overflow-hidden aqui para o botão fixo funcionar
+                            className="relative bg-zinc-900/90 border border-white/10 rounded-2xl md:rounded-3xl overflow-hidden w-full max-w-5xl max-h-[90vh] flex flex-col md:flex-row shadow-2xl"
                             onClick={(e) => e.stopPropagation()} 
                         >
-                            {/* Imagem Expandida - Removido o layoutId */}
-                            <div className="w-full md:w-[55%] h-64 md:h-[80vh] bg-black relative flex items-center justify-center p-4">
+                            {/* Botão Fechar - Movido para fora do scroll, agora ele flutua fixo no canto */}
+                            <motion.button
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="absolute top-4 right-4 md:top-6 md:right-6 z-50 w-10 h-10 bg-black/40 hover:bg-black/80 backdrop-blur-md rounded-full flex items-center justify-center text-zinc-300 hover:text-white transition-colors"
+                                onClick={() => setSelectedItem(null)}
+                            >
+                                <X size={20} />
+                            </motion.button>
+
+                            {/* Imagem Expandida - Reduzimos para h-56 no mobile (shrink-0 impede ela de ser esmagada) */}
+                            <div className="w-full md:w-[55%] h-56 shrink-0 md:h-[80vh] bg-black relative flex items-center justify-center p-4">
                                 <img
                                     src={urlFor(selectedItem.image).width(1200).url()}
                                     alt={selectedItem.title}
@@ -122,51 +134,42 @@ export const PlaygroundGrid = ({ limit }: { limit?: number }) => {
                                 />
                             </div>
 
-                            {/* Detalhes do Modal */}
-                            <div className="w-full md:w-[45%] p-8 md:p-12 overflow-y-auto custom-scrollbar flex flex-col justify-center relative">
-                                <motion.button
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    className="absolute top-6 right-6 w-10 h-10 bg-white/5 hover:bg-white/10 rounded-full flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
-                                    onClick={() => setSelectedItem(null)}
-                                >
-                                    <X size={20} />
-                                </motion.button>
-
+                            {/* Detalhes do Modal - Ajustamos padding e trocamos para justify-start no mobile */}
+                            <div className="w-full md:w-[45%] p-6 md:p-12 overflow-y-auto custom-scrollbar flex flex-col justify-start md:justify-center relative">
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.2, duration: 0.5 }}
                                 >
-                                    <span className="text-blue-400 text-xs font-semibold tracking-widest uppercase mb-4 block">
+                                    <span className="text-blue-400 text-xs font-semibold tracking-widest uppercase mb-3 md:mb-4 block">
                                         {selectedItem.type}
                                     </span>
-                                    <h3 className="text-3xl md:text-4xl font-light text-white mb-8 tracking-tight">
+                                    {/* Adicionamos um pr-10 apenas para o título não encostar no botão de fechar no desktop */}
+                                    <h3 className="text-2xl md:text-4xl font-light text-white mb-6 md:mb-8 tracking-tight md:pr-10">
                                         {selectedItem.title}
                                     </h3>
 
-                                    <div className="space-y-8">
+                                    <div className="space-y-6 md:space-y-8">
                                         <div>
-                                            <h4 className="text-sm font-medium text-zinc-100 uppercase tracking-wider mb-3">A Faísca</h4>
-                                            <p className="text-zinc-400 font-light leading-relaxed">
+                                            <h4 className="text-sm font-medium text-zinc-100 uppercase tracking-wider mb-2 md:mb-3">A Faísca</h4>
+                                            <p className="text-sm md:text-base text-zinc-400 font-light leading-relaxed">
                                                 {selectedItem.context || "Exploração visual focada em micro-interações e fluidez de interface."}
                                             </p>
                                         </div>
 
                                         <div>
-                                            <h4 className="text-sm font-medium text-zinc-100 uppercase tracking-wider mb-3">O Desafio</h4>
-                                            <p className="text-zinc-400 font-light leading-relaxed">
+                                            <h4 className="text-sm font-medium text-zinc-100 uppercase tracking-wider mb-2 md:mb-3">O Desafio</h4>
+                                            <p className="text-sm md:text-base text-zinc-400 font-light leading-relaxed">
                                                 {selectedItem.challenge || "Encontrar o equilíbrio perfeito entre performance e fidelidade visual durante a animação."}
                                             </p>
                                         </div>
 
                                         {selectedItem.stack && selectedItem.stack.length > 0 && (
                                             <div>
-                                                <h4 className="text-sm font-medium text-zinc-100 uppercase tracking-wider mb-3">Stack</h4>
-                                                <div className="flex flex-wrap gap-2">
+                                                <h4 className="text-sm font-medium text-zinc-100 uppercase tracking-wider mb-2 md:mb-3">Stack</h4>
+                                                <div className="flex flex-wrap gap-2 pb-4 md:pb-0">
                                                     {selectedItem.stack.map(tech => (
-                                                        <span key={tech} className="text-xs font-medium text-zinc-300 bg-zinc-800/50 px-3 py-1.5 rounded-md border border-white/5">
+                                                        <span key={tech} className="text-[11px] md:text-xs font-medium text-zinc-300 bg-zinc-800/50 px-2.5 py-1 md:px-3 md:py-1.5 rounded-md border border-white/5">
                                                             {tech}
                                                         </span>
                                                     ))}
