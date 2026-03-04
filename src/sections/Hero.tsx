@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, BrainCircuit, PenTool, Code2 } from 'lucide-react';
+import { ArrowRight, BrainCircuit, PenTool, Code2, GraduationCap, Award } from 'lucide-react';
 
 const TOOLS = [
     { icon: BrainCircuit, label: "Design Thinking", desc: "Empatia, Ideação, Definição, Prototipagem & Testes" },
@@ -36,14 +36,6 @@ export const HeroSection = () => {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="max-w-3xl order-2 lg:order-1"
                 >
-                    {/* Badge de Disponibilidade */}
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/80 border border-zinc-800 text-zinc-400 text-sm font-medium mb-8 backdrop-blur-sm">
-                        <span className="relative flex h-2.5 w-2.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                        </span>
-                        Disponível para Projetos
-                    </div>
 
                     {/* Headline */}
                     <h1 className="text-5xl md:text-7xl lg:text-7xl font-bold tracking-tighter text-white mb-6 leading-[1.1]">
@@ -54,7 +46,7 @@ export const HeroSection = () => {
                     </h1>
 
                     {/* Filosofia */}
-                    <p className="text-lg md:text-xl text-zinc-300 max-w-xl leading-relaxed font-light mb-8">
+                    <p className="text-lg md:text-xl text-zinc-300 max-w-xl leading-relaxed font-light mb-6">
                         A tecnologia não serve de nada se ela complicar a vida de quem usa.
                         <span className="block mt-4 text-zinc-500 text-base">
                             Atuo na "zona de conflito" entre Design e Desenvolvimento, transformando requisitos complexos em interfaces fluidas.
@@ -74,6 +66,18 @@ export const HeroSection = () => {
                                 </div>
                             </div>
                         ))}
+                    </div>
+
+                    <div className="flex flex-wrap justify-center gap-3 mb-10 max-w-xl md:flex-nowrap">
+                        <div className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-md text-zinc-300 text-sm shadow-sm hover:bg-white/[0.06] transition-colors">
+                            <GraduationCap size={16} className="text-zinc-400" />
+                            <span>Pós graduado em <strong className="text-white font-medium">Design Thinking & Inovação</strong></span>
+                        </div>
+                        
+                        <div className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-md text-zinc-300 text-sm shadow-sm hover:bg-white/[0.06] transition-colors">
+                            <Award size={16} className="text-zinc-400" />
+                            <span>Certificação <strong className="text-white font-medium">Google UX Design</strong></span>
+                        </div>
                     </div>
 
                     {/* CTAs */}
@@ -109,16 +113,11 @@ export const HeroSection = () => {
 
                     {/* 2. Container da Imagem */}
                     <div className="relative w-72 h-72 md:w-96 md:h-96 lg:w-[500px] lg:h-[600px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900">
-                        {/* NOTA: Se sua imagem está na pasta 'public', o src deve ser apenas '/photo.jpeg'.
-              O caminho '../public' geralmente não funciona em build de produção.
-            */}
                         <img
                             src="/photo.jpeg"
                             alt="Profile"
                             className="w-full h-full object-cover object-top opacity-90 hover:opacity-100 transition-opacity duration-500"
                         />
-
-                        {/* Gradient Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60" />
                     </div>
 
