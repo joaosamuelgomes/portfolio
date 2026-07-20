@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Terminal } from 'lucide-react';
 import { SectionTitle } from '../components/ui/SectionTitle';
 import { PlaygroundGrid } from '../components/ui/PlaygroundGrid'; 
 
@@ -7,26 +7,28 @@ export const PlaygroundSection = () => {
     const navigate = useNavigate();
 
     return (
-        <section id="vault" className="max-w-7xl mx-auto px-6 mb-24 md:mb-40">
-            <SectionTitle subtitle="WIPs, experimentos visuais e explorações criativas.">
-                Playground
+        <section id="vault" className="max-w-7xl mx-auto px-6 mb-28 md:mb-40">
+            <SectionTitle 
+                indexCode="SEC_04"
+                subtitle="WIPs, experimentos visuais, protótipos de interface e explorações criativas."
+            >
+                CREATIVE PLAYGROUND
             </SectionTitle>
 
-            {/* Container da Vitrine com Altura Máxima e Overflow Escondido */}
-            <div className="relative mt-16 max-h-[80vh] md:max-h-[100vh] overflow-hidden rounded-2xl">
+            {/* Container da Vitrine */}
+            <div className="relative mt-12 max-h-[80vh] md:max-h-[100vh] overflow-hidden">
                 
-                {/* Passamos um limit para não carregar 50 imagens atoa na Home */}
-                <PlaygroundGrid limit={8} />
+                <PlaygroundGrid limit={6} />
 
-                {/* Efeito de Gradiente (Fade-out) sobrepondo o final do Grid */}
-                <div className="absolute bottom-0 left-0 w-full h-80 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent flex items-end justify-center pb-12 pointer-events-none">
+                {/* Gradient Fade-Out Cyberpunk */}
+                <div className="absolute bottom-0 left-0 w-full h-80 bg-gradient-to-t from-[#08080c] via-[#08080c]/90 to-transparent flex items-end justify-center pb-8 pointer-events-none">
                     
-                    {/* Botão Magnético para a página do arquivo */}
                     <button 
                         onClick={() => navigate('/playground')}
-                        className="pointer-events-auto group flex items-center gap-3 bg-white text-zinc-950 px-8 py-4 rounded-full font-medium shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:scale-105 hover:shadow-[0_0_60px_rgba(255,255,255,0.2)] transition-all duration-300"
+                        className="pointer-events-auto group inline-flex items-center gap-3 bg-[#ccff00] text-black px-8 py-4 font-mono font-bold text-sm uppercase tracking-wider hover:bg-[#00f0ff] transition-all border border-black shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)] active:translate-x-0.5 active:translate-y-0.5"
                     >
-                        Explorar Arquivo Completo
+                        <Terminal size={16} />
+                        EXPLORAR VAULT COMPLETO [VAULT_04]
                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                     </button>
                     
