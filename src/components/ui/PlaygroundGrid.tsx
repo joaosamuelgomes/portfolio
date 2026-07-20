@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Fingerprint, Ghost, X } from 'lucide-react';
+import { Terminal, Ghost, X, Cpu, Crosshair } from 'lucide-react';
 import { client, urlFor } from '../../sanity'; 
 
 export interface PlaygroundItem {
@@ -39,142 +39,156 @@ export const PlaygroundGrid = ({ limit }: { limit?: number }) => {
     if (loading) return (
         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className={`w-full ${i % 2 === 0 ? 'h-96' : 'h-64'} bg-zinc-900/50 rounded-lg border border-white/5 animate-pulse break-inside-avoid`} />
+                <div key={i} className={`w-full ${i % 2 === 0 ? 'h-96' : 'h-64'} bg-[#0d0e14] border border-[#1a1c24] animate-pulse break-inside-avoid corner-brackets`} />
             ))}
         </div>
     );
 
     if (items.length === 0) return (
-        <div className="w-full h-64 rounded-xl border-2 border-dashed border-zinc-800 flex flex-col items-center justify-center text-zinc-500 gap-4 bg-zinc-900/20">
-            <div className="p-4 bg-zinc-900 rounded-full border border-zinc-800"><Ghost size={32} className="opacity-50" /></div>
-            <div className="text-center">
-                <p className="font-medium text-zinc-400">Não há nada na caixa</p>
-                <p className="text-sm text-zinc-600 mt-1">Nenhum experimento publicado ainda.</p>
+        <div className="w-full h-64 border-2 border-dashed border-[#1a1c24] flex flex-col items-center justify-center text-neutral-500 gap-3 bg-[#0d0e14] corner-brackets">
+            <div className="p-3 bg-neutral-900 border border-neutral-800 text-[#00f0ff]">
+                <Ghost size={28} />
+            </div>
+            <div className="text-center font-mono text-xs">
+                <p className="text-neutral-300 font-bold uppercase">[ NO_EXPERIMENTS_FOUND ]</p>
+                <p className="text-neutral-500 mt-1">Nenhum protótipo publicado no repositório.</p>
             </div>
         </div>
     );
 
     return (
         <>
-            {/* O Grid Masonry */}
+            {/* Grid Masonry Brutalista */}
             <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-                {items.map((item) => (
+                {items.map((item, idx) => (
                     <motion.div
                         key={item._id}
                         onClick={() => setSelectedItem(item)}
-                        className={`w-full ${item.heightClass || 'h-64'} relative group rounded-2xl overflow-hidden border border-white/5 bg-zinc-900 break-inside-avoid cursor-pointer`}
-                        whileHover={{ y: -5, scale: 0.98 }}
+                        className={`w-full ${item.heightClass || 'h-64'} relative group overflow-hidden border border-[#1a1c24] hover:border-[#ccff00] bg-[#0d0e14] break-inside-avoid cursor-pointer corner-brackets transition-all duration-300`}
+                        whileHover={{ y: -4 }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     >
                         {item.image ? (
-                            /* A MÁGICA ACONTECE AQUI: Controlamos a opacidade de todo o bloco interno */
                             <motion.div
                                 initial={false}
                                 animate={{ opacity: selectedItem?._id === item._id ? 0 : 1 }}
-                                transition={{ duration: 0.8, ease: "easeInOut" }} // Duração longa para o efeito "esmaecer"
+                                transition={{ duration: 0.5 }}
                                 className="w-full h-full relative"
                             >
                                 <img
                                     src={urlFor(item.image).width(800).url()}
                                     alt={item.title}
-                                    className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
+                                    className="w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-500"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                        <p className="text-white font-medium text-lg mb-1">{item.title}</p>
-                                        <p className="text-xs text-blue-400 uppercase tracking-widest">{item.type}</p>
+                                {/* Overlay de Informação Estilo Dossiê */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-300 flex flex-col justify-between p-4">
+                                    <div className="flex justify-between items-center text-[9px] font-mono text-[#ccff00]">
+                                        <span className="bg-black/80 px-2 py-0.5 border border-[#ccff00]/40">
+                                            EXP_{idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
+                                        </span>
+                                        <span className="text-neutral-400">[{item.type}]</span>
+                                    </div>
+                                    <div>
+                                        <p className="text-white font-display font-bold text-lg uppercase tracking-tight group-hover:text-[#ccff00] transition-colors">
+                                            {item.title}
+                                        </p>
+                                        <p className="text-[10px] font-mono text-[#00f0ff] mt-0.5 flex items-center gap-1">
+                                            <Crosshair size={10} /> INSPECT_ITEM
+                                        </p>
                                     </div>
                                 </div>
                             </motion.div>
                         ) : (
-                            <div className="w-full h-full flex items-center justify-center">
-                                <Fingerprint size={32} strokeWidth={1} className="text-zinc-700" />
+                            <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-neutral-600 font-mono text-xs">
+                                <Terminal size={24} className="text-[#ccff00]" />
+                                <span>[ RAW_DATA_ONLY ]</span>
                             </div>
                         )}
                     </motion.div>
                 ))}
             </div>
 
-            {/* O Modal de Vidro */}
+            {/* Modal de Inspeção Sci-Fi */}
             <AnimatePresence>
                 {selectedItem && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, transition: { duration: 0.3 } }} // Modal some um pouco mais rápido
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12 bg-zinc-950/80 backdrop-blur-xl"
+                        exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12 bg-black/90 backdrop-blur-md"
                         onClick={() => setSelectedItem(null)}
                     >
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            initial={{ opacity: 0, scale: 0.95, y: 15 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                            className="bg-zinc-900/90 border border-white/10 rounded-3xl overflow-hidden w-full max-w-5xl max-h-[90vh] flex flex-col md:flex-row shadow-2xl"
+                            transition={{ duration: 0.3 }}
+                            className="bg-[#0d0e14] border-2 border-[#ccff00] corner-brackets w-full max-w-5xl max-h-[90vh] flex flex-col md:flex-row shadow-[0_0_40px_rgba(204,255,0,0.15)] overflow-hidden"
                             onClick={(e) => e.stopPropagation()} 
                         >
-                            {/* Imagem Expandida - Removido o layoutId */}
-                            <div className="w-full md:w-[55%] h-64 md:h-[80vh] bg-black relative flex items-center justify-center p-4">
+                            {/* Imagem Expandida no Modal */}
+                            <div className="w-full md:w-[55%] h-64 md:h-[80vh] bg-black relative flex items-center justify-center p-4 border-b md:border-b-0 md:border-r border-[#1a1c24]">
                                 <img
                                     src={urlFor(selectedItem.image).width(1200).url()}
                                     alt={selectedItem.title}
                                     className="w-full h-full object-contain"
                                 />
+                                <div className="absolute inset-0 bg-scanlines pointer-events-none opacity-40" />
                             </div>
 
-                            {/* Detalhes do Modal */}
-                            <div className="w-full md:w-[45%] p-8 md:p-12 overflow-y-auto custom-scrollbar flex flex-col justify-center relative">
-                                <motion.button
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    className="absolute top-6 right-6 w-10 h-10 bg-white/5 hover:bg-white/10 rounded-full flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
+                            {/* Detalhes do Experimento */}
+                            <div className="w-full md:w-[45%] p-6 md:p-10 overflow-y-auto flex flex-col justify-between relative bg-[#08080c]">
+                                <button
+                                    className="absolute top-4 right-4 px-2 py-1 bg-neutral-900 border border-[#1a1c24] text-neutral-400 hover:text-[#ccff00] hover:border-[#ccff00] transition-colors font-mono text-xs flex items-center gap-1"
                                     onClick={() => setSelectedItem(null)}
                                 >
-                                    <X size={20} />
-                                </motion.button>
+                                    <X size={14} />
+                                    [ ESC ]
+                                </button>
 
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.2, duration: 0.5 }}
-                                >
-                                    <span className="text-blue-400 text-xs font-semibold tracking-widest uppercase mb-4 block">
-                                        {selectedItem.type}
-                                    </span>
-                                    <h3 className="text-3xl md:text-4xl font-light text-white mb-8 tracking-tight">
+                                <div>
+                                    <div className="flex items-center gap-2 mb-2 font-mono text-xs text-[#00f0ff]">
+                                        <Cpu size={14} />
+                                        <span>LAB_EXPERIMENT // {selectedItem.type.toUpperCase()}</span>
+                                    </div>
+                                    <h3 className="text-3xl font-display font-bold text-white uppercase tracking-tight mb-6">
                                         {selectedItem.title}
                                     </h3>
 
-                                    <div className="space-y-8">
-                                        <div>
-                                            <h4 className="text-sm font-medium text-zinc-100 uppercase tracking-wider mb-3">A Faísca</h4>
-                                            <p className="text-zinc-400 font-light leading-relaxed">
-                                                {selectedItem.context || "Exploração visual focada em micro-interações e fluidez de interface."}
+                                    <div className="space-y-6 text-sm font-sans">
+                                        <div className="p-3 bg-neutral-900/60 border border-neutral-800">
+                                            <h4 className="font-mono text-xs font-bold text-[#ccff00] uppercase mb-1">// A FAÍSCA</h4>
+                                            <p className="text-neutral-300 font-light leading-relaxed">
+                                                {selectedItem.context || "Exploração visual focada em micro-interações, realismo gráfico e fluidez de interface."}
                                             </p>
                                         </div>
 
-                                        <div>
-                                            <h4 className="text-sm font-medium text-zinc-100 uppercase tracking-wider mb-3">O Desafio</h4>
-                                            <p className="text-zinc-400 font-light leading-relaxed">
-                                                {selectedItem.challenge || "Encontrar o equilíbrio perfeito entre performance e fidelidade visual durante a animação."}
+                                        <div className="p-3 bg-neutral-900/60 border border-neutral-800">
+                                            <h4 className="font-mono text-xs font-bold text-[#00f0ff] uppercase mb-1">// O DESAFIO</h4>
+                                            <p className="text-neutral-300 font-light leading-relaxed">
+                                                {selectedItem.challenge || "Encontrar o equilíbrio perfeito entre performance gráfica e fidelidade estética."}
                                             </p>
                                         </div>
 
                                         {selectedItem.stack && selectedItem.stack.length > 0 && (
                                             <div>
-                                                <h4 className="text-sm font-medium text-zinc-100 uppercase tracking-wider mb-3">Stack</h4>
-                                                <div className="flex flex-wrap gap-2">
+                                                <h4 className="font-mono text-xs font-bold text-neutral-400 uppercase mb-2">// TECH STACK</h4>
+                                                <div className="flex flex-wrap gap-2 font-mono text-xs">
                                                     {selectedItem.stack.map(tech => (
-                                                        <span key={tech} className="text-xs font-medium text-zinc-300 bg-zinc-800/50 px-3 py-1.5 rounded-md border border-white/5">
-                                                            {tech}
+                                                        <span key={tech} className="text-neutral-300 bg-neutral-900 px-2.5 py-1 border border-neutral-800">
+                                                            [{tech}]
                                                         </span>
                                                     ))}
                                                 </div>
                                             </div>
                                         )}
                                     </div>
-                                </motion.div>
+                                </div>
+
+                                <div className="mt-8 pt-4 border-t border-neutral-800 text-[10px] font-mono text-neutral-500 flex justify-between">
+                                    <span>STATUS: ARCHIVED</span>
+                                    <span>ID: {selectedItem._id.slice(0, 10)}</span>
+                                </div>
                             </div>
                         </motion.div>
                     </motion.div>

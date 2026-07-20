@@ -1,30 +1,133 @@
 @import "tailwindcss";
 
-  @layer base {
-    :root {
-      --background: 240 10% 3.9%; /* Representação HSL do zinc-950 */
-      --foreground: 0 0% 98%;
-    }
+@theme {
+  --font-display: 'Chakra Petch', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Space Grotesk', sans-serif;
+  
+  --color-acid: #ccff00;
+  --color-cyan: #00f0ff;
+  --color-crimson: #ff003c;
+  --color-dark: #08080c;
+  --color-dark-panel: #0d0e14;
+  --color-dark-border: #1a1c24;
+}
+
+@layer base {
+  :root {
+    --background: #08080c;
+    --foreground: #f4f4f5;
+  }
 
   html {
     scroll-behavior: smooth;
+    background-color: #08080c;
+    color: #f4f4f5;
+    font-family: var(--font-sans);
   }
 
   body {
-    @apply bg-zinc-950 text-zinc-100 antialiased;
-    /* Melhora a renderização de fontes */
-    -webkit-font-smoothing: antialiased; 
+    background-color: #08080c;
+    color: #e4e4e7;
+    -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-tech {
+    font-family: var(--font-display);
+  }
+
+  code, pre, .font-mono-tech {
+    font-family: var(--font-mono);
   }
 }
 
-/* Scrollbar personalizada minimalista */
-::-webkit-scrollbar {
+/* Background Cyber Grid Pattern */
+.bg-cyber-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Dense Dot Grid */
+.bg-dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Scanlines overlay */
+.bg-scanlines {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.3)
+  );
+  background-size: 100% 4px;
+}
+
+/* Animated Laser Scan Line */
+@keyframes laserScan {
+  0% { top: 0%; opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { top: 100%; opacity: 0.8; }
+}
+
+.animate-laser {
+  animation: laserScan 3s linear infinite;
+}
+
+/* Glitch keyframe effect */
+@keyframes techPulse {
+  0%, 100% { border-color: rgba(204, 255, 0, 0.3); }
+  50% { border-color: rgba(0, 240, 255, 0.6); }
+}
+
+.animate-tech-pulse {
+  animation: techPulse 4s infinite;
+}
+
+/* Corner bracket marks */
+.corner-brackets {
+  position: relative;
+}
+.corner-brackets::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
   width: 8px;
+  height: 8px;
+  border-top: 2px solid #ccff00;
+  border-left: 2px solid #ccff00;
+}
+.corner-brackets::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid #ccff00;
+  border-right: 2px solid #ccff00;
+}
+
+/* Industrial scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-zinc-950;
+  background: #08080c;
+  border-left: 1px solid #1a1c24;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-zinc-800 rounded-full hover:bg-zinc-700 transition-colors;
+  background: #27272a;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ccff00;
 }
