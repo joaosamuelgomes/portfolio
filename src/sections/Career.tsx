@@ -5,22 +5,25 @@ import { CAREER_DATA } from '../data/content';
 
 export const CareerSection = () => {
     return (
-        <section id="career" className="max-w-7xl mx-auto px-6 md:px-6 mb-24 md:mb-40">
-            <SectionTitle subtitle="Trajetória focada em impacto técnico e de negócio.">
-                Carreira
+        <section id="career" className="max-w-7xl mx-auto px-6 mb-28 md:mb-40">
+            <SectionTitle 
+                indexCode="SEC_02"
+                subtitle="Trajetória corporativa focada em arquitetura técnica, alta performance e UX."
+            >
+                CARREIRA & TRAJETÓRIA
             </SectionTitle>
 
-            <div className="relative mt-12 md:mt-24">
-                {/* Linha da Timeline - Animação simplificada para garantir renderização mobile */}
+            <div className="relative mt-12 md:mt-20">
+                {/* Linha vertical laser da Timeline */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1 }}
-                    className="absolute left-[15px] md:left-[31px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-500 via-purple-500/30 to-transparent"
+                    initial={{ height: 0 }}
+                    whileInView={{ height: '100%' }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 1.2, ease: "easeInOut" }}
+                    className="absolute left-[12px] md:left-[30px] top-0 w-[2px] bg-gradient-to-b from-[#ccff00] via-[#00f0ff] to-transparent shadow-[0_0_8px_rgba(204,255,0,0.4)]"
                 />
 
-                <div className="flex flex-col gap-8 md:gap-16">
+                <div className="flex flex-col gap-10 md:gap-14">
                     {CAREER_DATA.map((job, index) => (
                         <CareerCard key={index} data={job} index={index} />
                     ))}

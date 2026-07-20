@@ -4,12 +4,15 @@ import { UX_CASES } from '../data/content';
 
 export const UXLabSection = () => {
     return (
-        <section id="ux-lab" className="max-w-7xl mx-auto px-6 mb-24 md:mb-40">
-            <SectionTitle subtitle="Case Studies com foco em resolução de problemas complexos.">
-                UI/UX Lab
+        <section id="ux-lab" className="max-w-7xl mx-auto px-6 mb-28 md:mb-40">
+            <SectionTitle 
+                indexCode="SEC_03"
+                subtitle="Estudos de caso aprofundados com foco em solução de problemas complexos de UX e sistemas SaaS."
+            >
+                UI/UX RESEARCH LAB
             </SectionTitle>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mt-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 mt-12">
                 {UX_CASES.map((project) => (
                     <UXCase key={project.id} data={project} />
                 ))}
