@@ -143,7 +143,7 @@ export const Header = () => {
                         transition={{ duration: 0.2, ease: "easeInOut" }}
                         className="md:hidden border-t border-[#1a1c24] bg-[#08080c] overflow-hidden"
                     >
-                        <div className="p-4 flex flex-col gap-3 font-mono text-xs bg-cyber-grid">
+                        <div className="p-4 flex flex-col gap-3 font-mono text-xs bg-dot-grid">
                             {/* Telemetry Indicator on Mobile */}
                             <div className="flex justify-between items-center text-[10px] text-neutral-500 pb-2 border-b border-[#1a1c24]">
                                 <span className="flex items-center gap-1 text-[#ccff00]">
