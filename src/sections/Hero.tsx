@@ -68,7 +68,7 @@ export const HeroSection = () => {
     return (
         <section id="hero" className="max-w-7xl mx-auto px-4 sm:px-6 pt-4 sm:pt-8 md:pt-16 mb-24 md:mb-36 min-h-[85vh] flex items-center relative">
             {/* Background Grid Accent */}
-            <div className="absolute inset-0 bg-cyber-grid opacity-30 pointer-events-none -z-10" />
+            <div className="absolute inset-0 bg-dot-grid opacity-30 pointer-events-none -z-10" />
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center w-full">
 
@@ -100,14 +100,14 @@ export const HeroSection = () => {
                         </div>
                         <h1 className="text-3xl sm:text-6xl md:text-7xl font-display font-bold uppercase tracking-tight text-white leading-[1.05] sm:leading-[0.95]">
                             FRONT-END & <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ccff00] via-[#00f0ff] to-white font-mono tracking-tighter text-2xl sm:text-5xl md:text-6xl lg:text-7xl block sm:inline-block mt-1 sm:mt-0 whitespace-nowrap">
+                            <span className="text-[#ccff00] font-mono tracking-tighter text-2xl sm:text-5xl md:text-6xl lg:text-7xl block sm:inline-block mt-1 sm:mt-0 whitespace-nowrap">
                                 {scrambleTitle}
                             </span>
                         </h1>
                     </div>
 
                     {/* Filosofia / Manifesto */}
-                    <div className="p-4 bg-neutral-950/80 border-l-2 border-[#ccff00] border-y border-r border-[#1a1c24] mb-8 max-w-2xl">
+                    <div className="p-4 bg-[#0d0e14] border border-[#1a1c24] corner-brackets mb-8 max-w-2xl">
                         <p className="text-base md:text-lg text-neutral-200 leading-relaxed font-sans">
                             A tecnologia não serve de nada se ela complicar a vida de quem usa.
                         </p>

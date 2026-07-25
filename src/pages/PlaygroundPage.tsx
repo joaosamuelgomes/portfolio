@@ -19,7 +19,7 @@ export const PlaygroundPage = () => {
 
     return (
         <div className="min-h-screen bg-[#08080c] text-neutral-300 font-sans pb-32 pt-24 md:pt-32 relative">
-            <div className="absolute inset-0 bg-cyber-grid opacity-20 pointer-events-none -z-10" />
+            <div className="absolute inset-0 bg-dot-grid opacity-20 pointer-events-none -z-10" />
 
             {/* Back Button */}
             <motion.button

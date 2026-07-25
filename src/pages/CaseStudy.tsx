@@ -31,7 +31,7 @@ export const CaseStudy = () => {
 
     return (
         <article className="min-h-screen bg-[#08080c] text-neutral-300 font-sans pb-32 relative">
-            <div className="absolute inset-0 bg-cyber-grid opacity-20 pointer-events-none -z-10" />
+            <div className="absolute inset-0 bg-dot-grid opacity-20 pointer-events-none -z-10" />
 
             {/* Reading Telemetry Line */}
             <motion.div className="fixed top-0 left-0 right-0 h-1 bg-[#ccff00] origin-left z-50 shadow-[0_0_10px_#ccff00]" style={{ scaleX }} />
@@ -104,7 +104,7 @@ export const CaseStudy = () => {
                     </p>
 
                     {details.painPoints && details.painPoints.length > 0 && (
-                        <div className="p-6 bg-[#0d0e14] border-l-4 border-[#ff003c] border-y border-r border-[#1a1c24]">
+                        <div className="p-6 bg-[#0d0e14] border border-[#1a1c24] corner-brackets">
                             <span className="block font-mono text-xs uppercase tracking-widest text-[#ff003c] font-bold mb-4">
                                 [ CRITICAL_PAIN_POINTS ]
                             </span>
