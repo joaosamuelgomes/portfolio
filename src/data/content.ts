@@ -4,9 +4,9 @@ export const CAREER_DATA = [
     role: "Analista de Sistemas",
     period: "Atual - 2023",
     sector: "Agronegócio & Indústria",
-    stack: ["Análise de requisitos", "Prototipação", "Desenvolvimento Front-end"],
+    stack: ["Análise de requisitos", "Estratégia de Produto", "UX/UI & Front-end"],
     impact:
-        "Refatoração de interfaces legadas visando alta performance e UX, definições estratégicas junto a stakeholders guiadas por Design Thinking.",
+        "Atuação de ponta a ponta entre descoberta e entrega: análise de requisitos, prototipação, refatoração de interfaces e definições estratégicas com stakeholders guiadas por Design Thinking.",
     },
     {
         company: "Prodan Software",
@@ -19,7 +19,120 @@ export const CAREER_DATA = [
     },
 ];
 
-export const UX_CASES = [
+type CaseFeature = {
+    title: string;
+    desc: string;
+    image?: string;
+};
+
+type CaseImage = {
+    src: string;
+    alt: string;
+    label: string;
+};
+
+export type UXCaseData = {
+    id: number;
+    title: string;
+    category: string;
+    process: string[];
+    thumbnail: string;
+    logo?: string;
+    details: {
+        heroSubtitle: string;
+        role: string;
+        timeline: string;
+        platform: string;
+        sector: string;
+        challenge: string;
+        challengeImage: string;
+        challengeImageAlt: string;
+        challengeImageLabel: string;
+        painPoints: string[];
+        strategy: string;
+        strategyImage: string;
+        strategyImageAlt: string;
+        strategyImageLabel: string;
+        solutionImage: string;
+        solutionImageAlt: string;
+        solutionImageLabel: string;
+        features: CaseFeature[];
+        additionalImages: CaseImage[];
+        results: Array<{ value: string; label: string }>;
+        conclusion: string;
+    };
+};
+
+export const UX_CASES: UXCaseData[] = [
+    {
+        id: 2,
+        title: "Cristhian Menezes Advocacia & Consultoria",
+        category: "LegalTech & Gestão Jurídica",
+        process: ["Discovery & Requisitos", "UX/UI", "Design System", "Product Engineering"],
+
+        thumbnail: "/cm-advocacia-dashboard.png",
+        logo: "/cm-advocacia-logo.png",
+
+        details: {
+            heroSubtitle: "Centralizando clientes, processos, prazos, audiências e finanças em uma plataforma jurídica simples para a operação diária.",
+            role: "Product Developer & Front-end",
+            timeline: "1 Mês",
+            platform: "Web App Responsivo",
+            sector: "Jurídico & Operações",
+
+            challenge:
+                "O escritório Cristhian Menezes Advocacia & Consultoria precisava concentrar sua operação em um único ambiente. Clientes, processos, prazos, audiências e controle financeiro faziam parte do mesmo fluxo de trabalho, mas precisavam ser organizados em uma experiência simples, funcional e segura para o uso cotidiano.",
+
+            challengeImage: "/cm-advocacia-clientes.png",
+            challengeImageAlt: "Carteira de clientes do sistema jurídico CM Advocacia",
+            challengeImageLabel: "PRODUCT_SCOPE // CLIENT_OPERATIONS",
+
+            painPoints: [
+                "Informações essenciais da operação jurídica distribuídas entre diferentes controles.",
+                "Necessidade de acompanhar processos, prazos, audiências e tarefas sem perder contexto.",
+                "Controle financeiro diretamente ligado aos clientes e processos do escritório.",
+                "Demanda por uma interface consistente que pudesse evoluir junto com o produto."
+            ],
+
+            strategy:
+                "O trabalho começou pela definição de requisitos e das jornadas prioritárias com o cliente. Atuei nas decisões de produto, UX/UI, arquitetura do front-end e integração com as APIs, enquanto Marceli Lausch conduziu o back-end, as regras de negócio e a persistência dos dados. Estruturei um design system documentado no Storybook e adotamos OpenAPI com geração de clientes TypeScript para manter os contratos entre front-end e back-end sincronizados.",
+
+            strategyImage: "/cm-advocacia-audiencias.png",
+            strategyImageAlt: "Calendário de audiências, prazos e tarefas do sistema jurídico",
+            strategyImageLabel: "WORKFLOW_ARCHITECTURE // DEADLINES_AND_HEARINGS",
+
+            solutionImage: "/cm-advocacia-dashboard.png",
+            solutionImageAlt: "Dashboard operacional do sistema jurídico CM Advocacia",
+            solutionImageLabel: "PRODUCTION_UI // LEGAL_OPERATIONS_HUB",
+
+            features: [
+                {
+                    title: "Visão Operacional Unificada",
+                    desc: "O dashboard reúne clientes ativos, processos, compromissos, movimentações prioritárias e previsão financeira em uma leitura única para orientar o dia de trabalho.",
+                    image: "/cm-advocacia-financeiro.png"
+                },
+                {
+                    title: "Agenda Jurídica Integrada",
+                    desc: "Audiências, prazos e tarefas convivem em calendário e pauta diária, com filtros por período, tipo e status para facilitar o acompanhamento dos compromissos."
+                },
+                {
+                    title: "Contratos Tipados por OpenAPI",
+                    desc: "A geração de clientes TypeScript a partir do contrato OpenAPI mantém front-end e back-end sincronizados e reduz inconsistências durante a evolução do produto."
+                }
+            ],
+
+            additionalImages: [],
+
+            results: [
+                { value: "Produção", label: "Plataforma em uso pelo escritório" },
+                { value: "1 Hub", label: "Operação jurídica centralizada" },
+                { value: "OpenAPI", label: "Contratos front-end e back-end sincronizados" }
+            ],
+
+            conclusion:
+                "O projeto reforçou uma direção importante da minha carreira: ir além do código, entender o problema real e participar de todo o ciclo de construção do produto. A IA apoiou discussões, revisões e tarefas de execução, mas a qualidade da entrega veio das decisões técnicas e de produto tomadas em parceria."
+        }
+    },
     {
         id: 1,
         title: "LogiTrack",
@@ -27,6 +140,7 @@ export const UX_CASES = [
         process: ["Imersão em Campo", "Mapeamento de Jornada", "Design Thinking", "Prototipação"],
         
         thumbnail: "/logitrack-thumbnail.png", 
+        logo: undefined,
         
         details: {
             heroSubtitle: "Otimizando a triagem de frotas e reduzindo a carga cognitiva em operações logísticas de alta pressão.",
@@ -39,6 +153,8 @@ export const UX_CASES = [
                 "Em operações logísticas, o tempo de resposta é o ativo mais valioso. O módulo de monitoramento legado exibia uma tabela de dados densa, sem hierarquia visual, contendo mais de 25 colunas cruas. Em momentos de crise, os controladores de tráfego levavam em média 3 minutos apenas para cruzar dados, encontrar o contato do motorista e identificar o gargalo de uma frota, resultando em multas por atraso de entrega e estresse operacional extremo.",
 
             challengeImage: "/logitrack-1.png",
+            challengeImageAlt: "Interface inicial do módulo de monitoramento LogiTrack",
+            challengeImageLabel: "LEGACY_INTERFACE // INITIAL_DIAGNOSTIC",
 
             painPoints: [
                 "Carga cognitiva alta devido à falta de priorização visual dos dados.",
@@ -51,8 +167,12 @@ export const UX_CASES = [
                 "A abordagem foi fundamentada em Design Thinking e imersão real no problema. Conduzimos sessões de observação in loco com os controladores de tráfego para mapear a jornada e identificar o tempo perdido na interface. A solução focou em reestruturar a arquitetura de informação, escondendo o 'ruído' e elevando os dados acionáveis através do princípio de Progressive Disclosure (revelação progressiva).",
 
             strategyImage: "/logitrack-2.png",
+            strategyImageAlt: "Arquitetura de informação e wireframes do LogiTrack",
+            strategyImageLabel: "ARCHITECTURE // INFORMATION_FLOW",
 
             solutionImage: "/logitrack-3.png",
+            solutionImageAlt: "Interface final do LogiTrack",
+            solutionImageLabel: "FINAL_UI // PRODUCTION_DEPLOY",
 
             features: [
                 {
@@ -70,6 +190,8 @@ export const UX_CASES = [
                 }
             ],
 
+            additionalImages: [],
+
             results: [
                 { value: "40%", label: "Redução no tempo médio de triagem de incidentes" },
                 { value: "Zero", label: "Necessidade de uso de abas ou sistemas paralelos" },
@@ -78,66 +200,6 @@ export const UX_CASES = [
 
             conclusion:
                 "O projeto de estudo comprovou que interfaces corporativas complexas não precisam de planilhas gigantes. Ao traduzir os requisitos brutos do setor de transportes a ferramentas se tornou um aliado no suporte à decisão ativa."
-        }
-    },
-    {
-        id: 2,
-        title: "Iron Tracker",
-        category: "App Health & Fitness",
-        process: ["Mobile First Design", "Gamification Strategy", "Cloud Architecture", "Prototipagem"],
-
-        thumbnail: "/irontracker-thumb.png", 
-        
-        details: {
-            heroSubtitle: "Transformando a rotina de musculação em uma experiência imersiva e livre de distrações.",
-            role: "Product Designer & Developer",
-            timeline: "8 Semanas",
-            platform: "PWA (iOS, Android e Web)",
-            sector: "Health & Fitness",
-            
-            challenge: 
-                "O ambiente de academia é hostil ao uso de tecnologia complexa: mãos suadas, fadiga mental e a necessidade de cronometrar descansos criam um cenário onde qualquer clique extra é uma barreira. O desafio foi desenhar uma interface que registrasse dados e induzisse o usuário ao estado de 'flow', eliminando a carga cognitiva de lembrar cargas passadas ou calcular tempos de descanso, tudo isso enquanto mantinha a motivação alta através de gatilhos comportamentais.",
-            
-            challengeImage: "/irontracker-login.png", 
-
-            painPoints: [
-                "Fricção de Interação: Interfaces padrão exigem muita atenção visual durante a execução.", 
-                "Perda de Continuidade: A falta de sincronização na nuvem impedia o usuário de alternar entre dispositivos.", 
-                "Baixa Retenção: Sem visualização de progresso, a disciplina tende a cair ao longo das semanas.", 
-                "Ansiedade de Performance: A incerteza sobre qual carga usar baseada no treino anterior."
-            ],
-            
-            strategy: 
-                "A estratégia de UX foi centrada no conceito de 'Focus Mode'. Ao invés de apresentar uma lista infinita de tarefas, o aplicativo guia o usuário exercício por exercício, como um personal trainer digital. Arquiteturalmente, a escolha pelo Supabase garantiu que essa experiência fosse fluida e persistente em qualquer dispositivo, enquanto a implementação de PWA proporcionou a ergonomia nativa necessária para uso confortável em dispositivos móveis.",
-
-            strategyImage: "/irontracker-dashboard.png",
-
-            solutionImage: "/irontracker-exercise.png", 
-            
-            features: [
-                {
-                    title: "Active Workout (Focus Mode)",
-                    desc: "O coração da experiência. Uma interface imersiva que isola o exercício atual, apresenta cronômetros automáticos de descanso e exibe mídias de execução, removendo qualquer distração visual da tela.",
-                    image: "/irontracker-rest.png"
-                },
-                {
-                    title: "Gamificação e Hábitos",
-                    desc: "Implementação de 'Streaks' (fogo), badges de consistência e um calendário de calor (heatmap). Utilizamos psicologia comportamental para transformar o treino diário em uma conquista visual, aumentando drasticamente a retenção."
-                },
-                {
-                    title: "Ecossistema Cloud Seguro",
-                    desc: "Autenticação robusta e sincronização em tempo real via Supabase. O usuário tem liberdade total para começar o treino no iPhone e analisar suas métricas de evolução de carga no Desktop."
-                }
-            ],
-            
-            results: [
-                { value: "PWA", label: "Experiência Nativa (Installable & Fullscreen)" },
-                { value: "100%", label: "Sincronização em Tempo Real (Cloud)" },
-                { value: "Focus", label: "Interface Otimizada para Ergonomia Mobile" }
-            ],
-            
-            conclusion: 
-                "O Iron Tracker prova que um aplicativo utilitário pode ser envolvente. Ao combinar a robustez técnica da nuvem com uma interface sensível ao contexto do usuário, entregamos um produto que atua como um parceiro ativo na construção de hábitos saudáveis."
         }
     }
 ];

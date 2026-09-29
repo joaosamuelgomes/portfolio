@@ -7,12 +7,12 @@ export const UXLabSection = () => {
         <section id="ux-lab" className="max-w-7xl mx-auto px-6 mb-28 md:mb-40">
             <SectionTitle 
                 indexCode="SEC_03"
-                subtitle="Estudos de caso aprofundados com foco em solução de problemas complexos de UX e sistemas SaaS."
+                subtitle="Estudos de caso da descoberta à implementação, conectando estratégia de produto, UX e engenharia."
             >
-                UI/UX RESEARCH LAB
+                PROJETOS
             </SectionTitle>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-12">
                 {UX_CASES.map((project) => (
                     <UXCase key={project.id} data={project} />
                 ))}
