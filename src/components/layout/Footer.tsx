@@ -16,7 +16,7 @@ export function Footer() {
 
                 {/* Status Bar Links */}
                 <div className="flex items-center justify-center gap-6 text-[10px] tracking-widest uppercase w-full min-[600px]:w-auto">
-                    <span>BUILD: 07.2026</span>
+                    <span>BUILD: 09.2026</span>
                     <span className="text-neutral-700">|</span>
                     <button 
                         onClick={scrollToTop}

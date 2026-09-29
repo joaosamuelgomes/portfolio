@@ -8,7 +8,7 @@ export const CareerSection = () => {
         <section id="career" className="max-w-7xl mx-auto px-6 mb-28 md:mb-40">
             <SectionTitle 
                 indexCode="SEC_02"
-                subtitle="Trajetória corporativa focada em arquitetura técnica, alta performance e UX."
+                subtitle="Trajetória conectando estratégia de produto, experiência do usuário e engenharia."
             >
                 CARREIRA & TRAJETÓRIA
             </SectionTitle>

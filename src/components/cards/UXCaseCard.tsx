@@ -1,20 +1,34 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowUpRight, Cpu, Eye } from 'lucide-react';
-import { UX_CASES } from '../../data/content'; 
+import type { UXCaseData } from '../../data/content';
 
-export const UXCase = ({ data }: { data: typeof UX_CASES[0] }) => {
+export const UXCase = ({ data }: { data: UXCaseData }) => {
+    const cardRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+    const shouldReduceMotion = useReducedMotion();
+    const { scrollYProgress } = useScroll({
+        target: cardRef,
+        offset: ['start 94%', 'end 8%'],
+    });
+    const progress = useSpring(scrollYProgress, { stiffness: 115, damping: 26 });
+    const cardY = useTransform(progress, [0, 0.5, 1], [28, 0, -18]);
+    const cardScale = useTransform(progress, [0, 0.5, 1], [0.97, 1, 0.985]);
+    const cardOpacity = useTransform(progress, [0, 0.22, 0.72, 1], [0.7, 1, 1, 0.82]);
+    const mediaY = useTransform(progress, [0, 1], [-14, 14]);
     
-    const thumbnail = (data as any)?.thumbnail || (data.details as any)?.solutionImage || (data.details as any)?.challengeImage;
+    const thumbnail = data.thumbnail || data.details.solutionImage || data.details.challengeImage;
 
     return (
         <motion.div
+            ref={cardRef}
             onClick={() => navigate(`/case/${data.id}`)}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            style={{
+                y: shouldReduceMotion ? 0 : cardY,
+                scale: shouldReduceMotion ? 1 : cardScale,
+                opacity: shouldReduceMotion ? 1 : cardOpacity,
+            }}
             className="relative group p-6 bg-[#0d0e14] border border-[#1a1c24] hover:border-[#ccff00]/80 transition-all duration-300 cursor-pointer flex flex-col gap-6 corner-brackets shadow-xl"
         >
             {/* Top Bar Telemetry Metadata */}
@@ -42,16 +56,31 @@ export const UXCase = ({ data }: { data: typeof UX_CASES[0] }) => {
                 </div>
 
                 {thumbnail ? (
-                    <img 
+                    <motion.img
                         src={thumbnail} 
                         alt={data.title} 
-                        className="w-full h-full object-cover filter contrast-110 group-hover:scale-105 group-hover:filter-none transition-all duration-700 opacity-90 group-hover:opacity-100"
+                        loading="lazy"
+                        decoding="async"
+                        style={{ y: shouldReduceMotion ? 0 : mediaY }}
+                        className="w-full h-[calc(100%+32px)] -mt-4 object-cover filter contrast-110 scale-[1.04] group-hover:scale-[1.09] group-hover:filter-none transition-all duration-700 opacity-90 group-hover:opacity-100"
                     />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center bg-neutral-950">
                         <span className="text-neutral-700 font-display font-bold text-3xl tracking-tighter uppercase px-6 text-center">
                             {data.title}
                         </span>
+                    </div>
+                )}
+
+                {data.logo && (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 pointer-events-none">
+                        <img
+                            src={data.logo}
+                            alt={`Logo ${data.title}`}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-[58%] max-h-[62%] object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.8)] transition-transform duration-700 group-hover:scale-105"
+                        />
                     </div>
                 )}
 

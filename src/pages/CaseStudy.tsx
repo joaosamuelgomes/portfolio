@@ -23,6 +23,7 @@ export const CaseStudy = () => {
     }
 
     const { details } = caseData; 
+    const featureWithImage = details.features.find((feature) => 'image' in feature);
 
     const fadeUp: Variants = {
         hidden: { opacity: 0, y: 20 },
@@ -124,9 +125,15 @@ export const CaseStudy = () => {
                 {details.challengeImage && (
                     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-6xl mx-auto px-6 mb-24">
                         <div className="relative p-2 bg-[#0d0e14] border border-[#1a1c24] corner-brackets">
-                            <img src={(details as any).challengeImage} alt="O Desafio" className="w-full object-cover filter contrast-105" />
+                            <img
+                                src={details.challengeImage}
+                                alt={details.challengeImageAlt}
+                                loading="lazy"
+                                decoding="async"
+                                className="w-full object-cover filter contrast-105"
+                            />
                             <div className="absolute top-4 left-4 px-2 py-1 bg-black/80 font-mono text-[9px] text-[#ff003c] border border-[#ff003c]/40">
-                                LEGACY_INTERFACE // INITIAL_DIAGNOSTIC
+                                {details.challengeImageLabel}
                             </div>
                         </div>
                     </motion.div>
@@ -140,7 +147,7 @@ export const CaseStudy = () => {
                             <span>SECTION // 02</span>
                         </div>
                         <h2 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight text-white mb-6">
-                            ESTRATÉGIA & DESIGN THINKING
+                            ESTRATÉGIA DE PRODUTO & UX
                         </h2>
                         <p className="text-base md:text-lg leading-relaxed text-neutral-300 font-sans font-light">
                             {details.strategy}
@@ -152,9 +159,15 @@ export const CaseStudy = () => {
                 {details.strategyImage && (
                     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-6xl mx-auto px-6 mb-24">
                         <div className="relative p-2 bg-[#0d0e14] border border-[#1a1c24] corner-brackets">
-                            <img src={(details as any).strategyImage} alt="Estratégia e Wireframes" className="w-full object-cover" />
+                            <img
+                                src={details.strategyImage}
+                                alt={details.strategyImageAlt}
+                                loading="lazy"
+                                decoding="async"
+                                className="w-full object-cover"
+                            />
                             <div className="absolute top-4 left-4 px-2 py-1 bg-black/80 font-mono text-[9px] text-[#00f0ff] border border-[#00f0ff]/40">
-                                ARCHITECTURE // INFORMATION_FLOW
+                                {details.strategyImageLabel}
                             </div>
                         </div>
                     </motion.div>
@@ -177,9 +190,15 @@ export const CaseStudy = () => {
                         {details.solutionImage && (
                             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-6xl mx-auto px-6 mb-16">
                                 <div className="relative p-2 bg-[#0d0e14] border-2 border-[#ccff00]/60 corner-brackets shadow-2xl">
-                                    <img src={(details as any).solutionImage} alt="Interface Final" className="w-full object-cover" />
+                                    <img
+                                        src={details.solutionImage}
+                                        alt={details.solutionImageAlt}
+                                        loading="lazy"
+                                        decoding="async"
+                                        className="w-full object-cover"
+                                    />
                                     <div className="absolute top-4 left-4 px-2.5 py-1 bg-[#ccff00] font-mono text-[10px] text-black font-bold uppercase">
-                                        FINAL_UI // PRODUCTION_DEPLOY
+                                        {details.solutionImageLabel}
                                     </div>
                                 </div>
                             </motion.div>
@@ -205,17 +224,40 @@ export const CaseStudy = () => {
                             ))}
                         </div>
 
-                        {details.features.find(f => (f as any).image) && (
+                        {featureWithImage && (
                             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-6xl mx-auto px-6 mb-24">
                                 <div className="relative p-2 bg-[#0d0e14] border border-[#1a1c24] corner-brackets">
                                     <img 
-                                        src={(details.features.find(f => (f as any).image) as any).image} 
+                                        src={featureWithImage.image}
                                         alt="Detalhe da funcionalidade" 
+                                        loading="lazy"
+                                        decoding="async"
                                         className="w-full object-cover" 
                                     />
                                     <div className="absolute top-4 left-4 px-2 py-1 bg-black/80 font-mono text-[9px] text-[#ccff00] border border-[#ccff00]/40">
                                         MODULE_PREVIEW // DETAILED_INSPECTION
                                     </div>
+                                </div>
+                            </motion.div>
+                        )}
+
+                        {details.additionalImages.length > 0 && (
+                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-4xl mx-auto px-6 mb-24">
+                                <div className="grid grid-cols-1 gap-8">
+                                    {details.additionalImages.map((image) => (
+                                        <div key={image.src} className="relative p-2 bg-[#0d0e14] border border-[#1a1c24] corner-brackets">
+                                            <img
+                                                src={image.src}
+                                                alt={image.alt}
+                                                loading="lazy"
+                                                decoding="async"
+                                                className="w-full max-h-[900px] object-contain"
+                                            />
+                                            <div className="absolute top-4 left-4 px-2 py-1 bg-black/80 font-mono text-[9px] text-[#00f0ff] border border-[#00f0ff]/40">
+                                                {image.label}
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </motion.div>
                         )}
@@ -229,7 +271,7 @@ export const CaseStudy = () => {
                         <div className="p-8 bg-[#0d0e14] border-2 border-[#1a1c24] corner-brackets my-16">
                             <div className="text-center font-mono text-xs text-[#ccff00] font-bold uppercase tracking-widest mb-8 flex items-center justify-center gap-2">
                                 <CheckCircle2 size={16} />
-                                TELEMETRY_RESULTS // METRICS_VERIFIED
+                                VERIFIED_OUTCOMES // PROJECT_RESULTS
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 {details.results.map((result, i) => (
