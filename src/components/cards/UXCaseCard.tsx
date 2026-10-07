@@ -73,14 +73,17 @@ export const UXCase = ({ data }: { data: UXCaseData }) => {
                 )}
 
                 {data.logo && (
-                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 pointer-events-none">
-                        <img
-                            src={data.logo}
-                            alt={`Logo ${data.title}`}
-                            loading="lazy"
-                            decoding="async"
-                            className="w-[58%] max-h-[62%] object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.8)] transition-transform duration-700 group-hover:scale-105"
-                        />
+                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/35 pointer-events-none">
+                        <div className="relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-xl border border-[#9a6f16] bg-[#171715]/95 p-3 shadow-[0_10px_32px_rgba(0,0,0,0.75),0_0_20px_rgba(234,182,56,0.08)] transition-all duration-700 group-hover:scale-105 group-hover:border-[#eab638] group-hover:shadow-[0_12px_36px_rgba(0,0,0,0.8),0_0_24px_rgba(234,182,56,0.16)] sm:h-24 sm:w-24 sm:p-4">
+                            <span className="absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-[#eab638]/70 to-transparent" />
+                            <img
+                                src={data.logo}
+                                alt={`Logo ${data.title}`}
+                                loading="lazy"
+                                decoding="async"
+                                className="h-full w-full object-contain"
+                            />
+                        </div>
                     </div>
                 )}
 

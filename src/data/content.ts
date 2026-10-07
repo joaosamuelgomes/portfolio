@@ -71,7 +71,7 @@ export const UX_CASES: UXCaseData[] = [
         process: ["Discovery & Requisitos", "UX/UI", "Design System", "Product Engineering"],
 
         thumbnail: "/cm-advocacia-dashboard.png",
-        logo: "/cm-advocacia-logo.png",
+        logo: "/cm-white.svg",
 
         details: {
             heroSubtitle: "Centralizando clientes, processos, prazos, audiências e finanças em uma plataforma jurídica simples para a operação diária.",
