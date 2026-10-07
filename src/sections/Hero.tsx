@@ -1,36 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight, BrainCircuit, PenTool, Code2, Crosshair, ShieldCheck, Zap } from 'lucide-react';
 
 const TOOLS = [
     { 
         code: "SPEC_01",
         icon: BrainCircuit, 
-        label: "DESIGN THINKING", 
-        desc: "Empatia, Ideação, Definição, Prototipagem & Testes",
+        label: "PRODUCT DISCOVERY & STRATEGY",
+        desc: "Pesquisa, Requisitos, Priorização & Stakeholders",
         level: "95%"
     },
     { 
         code: "SPEC_02",
         icon: PenTool, 
-        label: "UI/UX PROTOTYPING", 
-        desc: "Figma, Miro, UX Pilot, Hotjar & InVision",
+        label: "UX/UI DESIGN & PROTOTYPING",
+        desc: "Jornadas, Arquitetura de Informação, Figma & Testes",
         level: "90%"
     },
     { 
         code: "SPEC_03",
         icon: Code2, 
-        label: "FRONT-END ENGINEERING", 
-        desc: "JS, React, TypeScript, Tailwind CSS, Motion",
+        label: "PRODUCT ENGINEERING",
+        desc: "React, TypeScript, APIs, Arquitetura & Entrega",
         level: "98%"
     },
 ];
 
 export const HeroSection = () => {
+    const heroRef = useRef<HTMLElement>(null);
+    const shouldReduceMotion = useReducedMotion();
     const [scrambleTitle, setScrambleTitle] = useState("UX SPECIALIST");
+
+    const { scrollYProgress } = useScroll({
+        target: heroRef,
+        offset: ['start start', 'end start'],
+    });
+    const smoothProgress = useSpring(scrollYProgress, { stiffness: 110, damping: 28 });
+    const copyY = useTransform(smoothProgress, [0, 1], [0, -64]);
+    const copyOpacity = useTransform(smoothProgress, [0, 0.72, 1], [1, 0.88, 0.35]);
+    const portraitY = useTransform(smoothProgress, [0, 1], [0, 112]);
+    const portraitScale = useTransform(smoothProgress, [0, 1], [1, 0.92]);
+    const portraitOpacity = useTransform(smoothProgress, [0, 0.78, 1], [1, 0.86, 0.38]);
+    const gridOpacity = useTransform(smoothProgress, [0, 1], [0.3, 0.05]);
 
     useEffect(() => {
         const target = "UX SPECIALIST";
+        if (shouldReduceMotion) {
+            return;
+        }
+
         const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$&*";
         let iteration = 0;
         const interval = setInterval(() => {
@@ -48,7 +66,7 @@ export const HeroSection = () => {
             iteration += 1 / 2;
         }, 30);
         return () => clearInterval(interval);
-    }, []);
+    }, [shouldReduceMotion]);
 
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
         e.preventDefault();
@@ -66,9 +84,12 @@ export const HeroSection = () => {
     };
 
     return (
-        <section id="hero" className="max-w-7xl mx-auto px-4 sm:px-6 pt-4 sm:pt-8 md:pt-16 mb-24 md:mb-36 min-h-[85vh] flex items-center relative">
+        <section ref={heroRef} id="hero" className="max-w-7xl mx-auto px-4 sm:px-6 pt-4 sm:pt-8 md:pt-16 mb-24 md:mb-36 min-h-[85vh] flex items-center relative">
             {/* Background Grid Accent */}
-            <div className="absolute inset-0 bg-dot-grid opacity-30 pointer-events-none -z-10" />
+            <motion.div
+                style={{ opacity: shouldReduceMotion ? 0.3 : gridOpacity }}
+                className="absolute inset-0 bg-dot-grid pointer-events-none -z-10"
+            />
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center w-full">
 
@@ -77,6 +98,10 @@ export const HeroSection = () => {
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.7, ease: "easeOut" }}
+                    style={{
+                        y: shouldReduceMotion ? 0 : copyY,
+                        opacity: shouldReduceMotion ? 1 : copyOpacity,
+                    }}
                     className="lg:col-span-7 order-2 lg:order-1"
                 >
                     {/* Badge de Status / Disponibilidade (Ajustado para Mobile) */}
@@ -96,12 +121,12 @@ export const HeroSection = () => {
                     <div className="relative mb-6">
                         <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
                             <Crosshair size={12} className="text-[#00f0ff] shrink-0" />
-                            <span>PRODUCT SPECIALIST // DEPLOY_ID: 2720J1-G</span>
+                            <span>END-TO-END PRODUCT DEVELOPMENT // DEPLOY_ID: 2720J1-G</span>
                         </div>
-                        <h1 className="text-3xl sm:text-6xl md:text-7xl font-display font-bold uppercase tracking-tight text-white leading-[1.05] sm:leading-[0.95]">
-                            FRONT-END & <br />
-                            <span className="text-[#ccff00] font-mono tracking-tighter text-2xl sm:text-5xl md:text-6xl lg:text-7xl block sm:inline-block mt-1 sm:mt-0 whitespace-nowrap">
-                                {scrambleTitle}
+                        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold uppercase tracking-tight text-white leading-[1.05] sm:leading-[0.95]">
+                            PRODUCT DEVELOPER <br />
+                            <span className="text-[#ccff00] font-mono tracking-tighter text-2xl sm:text-4xl md:text-5xl lg:text-6xl block mt-1 sm:mt-2 whitespace-nowrap">
+                                &amp; {scrambleTitle}
                             </span>
                         </h1>
                     </div>
@@ -112,7 +137,7 @@ export const HeroSection = () => {
                             A tecnologia não serve de nada se ela complicar a vida de quem usa.
                         </p>
                         <p className="mt-2 text-xs md:text-sm font-mono text-neutral-400">
-                            // Atuo na "zona de conflito" entre Design e Desenvolvimento, transformando requisitos complexos em interfaces fluidas e de altíssima fidelidade.
+                            // Atuo de ponta a ponta no ciclo do produto — da descoberta e alinhamento com stakeholders ao design da experiência, desenvolvimento e evolução da solução.
                         </p>
                     </div>
 
@@ -176,6 +201,11 @@ export const HeroSection = () => {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+                    style={{
+                        y: shouldReduceMotion ? 0 : portraitY,
+                        scale: shouldReduceMotion ? 1 : portraitScale,
+                        opacity: shouldReduceMotion ? 1 : portraitOpacity,
+                    }}
                     className="hidden min-[600px]:flex lg:col-span-5 order-1 lg:order-2 justify-center lg:justify-end"
                 >
                     <div className="relative w-full max-w-md">

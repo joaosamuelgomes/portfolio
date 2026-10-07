@@ -1,20 +1,34 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowUpRight, Cpu, Eye } from 'lucide-react';
-import { UX_CASES } from '../../data/content'; 
+import type { UXCaseData } from '../../data/content';
 
-export const UXCase = ({ data }: { data: typeof UX_CASES[0] }) => {
+export const UXCase = ({ data }: { data: UXCaseData }) => {
+    const cardRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+    const shouldReduceMotion = useReducedMotion();
+    const { scrollYProgress } = useScroll({
+        target: cardRef,
+        offset: ['start 94%', 'end 8%'],
+    });
+    const progress = useSpring(scrollYProgress, { stiffness: 115, damping: 26 });
+    const cardY = useTransform(progress, [0, 0.5, 1], [28, 0, -18]);
+    const cardScale = useTransform(progress, [0, 0.5, 1], [0.97, 1, 0.985]);
+    const cardOpacity = useTransform(progress, [0, 0.22, 0.72, 1], [0.7, 1, 1, 0.82]);
+    const mediaY = useTransform(progress, [0, 1], [-14, 14]);
     
-    const thumbnail = (data as any)?.thumbnail || (data.details as any)?.solutionImage || (data.details as any)?.challengeImage;
+    const thumbnail = data.thumbnail || data.details.solutionImage || data.details.challengeImage;
 
     return (
         <motion.div
+            ref={cardRef}
             onClick={() => navigate(`/case/${data.id}`)}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            style={{
+                y: shouldReduceMotion ? 0 : cardY,
+                scale: shouldReduceMotion ? 1 : cardScale,
+                opacity: shouldReduceMotion ? 1 : cardOpacity,
+            }}
             className="relative group p-6 bg-[#0d0e14] border border-[#1a1c24] hover:border-[#ccff00]/80 transition-all duration-300 cursor-pointer flex flex-col gap-6 corner-brackets shadow-xl"
         >
             {/* Top Bar Telemetry Metadata */}
@@ -42,16 +56,34 @@ export const UXCase = ({ data }: { data: typeof UX_CASES[0] }) => {
                 </div>
 
                 {thumbnail ? (
-                    <img 
+                    <motion.img
                         src={thumbnail} 
                         alt={data.title} 
-                        className="w-full h-full object-cover filter contrast-110 group-hover:scale-105 group-hover:filter-none transition-all duration-700 opacity-90 group-hover:opacity-100"
+                        loading="lazy"
+                        decoding="async"
+                        style={{ y: shouldReduceMotion ? 0 : mediaY }}
+                        className="w-full h-[calc(100%+32px)] -mt-4 object-cover filter contrast-110 scale-[1.04] group-hover:scale-[1.09] group-hover:filter-none transition-all duration-700 opacity-90 group-hover:opacity-100"
                     />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center bg-neutral-950">
                         <span className="text-neutral-700 font-display font-bold text-3xl tracking-tighter uppercase px-6 text-center">
                             {data.title}
                         </span>
+                    </div>
+                )}
+
+                {data.logo && (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/35 pointer-events-none">
+                        <div className="relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-xl border border-[#9a6f16] bg-[#171715]/95 p-3 shadow-[0_10px_32px_rgba(0,0,0,0.75),0_0_20px_rgba(234,182,56,0.08)] transition-all duration-700 group-hover:scale-105 group-hover:border-[#eab638] group-hover:shadow-[0_12px_36px_rgba(0,0,0,0.8),0_0_24px_rgba(234,182,56,0.16)] sm:h-24 sm:w-24 sm:p-4">
+                            <span className="absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-[#eab638]/70 to-transparent" />
+                            <img
+                                src={data.logo}
+                                alt={`Logo ${data.title}`}
+                                loading="lazy"
+                                decoding="async"
+                                className="h-full w-full object-contain"
+                            />
+                        </div>
                     </div>
                 )}
 
