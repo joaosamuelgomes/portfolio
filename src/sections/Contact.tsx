@@ -33,7 +33,7 @@ export const ContactSection = () => {
                 </h2>
 
                 <p className="text-base md:text-lg text-neutral-400 max-w-xl mx-auto font-sans font-light mb-10">
-                    Disponível para novos desafios, soluções de UX/UI e desenvolvimento front-end de alta fidelidade.
+                    Disponível para novos desafios em desenvolvimento de produto, UX/UI e construção de experiências digitais de ponta a ponta.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
