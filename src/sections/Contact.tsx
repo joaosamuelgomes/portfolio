@@ -51,10 +51,10 @@ export const ContactSection = () => {
                     {/* Botão Email Copy Terminal */}
                     <button
                         onClick={copyEmail}
-                        className="w-full sm:w-auto relative px-8 py-4 bg-neutral-900 border border-neutral-700 text-neutral-200 font-mono text-sm hover:border-[#ccff00] hover:text-white transition-all flex items-center justify-center gap-3 active:scale-95"
+                        className="w-full sm:w-auto relative px-3 sm:px-8 py-4 bg-neutral-900 border border-neutral-700 text-neutral-200 font-mono hover:border-[#ccff00] hover:text-white transition-all flex items-center justify-center gap-2 sm:gap-3 active:scale-95"
                     >
-                        <Terminal size={16} className="text-[#ccff00]" />
-                        <span>{userEmail}</span>
+                        <Terminal size={16} className="hidden sm:block text-[#ccff00]" />
+                        <span className="text-[10px] min-[360px]:text-xs sm:text-sm">{userEmail}</span>
                         <div className="w-5 h-5 flex items-center justify-center">
                             <AnimatePresence mode="wait">
                                 {emailCopied ? (
