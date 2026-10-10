@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { ArrowLeft, Cpu, ShieldCheck, Terminal, AlertTriangle, CheckCircle2 } from 'lucide-react';
-import { UX_CASES } from '../data/content'; 
+import { ArrowLeft, Cpu, ShieldCheck, Terminal, AlertTriangle, CheckCircle2, Quote } from 'lucide-react';
+import { UX_CASES } from '../data/content';
+import { getResponsiveImageProps } from '../lib/responsiveImage';
 
 export const CaseStudy = () => {
     const { id } = useParams();
@@ -51,7 +52,7 @@ export const CaseStudy = () => {
 
             {/* Case Study Header */}
             <header className="pt-28 md:pt-36 pb-16 border-b border-[#1a1c24] bg-[#0d0e14]">
-                <div className="max-w-4xl mx-auto px-6 text-center">
+                <div className="case-container text-center">
                     <motion.div initial="hidden" animate="visible" variants={fadeUp}>
                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-black border border-neutral-800 font-mono text-xs text-[#00f0ff] uppercase tracking-widest mb-6">
                             <Cpu size={14} />
@@ -92,7 +93,7 @@ export const CaseStudy = () => {
             <main className="mt-20">
 
                 {/* 01. O DESAFIO */}
-                <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="max-w-4xl mx-auto px-6 mb-16">
+                <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="case-container mb-16">
                     <div className="flex items-center gap-2 mb-4 font-mono text-xs text-[#ff003c]">
                         <AlertTriangle size={16} />
                         <span>SECTION // 01</span>
@@ -123,10 +124,10 @@ export const CaseStudy = () => {
 
                 {/* Challenge Image HUD */}
                 {details.challengeImage && (
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-6xl mx-auto px-6 mb-24">
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="case-container mb-24">
                         <div className="relative p-2 bg-[#0d0e14] border border-[#1a1c24] corner-brackets">
                             <img
-                                src={details.challengeImage}
+                                {...getResponsiveImageProps(details.challengeImage, '(max-width: 767px) calc(100vw - 48px), 65vw')}
                                 alt={details.challengeImageAlt}
                                 loading="lazy"
                                 decoding="async"
@@ -141,7 +142,7 @@ export const CaseStudy = () => {
 
                 {/* 02. A ESTRATÉGIA */}
                 {details.strategy && (
-                    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="max-w-4xl mx-auto px-6 mb-16">
+                    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="case-container mb-16">
                         <div className="flex items-center gap-2 mb-4 font-mono text-xs text-[#00f0ff]">
                             <Terminal size={16} />
                             <span>SECTION // 02</span>
@@ -157,10 +158,10 @@ export const CaseStudy = () => {
 
                 {/* Strategy Image HUD */}
                 {details.strategyImage && (
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-6xl mx-auto px-6 mb-24">
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="case-container mb-24">
                         <div className="relative p-2 bg-[#0d0e14] border border-[#1a1c24] corner-brackets">
                             <img
-                                src={details.strategyImage}
+                                {...getResponsiveImageProps(details.strategyImage, '(max-width: 767px) calc(100vw - 48px), 65vw')}
                                 alt={details.strategyImageAlt}
                                 loading="lazy"
                                 decoding="async"
@@ -176,7 +177,7 @@ export const CaseStudy = () => {
                 {/* 03. A SOLUÇÃO */}
                 {details.features && details.features.length > 0 && (
                     <>
-                        <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="max-w-4xl mx-auto px-6 mb-12">
+                        <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="case-container mb-12">
                             <div className="flex items-center gap-2 mb-4 font-mono text-xs text-[#ccff00]">
                                 <ShieldCheck size={16} />
                                 <span>SECTION // 03</span>
@@ -188,10 +189,10 @@ export const CaseStudy = () => {
 
                         {/* Main Solution Image */}
                         {details.solutionImage && (
-                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-6xl mx-auto px-6 mb-16">
+                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="case-container mb-16">
                                 <div className="relative p-2 bg-[#0d0e14] border-2 border-[#ccff00]/60 corner-brackets shadow-2xl">
                                     <img
-                                        src={details.solutionImage}
+                                        {...getResponsiveImageProps(details.solutionImage, '(max-width: 767px) calc(100vw - 48px), 65vw')}
                                         alt={details.solutionImageAlt}
                                         loading="lazy"
                                         decoding="async"
@@ -205,7 +206,7 @@ export const CaseStudy = () => {
                         )}
 
                         {/* Features Spec Modules */}
-                        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+                        <div className="case-container grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
                             {details.features.map((feature, i) => (
                                 <motion.div 
                                     key={i} 
@@ -224,11 +225,11 @@ export const CaseStudy = () => {
                             ))}
                         </div>
 
-                        {featureWithImage && (
-                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-6xl mx-auto px-6 mb-24">
+                        {featureWithImage?.image && (
+                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="case-container mb-24">
                                 <div className="relative p-2 bg-[#0d0e14] border border-[#1a1c24] corner-brackets">
                                     <img 
-                                        src={featureWithImage.image}
+                                        {...getResponsiveImageProps(featureWithImage.image, '(max-width: 767px) calc(100vw - 48px), 65vw')}
                                         alt="Detalhe da funcionalidade" 
                                         loading="lazy"
                                         decoding="async"
@@ -242,12 +243,12 @@ export const CaseStudy = () => {
                         )}
 
                         {details.additionalImages.length > 0 && (
-                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-4xl mx-auto px-6 mb-24">
+                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="case-container mb-24">
                                 <div className="grid grid-cols-1 gap-8">
                                     {details.additionalImages.map((image) => (
                                         <div key={image.src} className="relative p-2 bg-[#0d0e14] border border-[#1a1c24] corner-brackets">
                                             <img
-                                                src={image.src}
+                                                {...getResponsiveImageProps(image.src, '(max-width: 767px) calc(100vw - 48px), 65vw')}
                                                 alt={image.alt}
                                                 loading="lazy"
                                                 decoding="async"
@@ -265,18 +266,18 @@ export const CaseStudy = () => {
                 )}
 
                 {/* 04. RESULTADOS DE TELEMETRIA */}
-                <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="max-w-4xl mx-auto px-6">
+                <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="case-container">
                     
                     {details.results && details.results.length > 0 && (
-                        <div className="p-8 bg-[#0d0e14] border-2 border-[#1a1c24] corner-brackets my-16">
+                        <div className="p-4 sm:p-8 bg-[#0d0e14] border-2 border-[#1a1c24] corner-brackets my-16">
                             <div className="text-center font-mono text-xs text-[#ccff00] font-bold uppercase tracking-widest mb-8 flex items-center justify-center gap-2">
                                 <CheckCircle2 size={16} />
                                 VERIFIED_OUTCOMES // PROJECT_RESULTS
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 {details.results.map((result, i) => (
-                                    <div key={i} className="text-center p-4 bg-black/60 border border-neutral-800">
-                                        <span className="block text-5xl font-display font-bold text-[#ccff00] mb-2 tracking-tight">
+                                    <div key={i} className="min-w-0 text-center p-4 bg-black/60 border border-neutral-800">
+                                        <span className="block max-w-full break-words [overflow-wrap:anywhere] text-[clamp(1.75rem,10vw,3rem)] leading-none font-display font-bold text-[#ccff00] mb-2 tracking-tight">
                                             {result.value}
                                         </span>
                                         <span className="text-xs font-mono text-neutral-300 uppercase leading-relaxed block">
@@ -288,10 +289,44 @@ export const CaseStudy = () => {
                         </div>
                     )}
 
+                    {details.testimonial && (
+                        <figure className="grid grid-cols-1 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.7fr)] bg-[#0d0e14] border border-[#1a1c24] corner-brackets mb-16 overflow-hidden">
+                            <div className="relative min-h-64 md:min-h-full border-b md:border-b-0 md:border-r border-[#1a1c24] overflow-hidden">
+                                <img
+                                    src={details.testimonial.image}
+                                    alt={details.testimonial.imageAlt}
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="absolute inset-0 h-full w-full object-cover object-[center_28%] grayscale contrast-110"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" aria-hidden="true" />
+                                <figcaption className="absolute inset-x-0 bottom-0 p-5">
+                                    <span className="block font-display text-lg font-bold uppercase tracking-tight text-white">
+                                        {details.testimonial.author}
+                                    </span>
+                                    <span className="mt-1 block font-mono text-[10px] uppercase tracking-widest text-[#ccff00]">
+                                        {details.testimonial.role}
+                                    </span>
+                                </figcaption>
+                            </div>
+
+                            <blockquote className="relative flex flex-col justify-between p-6 sm:p-8 md:p-10">
+                                <Quote size={32} strokeWidth={1.5} className="mb-8 text-[#00f0ff]" aria-hidden="true" />
+                                <p className="max-w-[34ch] whitespace-pre-line text-xl sm:text-2xl md:text-3xl font-display font-semibold leading-snug tracking-[-0.02em] text-white">
+                                    “{details.testimonial.quote}”
+                                </p>
+                                <div className="mt-10 flex items-center gap-3 border-t border-[#1a1c24] pt-4 font-mono text-[10px] uppercase tracking-widest text-neutral-400">
+                                    <span className="h-2 w-2 bg-[#ccff00]" aria-hidden="true" />
+                                    <span>CLIENT_SIGNAL // {details.testimonial.source}</span>
+                                </div>
+                            </blockquote>
+                        </figure>
+                    )}
+
                     {details.conclusion && (
                         <div className="mb-24 p-6 bg-[#0d0e14] border border-[#1a1c24]">
                             <h2 className="text-2xl font-display font-bold uppercase text-white mb-4">// CONCLUSÃO</h2>
-                            <p className="text-base md:text-lg leading-relaxed text-neutral-300 font-sans font-light">
+                            <p className="text-justify [hyphens:auto] text-base md:text-lg leading-relaxed text-neutral-300 font-sans font-light">
                                 {details.conclusion}
                             </p>
                         </div>

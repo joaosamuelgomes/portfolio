@@ -81,7 +81,7 @@ A unidade base é 4 px. Usar a escala já dominante no projeto:
 - `40-56px`: separação de grupos internos;
 - `96-160px`: ritmo entre seções da landing page.
 
-Containers de conteúdo usam `max-w-7xl`; narrativa longa de cases usa `max-w-4xl`; contato usa `max-w-5xl`. Manter `px-4` ou `px-6` nas bordas do viewport.
+Containers de conteúdo usam `max-w-7xl`; cases usam uma régua editorial compartilhada de `65vw`, limitada a `1440px`, para alinhar textos, imagens e evidências na mesma largura; abaixo de `768px`, a régua ocupa a largura disponível com margens laterais de `16px`. Contato usa `max-w-5xl`.
 
 ### 3.4 Forma, bordas e profundidade
 
@@ -287,6 +287,6 @@ Evitar:
 
 - Foto: `public/photo.jpeg`, 848 × 1264.
 - Open Graph: `public/og-image.png`, 1200 × 630.
-- LogiTrack: thumbnail e quatro telas em 1920 × 1080.
+- Gelatto Sorvetes: logo e quatro mockups responsivos cobrindo hero, produtos, atacado e experiência mobile.
 - Cristhian Menezes Advocacia & Consultoria: logo, quatro mockups desktop em 1536 × 1024 e um mockup mobile em 1024 × 1536.
 - Ícone da aplicação: `public/icon.svg`.
