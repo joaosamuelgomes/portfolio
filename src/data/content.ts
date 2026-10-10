@@ -31,6 +31,15 @@ type CaseImage = {
     label: string;
 };
 
+type CaseTestimonial = {
+    quote: string;
+    author: string;
+    role: string;
+    image: string;
+    imageAlt: string;
+    source: string;
+};
+
 export type UXCaseData = {
     id: number;
     title: string;
@@ -38,6 +47,7 @@ export type UXCaseData = {
     process: string[];
     thumbnail: string;
     logo?: string;
+    brandAccent?: "gold" | "red";
     details: {
         heroSubtitle: string;
         role: string;
@@ -59,6 +69,7 @@ export type UXCaseData = {
         features: CaseFeature[];
         additionalImages: CaseImage[];
         results: Array<{ value: string; label: string }>;
+        testimonial?: CaseTestimonial;
         conclusion: string;
     };
 };
@@ -129,77 +140,92 @@ export const UX_CASES: UXCaseData[] = [
                 { value: "OpenAPI", label: "Contratos front-end e back-end sincronizados" }
             ],
 
+            testimonial: {
+                quote: "O sistema ficou muito bom, prático e intuitivo, carregando tudo o que o escritório precisa no dia a dia: clientes, prazos, compromissos, audiências e financeiro em um só lugar.\n\nObrigado pela dedicação e pela parceria.\n\nSucesso!",
+                author: "Cristhian Menezes",
+                role: "Advogado · Cliente",
+                image: "/advogado-image.webp",
+                imageAlt: "Retrato de Cristhian Menezes, advogado e cliente do projeto",
+                source: "Comentário no LinkedIn"
+            },
+
             conclusion:
                 "O projeto reforçou uma direção importante da minha carreira: ir além do código, entender o problema real e participar de todo o ciclo de construção do produto. A IA apoiou discussões, revisões e tarefas de execução, mas a qualidade da entrega veio das decisões técnicas e de produto tomadas em parceria."
         }
     },
     {
         id: 1,
-        title: "LogiTrack",
-        category: "SaaS Logística & Fleet Management",
-        process: ["Imersão em Campo", "Mapeamento de Jornada", "Design Thinking", "Prototipação"],
+        title: "Gelatto Sorvetes",
+        category: "Food Retail & Presença Digital",
+        process: ["Direção de Arte", "UX/UI", "Front-end", "Acessibilidade"],
         
-        thumbnail: "/logitrack-thumbnail.png", 
-        logo: undefined,
+        thumbnail: "/gelatto-hero-1280.webp",
+        logo: "/gelatto-logo.webp",
+        brandAccent: "red",
         
         details: {
-            heroSubtitle: "Otimizando a triagem de frotas e reduzindo a carga cognitiva em operações logísticas de alta pressão.",
-            role: "UX/UI Designer",
-            timeline: "6 Semanas",
-            platform: "Desktop Web App",
-            sector: "Logística & Gestão de Frotas",
+            heroSubtitle: "Transformando produtos, presença local e oportunidades de revenda em uma landing page editorial construída para despertar desejo e facilitar o contato.",
+            role: "Direção de Arte, UX/UI & Front-end",
+            timeline: "3 Semanas",
+            platform: "Landing Page Responsiva",
+            sector: "Alimentos, Varejo & Atacado",
 
             challenge:
-                "Em operações logísticas, o tempo de resposta é o ativo mais valioso. O módulo de monitoramento legado exibia uma tabela de dados densa, sem hierarquia visual, contendo mais de 25 colunas cruas. Em momentos de crise, os controladores de tráfego levavam em média 3 minutos apenas para cruzar dados, encontrar o contato do motorista e identificar o gargalo de uma frota, resultando em multas por atraso de entrega e estresse operacional extremo.",
+                "A Gelatto precisava apresentar sua fábrica, sua loja e seu portfólio de sorvetes, picolés e açaí em uma experiência digital coerente com o apelo visual dos produtos. Ao mesmo tempo, a página deveria atender dois públicos com intenções diferentes: consumidores interessados em conhecer a marca e empresas buscando produtos para revenda. O desafio não era criar um catálogo completo ou uma operação de e-commerce. O objetivo era construir uma presença digital marcante, comunicar a existência da Gelatto em Cruz Alta e conduzir cada visitante ao canal de atendimento adequado.",
 
-            challengeImage: "/logitrack-1.png",
-            challengeImageAlt: "Interface inicial do módulo de monitoramento LogiTrack",
-            challengeImageLabel: "LEGACY_INTERFACE // INITIAL_DIAGNOSTIC",
+            challengeImage: "/gelatto-hero-1280.webp",
+            challengeImageAlt: "Landing page da Gelatto exibida em um laptop sobre o balcão de uma gelateria",
+            challengeImageLabel: "BRAND_ENTRY // PRODUCT_DESIRE_AND_LOCAL_PRESENCE",
 
             painPoints: [
-                "Carga cognitiva alta devido à falta de priorização visual dos dados.",
-                "Ausência de indicadores claros para status críticos.",
-                "Rolagem horizontal exaustiva para encontrar informações de contato e placa.",
-                "Perda de contexto, exigindo que o usuário abrisse múltiplas abas para ver o manifesto da carga."
+                "Ausência de uma experiência digital capaz de traduzir o apelo visual e sensorial dos produtos.",
+                "Necessidade de comunicar varejo e atacado na mesma página sem misturar as duas jornadas.",
+                "Materiais visuais de origens diferentes que precisavam conviver em uma direção de arte consistente.",
+                "Experiência dependente de fotografia, movimento e escala, mas que também precisava funcionar bem no celular, por teclado e com movimento reduzido."
             ],
 
             strategy:
-                "A abordagem foi fundamentada em Design Thinking e imersão real no problema. Conduzimos sessões de observação in loco com os controladores de tráfego para mapear a jornada e identificar o tempo perdido na interface. A solução focou em reestruturar a arquitetura de informação, escondendo o 'ruído' e elevando os dados acionáveis através do princípio de Progressive Disclosure (revelação progressiva).",
+                "O desenvolvimento começou pela organização dos fatos comerciais, públicos e caminhos de conversão. Estruturei a página em dois grandes capítulos: primeiro, uma sequência dedicada aos produtos; depois, uma transição direta para atacado, presença física e continuidade da marca no Instagram. A direção visual recebeu o conceito “Ensaio de balcão”. Em vez de seguir o padrão comum de hero dividido, grade de cards e blocos genéricos de benefícios, cada família de produto ganhou uma cena própria. Tipografia editorial, grandes campos de cor, fotografia de produto e movimento ligado ao scroll criam uma visita visual à Gelatto. As cores também assumem função narrativa: creme como base, chocolate para coberturas, azul-gelo para picolés, roxo para açaí e vermelho Gelatto para marca, ações e atacado. Essa separação ajuda o visitante a entender a mudança de contexto sem depender de menus ou explicações extensas.",
 
-            strategyImage: "/logitrack-2.png",
-            strategyImageAlt: "Arquitetura de informação e wireframes do LogiTrack",
-            strategyImageLabel: "ARCHITECTURE // INFORMATION_FLOW",
+            strategyImage: "/gelatto-atacado-1280.webp",
+            strategyImageAlt: "Seção de atacado da Gelatto exibida em um laptop em cenário de sorveteria",
+            strategyImageLabel: "EXPERIENCE_ARCHITECTURE // RETAIL_TO_WHOLESALE_JOURNEY",
 
-            solutionImage: "/logitrack-3.png",
-            solutionImageAlt: "Interface final do LogiTrack",
-            solutionImageLabel: "FINAL_UI // PRODUCTION_DEPLOY",
+            solutionImage: "/gelatto-picoles-1280.webp",
+            solutionImageAlt: "Cena interativa de picolé da landing page Gelatto exibida em um laptop",
+            solutionImageLabel: "PRODUCTION_UI // SCROLL_DRIVEN_PRODUCT_STAGE",
 
             features: [
                 {
-                    title: "Progressive Disclosure (Side-sheets)",
-                    desc: "Reduzimos as 25 colunas iniciais para as 8 estritamente essenciais. Dados secundários foram movidos para um painel lateral (side-sheet) que desliza sem tirar o usuário da tela principal.",
-                    image: "/logitrack-4.png"
+                    title: "Narrativa Editorial por Produto",
+                    desc: "Sorvetes, coberturas, picolés e açaí receberam composições próprias, evitando transformar a experiência em uma grade uniforme. Fotografias, títulos e cores conduzem a leitura e preservam a identidade real dos produtos."
                 },
                 {
-                    title: "Sistema de Triagem Visual",
-                    desc: "Implementação de indicadores cromáticos de status com alto contraste, permitindo que anomalias na rota sejam identificadas perifericamente em frações de segundo."
+                    title: "Palco Interativo de Picolés",
+                    desc: "No desktop, o scroll vertical conduz cinco sabores por uma cena sticky. O picolé central permanece nítido enquanto os demais recuam com escala, opacidade e blur. No mobile, a interação é adaptada para um trilho horizontal com swipe e snap central, sem bloquear a rolagem da página."
                 },
                 {
-                    title: "Ações Contextuais Integradas",
-                    desc: "Criação de atalhos de ação rápida ativados por hover na tabela, permitindo o acionamento direto do motorista via WhatsApp Web com um único clique."
+                    title: "Jornada Própria para Atacado",
+                    desc: "A seção vermelha cria uma mudança clara de intenção e ocupa uma viewport completa. O CTA “Quero revender” leva diretamente a esse ponto da página, e o contato abre o WhatsApp com uma mensagem específica para oportunidades de revenda."
                 }
             ],
 
-            additionalImages: [],
+            additionalImages: [
+                {
+                    src: "/gelatto-acai-mobile-1024.webp",
+                    alt: "Experiência mobile da Gelatto com a seção editorial dedicada ao açaí",
+                    label: "RESPONSIVE_ADAPTATION // MOBILE_PRODUCT_SCENE"
+                }
+            ],
 
             results: [
-                { value: "40%", label: "Redução no tempo médio de triagem de incidentes" },
-                { value: "Zero", label: "Necessidade de uso de abas ou sistemas paralelos" },
-                { value: "+85%", label: "Satisfação medida no System Usability Scale (SUS)" }
+                { value: "15", label: "Testes end-to-end cobrindo layout, navegação, imagens e CTAs" },
+                { value: "Responsivo", label: "Experiência validada do mobile ao desktop" },
+                { value: "39", label: "Derivados WebP responsivos gerados por pipeline próprio" }
             ],
 
             conclusion:
-                "O projeto de estudo comprovou que interfaces corporativas complexas não precisam de planilhas gigantes. Ao traduzir os requisitos brutos do setor de transportes a ferramentas se tornou um aliado no suporte à decisão ativa."
+                "O projeto da Gelatto reforçou a importância de tratar uma landing page como produto e experiência, não apenas como uma sequência de blocos comerciais. A solução nasceu do entendimento da marca, da separação entre varejo e atacado e da construção de uma narrativa visual capaz de transformar fotografias e informações locais em uma presença digital própria. A IA apoiou explorações visuais, refinamentos de imagens, discussões de interface e tarefas de execução. A direção de arte, a arquitetura da experiência, as decisões técnicas e os critérios de qualidade foram conduzidos de forma intencional durante todo o desenvolvimento. O resultado é uma landing page responsiva, acessível e preparada para produção, com uma identidade visual que conecta produto, loja e oportunidade de revenda em uma única jornada."
         }
     }
 ];

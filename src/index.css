@@ -108,6 +108,18 @@
   border-right: 2px solid #ccff00;
 }
 
+/* Shared editorial rail for case-study text, media, and evidence. */
+.case-container {
+  width: min(65vw, 1440px);
+  margin-inline: auto;
+}
+
+@media (max-width: 767px) {
+  .case-container {
+    width: calc(100% - 2rem);
+  }
+}
+
 /* Industrial scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

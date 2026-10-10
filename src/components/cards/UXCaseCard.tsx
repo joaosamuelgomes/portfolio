@@ -3,6 +3,7 @@ import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'fr
 import { useNavigate } from 'react-router-dom';
 import { ArrowUpRight, Cpu, Eye } from 'lucide-react';
 import type { UXCaseData } from '../../data/content';
+import { getResponsiveImageProps } from '../../lib/responsiveImage';
 
 export const UXCase = ({ data }: { data: UXCaseData }) => {
     const cardRef = useRef<HTMLDivElement>(null);
@@ -19,6 +20,7 @@ export const UXCase = ({ data }: { data: UXCaseData }) => {
     const mediaY = useTransform(progress, [0, 1], [-14, 14]);
     
     const thumbnail = data.thumbnail || data.details.solutionImage || data.details.challengeImage;
+    const usesRedBrandAccent = data.brandAccent === 'red';
 
     return (
         <motion.div
@@ -57,7 +59,7 @@ export const UXCase = ({ data }: { data: UXCaseData }) => {
 
                 {thumbnail ? (
                     <motion.img
-                        src={thumbnail} 
+                        {...getResponsiveImageProps(thumbnail, '(max-width: 767px) calc(100vw - 80px), 40vw')}
                         alt={data.title} 
                         loading="lazy"
                         decoding="async"
@@ -74,8 +76,11 @@ export const UXCase = ({ data }: { data: UXCaseData }) => {
 
                 {data.logo && (
                     <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/35 pointer-events-none">
-                        <div className="relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-xl border border-[#9a6f16] bg-[#171715]/95 p-3 shadow-[0_10px_32px_rgba(0,0,0,0.75),0_0_20px_rgba(234,182,56,0.08)] transition-all duration-700 group-hover:scale-105 group-hover:border-[#eab638] group-hover:shadow-[0_12px_36px_rgba(0,0,0,0.8),0_0_24px_rgba(234,182,56,0.16)] sm:h-24 sm:w-24 sm:p-4">
-                            <span className="absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-[#eab638]/70 to-transparent" />
+                        <div className={`relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-xl border bg-[#171715]/95 p-3 transition-all duration-700 group-hover:scale-105 sm:h-24 sm:w-24 sm:p-4 ${usesRedBrandAccent
+                            ? 'border-[#c9362f] shadow-[0_10px_32px_rgba(0,0,0,0.75),0_0_20px_rgba(201,54,47,0.12)] group-hover:border-[#ef443b] group-hover:shadow-[0_12px_36px_rgba(0,0,0,0.8),0_0_24px_rgba(201,54,47,0.24)]'
+                            : 'border-[#9a6f16] shadow-[0_10px_32px_rgba(0,0,0,0.75),0_0_20px_rgba(234,182,56,0.08)] group-hover:border-[#eab638] group-hover:shadow-[0_12px_36px_rgba(0,0,0,0.8),0_0_24px_rgba(234,182,56,0.16)]'
+                        }`}>
+                            <span className={`absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent to-transparent ${usesRedBrandAccent ? 'via-[#ef443b]/80' : 'via-[#eab638]/70'}`} />
                             <img
                                 src={data.logo}
                                 alt={`Logo ${data.title}`}
