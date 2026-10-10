@@ -13,7 +13,7 @@ export const UXLabSection = () => {
             </SectionTitle>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-12">
-                {UX_CASES.map((project) => (
+                {[...UX_CASES].sort((a, b) => a.id - b.id).map((project) => (
                     <UXCase key={project.id} data={project} />
                 ))}
             </div>

@@ -70,7 +70,7 @@ A avaliação tende a ser rápida, em desktop ou celular, e pode começar por um
 |---|---|---|---|
 | `/` | visão geral e conversão | posicionamento, capacidades, carreira, cases, playground, contato | abrir um case ou iniciar contato |
 | `/#career` | prova de trajetória | cargos, empresas, períodos, impacto e stack | avaliar experiência |
-| `/#ux-lab` | prova de processo | Cristhian Menezes Advocacia & Consultoria e LogiTrack | abrir um case |
+| `/#ux-lab` | prova de processo | Gelatto Sorvetes e Cristhian Menezes Advocacia & Consultoria | abrir um case |
 | `/#vault` | amostra experimental | até seis itens do Sanity | abrir item ou vault completo |
 | `/#connect` | conversão | LinkedIn e e-mail | conectar ou copiar e-mail |
 | `/case/:id` | narrativa profunda | desafio, pesquisa, solução, features e resultados | validar capacidade de produto/UX |
@@ -92,7 +92,7 @@ Critério de qualidade: proposta, evidência e contato continuam fáceis de enco
 
 ### Jornada B: validação de case
 
-1. visitante seleciona Cristhian Menezes Advocacia & Consultoria ou LogiTrack;
+1. visitante seleciona Gelatto Sorvetes ou Cristhian Menezes Advocacia & Consultoria;
 2. lê contexto, papel, duração e plataforma;
 3. percorre desafio, estratégia, solução e resultados;
 4. usa o retorno fixo para voltar à home.
