@@ -202,9 +202,10 @@ O indicador de leitura fica fixo no topo. O botão de retorno permanece visível
 
 ## 7. Movimento
 
-Padrões existentes:
+Padrões existentes, implementados com GSAP, Intersection Observer e eventos nativos de scroll:
 
-- entrada: fade + deslocamento de aproximadamente 20-30 px, 500-700 ms;
+- momento focal do hero: headline revelada por máscara, painel técnico e retrato sincronizados em uma sequência curta;
+- entrada de apoio: máscara, fade ou deslocamento de aproximadamente 12-28 px, 380-700 ms, apenas quando reforça hierarquia;
 - capítulos de scroll: indicador lateral acompanha a seção ativa em telas amplas, sem disputar espaço com o conteúdo;
 - profundidade: hero e cards respondem ao progresso do viewport com deslocamento e escala sutis;
 - títulos: revelação vertical com máscara e linha de especificação progressiva;
@@ -225,7 +226,7 @@ Guardrails:
 
 O idioma principal é português do Brasil; termos técnicos em inglês podem permanecer quando são comuns à área ou fazem parte da linguagem visual.
 
-A promessa principal é **Software para problemas reais**. A assinatura técnica **Software Developer // Product · UX · Engineering** aparece como evidência secundária, sem apagar cargos históricos.
+A promessa principal é **Ideias que viram produtos digitais**. A assinatura técnica **Software Developer // Product · UX · Engineering** aparece como evidência secundária, sem apagar cargos históricos.
 
 - Headlines: diretas, curtas e confiantes.
 - Corpo: claro, concreto e orientado a problema, decisão e impacto.

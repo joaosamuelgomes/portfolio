@@ -1,5 +1,4 @@
 import { useRef, type CSSProperties, type HTMLAttributes, type PointerEvent as ReactPointerEvent } from 'react';
-import { useReducedMotion } from 'framer-motion';
 
 interface SpotlightCardProps extends HTMLAttributes<HTMLDivElement> {
     spotlightColor?: string;
@@ -25,7 +24,6 @@ export const SpotlightCard = ({
     ...props
 }: SpotlightCardProps) => {
     const rootRef = useRef<HTMLDivElement>(null);
-    const shouldReduceMotion = useReducedMotion();
 
     const setPosition = (x: number, y: number) => {
         rootRef.current?.style.setProperty('--spotlight-x', `${x}px`);
@@ -33,7 +31,7 @@ export const SpotlightCard = ({
     };
 
     const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
-        if (shouldReduceMotion || event.pointerType === 'touch' || !rootRef.current) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || event.pointerType === 'touch' || !rootRef.current) return;
         const rect = rootRef.current.getBoundingClientRect();
         setPosition(event.clientX - rect.left, event.clientY - rect.top);
     };

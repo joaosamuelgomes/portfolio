@@ -1,10 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
-import { motion, useScroll, useSpring } from 'framer-motion';
-import type { Variants } from 'framer-motion';
 import { ArrowLeft, Cpu, ShieldCheck, Terminal, AlertTriangle, CheckCircle2, Quote } from 'lucide-react';
 import { UX_CASES } from '../data/content';
 import { getResponsiveImageProps } from '../lib/responsiveImage';
+import { animateWhenVisible, fullMotionQuery, gsap } from '../lib/gsap';
 
 export const CaseStudy = () => {
     const { id } = useParams();
@@ -12,11 +11,52 @@ export const CaseStudy = () => {
 
     const caseData = UX_CASES.find((item) => item.id.toString() === id);
 
-    const { scrollYProgress } = useScroll();
-    const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+    const articleRef = useRef<HTMLElement>(null);
+    const progressRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+    }, [id]);
+
+    useLayoutEffect(() => {
+        const article = articleRef.current;
+        const progress = progressRef.current;
+        if (!article || !progress) return;
+
+        let animationFrame = 0;
+        const setProgress = gsap.quickSetter(progress, 'scaleX');
+        const updateProgress = () => {
+            cancelAnimationFrame(animationFrame);
+            animationFrame = requestAnimationFrame(() => {
+                const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+                setProgress(scrollable > 0 ? window.scrollY / scrollable : 0);
+            });
+        };
+        updateProgress();
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        window.addEventListener('resize', updateProgress);
+
+        const media = gsap.matchMedia();
+        const context = gsap.context(() => {
+            media.add(fullMotionQuery, () => {
+                gsap.from('[data-case-header]', { y: 20, opacity: 0.4, duration: 0.62, ease: 'power3.out' });
+                const cleanups: Array<() => void> = [];
+                gsap.utils.toArray<HTMLElement>('[data-case-reveal]').forEach((element) => {
+                    cleanups.push(animateWhenVisible(element, () => {
+                        gsap.from(element, { y: 20, opacity: 0.4, duration: 0.55, ease: 'power3.out' });
+                    }));
+                });
+                return () => cleanups.forEach((cleanup) => cleanup());
+            });
+        }, article);
+
+        return () => {
+            cancelAnimationFrame(animationFrame);
+            window.removeEventListener('scroll', updateProgress);
+            window.removeEventListener('resize', updateProgress);
+            media.revert();
+            context.revert();
+        };
     }, [id]);
 
     if (!caseData || !caseData.details) {
@@ -26,34 +66,26 @@ export const CaseStudy = () => {
     const { details } = caseData; 
     const featureWithImage = details.features.find((feature) => 'image' in feature);
 
-    const fadeUp: Variants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-    };
-
     return (
-        <article className="min-h-screen bg-[#08080c] text-neutral-300 font-sans pb-32 relative">
+        <article ref={articleRef} className="min-h-screen bg-[#08080c] text-neutral-300 font-sans pb-32 relative">
             <div className="absolute inset-0 bg-dot-grid opacity-20 pointer-events-none -z-10" />
 
             {/* Reading Telemetry Line */}
-            <motion.div className="fixed top-0 left-0 right-0 h-1 bg-[#ccff00] origin-left z-50 shadow-[0_0_10px_#ccff00]" style={{ scaleX }} />
+            <div ref={progressRef} className="fixed top-0 left-0 right-0 h-1 scale-x-0 bg-[#ccff00] origin-left z-50 shadow-[0_0_10px_#ccff00]" />
 
             {/* Return Button */}
-            <motion.button
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.1 }}
+            <button
                 onClick={() => navigate('/')}
                 className="fixed top-6 left-6 md:top-10 md:left-10 z-40 group flex items-center gap-2 bg-[#0d0e14] border border-[#1a1c24] px-3.5 py-2 font-mono text-xs text-neutral-400 hover:text-white hover:border-[#ccff00] transition-all"
             >
                 <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform text-[#ccff00]" />
                 <span className="uppercase font-bold tracking-wider">[ RETURN_TO_BASE ]</span>
-            </motion.button>
+            </button>
 
             {/* Case Study Header */}
             <header className="pt-28 md:pt-36 pb-16 border-b border-[#1a1c24] bg-[#0d0e14]">
                 <div className="case-container text-center">
-                    <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+                    <div data-case-header>
                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-black border border-neutral-800 font-mono text-xs text-[#00f0ff] uppercase tracking-widest mb-6">
                             <Cpu size={14} />
                             DECLASSIFIED_CASE // 0{caseData.id} // {caseData.category}
@@ -86,14 +118,14 @@ export const CaseStudy = () => {
                                 <span className="text-[#00f0ff] font-bold">{details.sector || caseData.category}</span>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </header>
 
             <main className="mt-20">
 
                 {/* 01. O DESAFIO */}
-                <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="case-container mb-16">
+                <section data-case-reveal className="case-container mb-16">
                     <div className="flex items-center gap-2 mb-4 font-mono text-xs text-[#ff003c]">
                         <AlertTriangle size={16} />
                         <span>SECTION // 01</span>
@@ -120,11 +152,11 @@ export const CaseStudy = () => {
                             </ul>
                         </div>
                     )}
-                </motion.section>
+                </section>
 
                 {/* Challenge Image HUD */}
                 {details.challengeImage && (
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="case-container mb-24">
+                    <div data-case-reveal className="case-container mb-24">
                         <div className="relative p-2 bg-[#0d0e14] border border-[#1a1c24] corner-brackets">
                             <img
                                 {...getResponsiveImageProps(details.challengeImage, '(max-width: 767px) calc(100vw - 48px), 65vw')}
@@ -137,12 +169,12 @@ export const CaseStudy = () => {
                                 {details.challengeImageLabel}
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
                 )}
 
                 {/* 02. A ESTRATÉGIA */}
                 {details.strategy && (
-                    <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="case-container mb-16">
+                    <section data-case-reveal className="case-container mb-16">
                         <div className="flex items-center gap-2 mb-4 font-mono text-xs text-[#00f0ff]">
                             <Terminal size={16} />
                             <span>SECTION // 02</span>
@@ -153,12 +185,12 @@ export const CaseStudy = () => {
                         <p className="text-base md:text-lg leading-relaxed text-neutral-300 font-sans font-light">
                             {details.strategy}
                         </p>
-                    </motion.section>
+                    </section>
                 )}
 
                 {/* Strategy Image HUD */}
                 {details.strategyImage && (
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="case-container mb-24">
+                    <div data-case-reveal className="case-container mb-24">
                         <div className="relative p-2 bg-[#0d0e14] border border-[#1a1c24] corner-brackets">
                             <img
                                 {...getResponsiveImageProps(details.strategyImage, '(max-width: 767px) calc(100vw - 48px), 65vw')}
@@ -171,13 +203,13 @@ export const CaseStudy = () => {
                                 {details.strategyImageLabel}
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
                 )}
 
                 {/* 03. A SOLUÇÃO */}
                 {details.features && details.features.length > 0 && (
                     <>
-                        <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="case-container mb-12">
+                        <section data-case-reveal className="case-container mb-12">
                             <div className="flex items-center gap-2 mb-4 font-mono text-xs text-[#ccff00]">
                                 <ShieldCheck size={16} />
                                 <span>SECTION // 03</span>
@@ -185,11 +217,11 @@ export const CaseStudy = () => {
                             <h2 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight text-white">
                                 ARQUITETURA DA SOLUÇÃO
                             </h2>
-                        </motion.section>
+                        </section>
 
                         {/* Main Solution Image */}
                         {details.solutionImage && (
-                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="case-container mb-16">
+                            <div data-case-reveal className="case-container mb-16">
                                 <div className="relative p-2 bg-[#0d0e14] border-2 border-[#ccff00]/60 corner-brackets shadow-2xl">
                                     <img
                                         {...getResponsiveImageProps(details.solutionImage, '(max-width: 767px) calc(100vw - 48px), 65vw')}
@@ -202,18 +234,15 @@ export const CaseStudy = () => {
                                         {details.solutionImageLabel}
                                     </div>
                                 </div>
-                            </motion.div>
+                            </div>
                         )}
 
                         {/* Features Spec Modules */}
                         <div className="case-container grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
                             {details.features.map((feature, i) => (
-                                <motion.div 
+                                <div
                                     key={i} 
-                                    initial="hidden" 
-                                    whileInView="visible" 
-                                    viewport={{ once: true, margin: "-50px" }} 
-                                    variants={fadeUp}
+                                    data-case-reveal
                                     className="p-6 bg-[#0d0e14] border border-[#1a1c24] corner-brackets flex flex-col justify-between"
                                 >
                                     <div>
@@ -221,12 +250,12 @@ export const CaseStudy = () => {
                                         <h3 className="text-xl font-display font-bold uppercase text-white mb-3">{feature.title}</h3>
                                         <p className="text-sm text-neutral-300 font-sans font-light leading-relaxed">{feature.desc}</p>
                                     </div>
-                                </motion.div>
+                                </div>
                             ))}
                         </div>
 
                         {featureWithImage?.image && (
-                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="case-container mb-24">
+                            <div data-case-reveal className="case-container mb-24">
                                 <div className="relative p-2 bg-[#0d0e14] border border-[#1a1c24] corner-brackets">
                                     <img 
                                         {...getResponsiveImageProps(featureWithImage.image, '(max-width: 767px) calc(100vw - 48px), 65vw')}
@@ -239,11 +268,11 @@ export const CaseStudy = () => {
                                         MODULE_PREVIEW // DETAILED_INSPECTION
                                     </div>
                                 </div>
-                            </motion.div>
+                            </div>
                         )}
 
                         {details.additionalImages.length > 0 && (
-                            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="case-container mb-24">
+                            <div data-case-reveal className="case-container mb-24">
                                 <div className="grid grid-cols-1 gap-8">
                                     {details.additionalImages.map((image) => (
                                         <div key={image.src} className="relative p-2 bg-[#0d0e14] border border-[#1a1c24] corner-brackets">
@@ -260,13 +289,13 @@ export const CaseStudy = () => {
                                         </div>
                                     ))}
                                 </div>
-                            </motion.div>
+                            </div>
                         )}
                     </>
                 )}
 
                 {/* 04. RESULTADOS DE TELEMETRIA */}
-                <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="case-container">
+                <section data-case-reveal className="case-container">
                     
                     {details.results && details.results.length > 0 && (
                         <div className="p-4 sm:p-8 bg-[#0d0e14] border-2 border-[#1a1c24] corner-brackets my-16">
@@ -331,7 +360,7 @@ export const CaseStudy = () => {
                             </p>
                         </div>
                     )}
-                </motion.section>
+                </section>
 
             </main>
         </article>
