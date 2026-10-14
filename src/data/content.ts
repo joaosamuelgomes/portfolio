@@ -18,7 +18,6 @@ export const CAREER_DATA = [
         "Construção de ecossistema front-end para gestão comercial, incluindo painéis de decisão interativos e integração de dados em tempo real via APIs.",
     },
 ];
-
 type CaseFeature = {
     title: string;
     desc: string;
@@ -44,10 +43,14 @@ export type UXCaseData = {
     id: number;
     title: string;
     category: string;
-    process: string[];
+    summary: {
+        problem: string;
+        solution: string;
+        contribution: string;
+        proof: string;
+    };
     thumbnail: string;
     logo?: string;
-    brandAccent?: "gold" | "red";
     details: {
         heroSubtitle: string;
         role: string;
@@ -79,8 +82,12 @@ export const UX_CASES: UXCaseData[] = [
         id: 2,
         title: "Cristhian Menezes Advocacia & Consultoria",
         category: "LegalTech & Gestão Jurídica",
-        process: ["Discovery & Requisitos", "UX/UI", "Design System", "Product Engineering"],
-
+        summary: {
+            problem: "Clientes, processos, prazos, audiências e finanças precisavam deixar de viver em controles separados.",
+            solution: "Uma plataforma web responsiva que centraliza a operação diária do escritório.",
+            contribution: "Produto, UX/UI, arquitetura front-end e integração com APIs.",
+            proof: "Plataforma em uso pelo escritório",
+        },
         thumbnail: "/cm-advocacia-dashboard.png",
         logo: "/cm-white.svg",
 
@@ -157,11 +164,14 @@ export const UX_CASES: UXCaseData[] = [
         id: 1,
         title: "Gelatto Sorvetes",
         category: "Food Retail & Presença Digital",
-        process: ["Direção de Arte", "UX/UI", "Front-end", "Acessibilidade"],
-        
+        summary: {
+            problem: "A marca precisava apresentar produtos, presença local e revenda sem misturar públicos diferentes.",
+            solution: "Uma landing page responsiva com jornadas próprias para varejo e atacado.",
+            contribution: "Direção de arte, UX/UI, desenvolvimento front-end e acessibilidade.",
+            proof: "Experiência responsiva preparada para produção",
+        },
         thumbnail: "/gelatto-hero-1280.webp",
         logo: "/gelatto-logo.webp",
-        brandAccent: "red",
         
         details: {
             heroSubtitle: "Transformando produtos, presença local e oportunidades de revenda em uma landing page editorial construída para despertar desejo e facilitar o contato.",
@@ -228,13 +238,4 @@ export const UX_CASES: UXCaseData[] = [
                 "O projeto da Gelatto reforçou a importância de tratar uma landing page como produto e experiência, não apenas como uma sequência de blocos comerciais. A solução nasceu do entendimento da marca, da separação entre varejo e atacado e da construção de uma narrativa visual capaz de transformar fotografias e informações locais em uma presença digital própria. A IA apoiou explorações visuais, refinamentos de imagens, discussões de interface e tarefas de execução. A direção de arte, a arquitetura da experiência, as decisões técnicas e os critérios de qualidade foram conduzidos de forma intencional durante todo o desenvolvimento. O resultado é uma landing page responsiva, acessível e preparada para produção, com uma identidade visual que conecta produto, loja e oportunidade de revenda em uma única jornada."
         }
     }
-];
-
-export const VAULT_ITEMS = [
-    { id: 1, type: "concept", height: "h-64" },
-    { id: 2, type: "typo", height: "h-96" },
-    { id: 3, type: "ui-kit", height: "h-72" },
-    { id: 4, type: "3d", height: "h-64" },
-    { id: 5, type: "interaction", height: "h-80" },
-    { id: 6, type: "experiment", height: "h-60" },
 ];

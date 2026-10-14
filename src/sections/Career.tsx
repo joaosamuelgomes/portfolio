@@ -7,13 +7,27 @@ export const CareerSection = () => {
     return (
         <section id="career" className="max-w-7xl mx-auto px-6 mb-28 md:mb-40">
             <SectionTitle 
-                indexCode="SEC_02"
-                subtitle="Trajetória conectando estratégia de produto, experiência do usuário e engenharia."
+                indexCode="SEC_04"
+                subtitle="Experiência profissional que sustenta uma forma de trabalhar entre negócio, experiência e implementação."
             >
-                CARREIRA & TRAJETÓRIA
+                SOBRE & EXPERIÊNCIA
             </SectionTitle>
 
-            <div className="relative mt-12 md:mt-20">
+            <div className="mb-14 grid gap-8 border-y border-[#1a1c24] py-8 md:grid-cols-12 md:gap-12 md:py-10">
+                <p className="font-display text-2xl font-bold uppercase leading-tight tracking-tight text-white md:col-span-5 md:text-3xl">
+                    Engenharia, produto e experiência não são etapas isoladas.
+                </p>
+                <div className="space-y-4 text-base leading-relaxed text-neutral-300 md:col-span-7 md:text-lg">
+                    <p>
+                        Trabalho entre essas três perspectivas para entender o problema, organizar requisitos e transformar decisões em software claro e sustentável.
+                    </p>
+                    <p className="text-neutral-400">
+                        Minha experiência passa por interfaces, integração de APIs, ferramentas de gestão e evolução de produtos digitais — sempre com atenção a quem usa e a quem mantém a solução.
+                    </p>
+                </div>
+            </div>
+
+            <div className="relative">
                 {/* Linha vertical laser da Timeline */}
                 <motion.div
                     initial={{ height: 0 }}

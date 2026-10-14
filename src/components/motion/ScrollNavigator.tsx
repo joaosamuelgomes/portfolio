@@ -3,9 +3,9 @@ import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 
 const CHAPTERS = [
     { id: 'hero', label: 'Início' },
-    { id: 'career', label: 'Carreira' },
+    { id: 'services', label: 'Serviços' },
     { id: 'ux-lab', label: 'Projetos' },
-    { id: 'vault', label: 'Playground' },
+    { id: 'career', label: 'Sobre' },
     { id: 'connect', label: 'Contato' },
 ];
 

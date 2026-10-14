@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Terminal, Cpu } from 'lucide-react';
+import { Terminal } from 'lucide-react';
+
+const NAV_ITEMS = [
+    { href: '#services', label: 'SERVIÇOS' },
+    { href: '#ux-lab', label: 'PROJETOS' },
+    { href: '#career', label: 'SOBRE' },
+];
 
 export const Header = () => {
     const [timeString, setTimeString] = useState<string>('');
@@ -18,7 +24,7 @@ export const Header = () => {
         return () => clearInterval(interval);
     }, []);
 
-    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement | HTMLDivElement | HTMLSpanElement>, id: string) => {
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
         e.preventDefault();
         e.stopPropagation();
 
@@ -55,42 +61,57 @@ export const Header = () => {
                     <span>LOC: RIO GRANDE DO SUL, BR</span>
                 </div>
                 <div className="flex items-center gap-4">
-                    <span className="flex items-center gap-1">
-                        <Cpu size={12} className="text-[#00f0ff]" /> CORE_LOAD: 14%
-                    </span>
+                    <span className="text-[#00f0ff]">PRODUCT · UX · ENGINEERING</span>
                     <span className="text-neutral-500">|</span>
                     <span>TIME: {timeString}</span>
                 </div>
             </div>
 
             {/* Main Header Bar */}
-            <div className="max-w-7xl mx-auto px-4 md:px-6 py-2.5 md:py-3 flex justify-between items-center">
+            <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-2.5 sm:px-4 md:px-6 md:py-3">
                 {/* Logo Branding */}
-                <motion.div
+                <motion.a
+                    href="#hero"
                     whileHover={{ scale: 1.02 }}
                     onClick={(e) => handleScroll(e, '#hero')}
-                    className="cursor-pointer group flex items-center gap-2"
+                    className="group flex min-w-0 items-center gap-1.5 focus-visible:outline-none sm:gap-2"
+                    aria-label="Made by João Gomes — voltar ao início"
                 >
                     <div className="w-7 h-7 md:w-8 md:h-8 bg-neutral-900 border border-[#ccff00]/40 flex items-center justify-center text-[#ccff00] font-mono text-xs font-bold group-hover:bg-[#ccff00] group-hover:text-black transition-colors shrink-0">
                         JG
                     </div>
-                    <span className="font-display font-bold text-base sm:text-lg md:text-xl tracking-tight text-white uppercase whitespace-nowrap">
+                    <span className="whitespace-nowrap font-display text-sm font-bold uppercase tracking-tight text-white sm:text-lg md:text-xl">
                         JOAO<span className="text-[#ccff00]">.</span>GOMES
                     </span>
                     <span className="hidden sm:inline-block px-1.5 py-0.5 text-[9px] font-mono bg-neutral-900 border border-neutral-700 text-neutral-400 tracking-wider">
                         DEV_UX
                     </span>
-                </motion.div>
+                </motion.a>
 
-                <a
-                    href="#connect"
-                    onClick={(e) => handleScroll(e, '#connect')}
-                    className="h-8 flex items-center gap-1.5 px-3 bg-[#ccff00] text-black font-mono font-bold text-[11px] md:text-xs hover:bg-[#00f0ff] transition-colors border border-black uppercase tracking-wider active:scale-95 shrink-0"
-                >
-                    <Terminal size={13} />
-                    <span className="hidden sm:inline">INICIAR_CONTATO</span>
-                    <span className="sm:hidden">CONNECT</span>
-                </a>
+                <div className="flex shrink-0 items-center gap-2 lg:gap-5">
+                    <nav className="hidden items-center gap-5 lg:flex" aria-label="Navegação principal">
+                        {NAV_ITEMS.map((item) => (
+                            <a
+                                key={item.href}
+                                href={item.href}
+                                onClick={(e) => handleScroll(e, item.href)}
+                                className="font-mono text-[10px] font-bold tracking-widest text-neutral-300 transition-colors hover:text-[#ccff00]"
+                            >
+                                {item.label}
+                            </a>
+                        ))}
+                    </nav>
+
+                    <a
+                        href="#connect"
+                        onClick={(e) => handleScroll(e, '#connect')}
+                        className="flex min-h-11 shrink-0 items-center gap-1.5 border border-black bg-[#ccff00] px-2.5 font-mono text-[10px] font-bold uppercase tracking-wider text-black transition-colors hover:bg-[#00f0ff] active:scale-95 sm:px-3 sm:text-[11px] md:text-xs"
+                    >
+                        <Terminal size={13} aria-hidden="true" />
+                        <span className="hidden sm:inline">INICIAR_CONTATO</span>
+                        <span className="sm:hidden">CONTATO</span>
+                    </a>
+                </div>
             </div>
         </header>
     );
