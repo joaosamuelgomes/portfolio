@@ -7,7 +7,7 @@ Portfólio pessoal de João Samuel Gomes, voltado a projetos de desenvolvimento 
 - React 19 e TypeScript
 - Vite 7
 - Tailwind CSS 4
-- Framer Motion
+- GSAP
 - React Router
 - Lucide React
 

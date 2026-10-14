@@ -1,19 +1,41 @@
-import { useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { ArrowUpRight, Check, Copy, Mail, Radio } from 'lucide-react';
 import { Magnet } from '../components/react-bits/Magnet';
+import { animateWhenVisible, fullMotionQuery, gsap } from '../lib/gsap';
 
 type CopyStatus = 'idle' | 'copied' | 'error';
 
 export const ContactSection = () => {
     const [copyStatus, setCopyStatus] = useState<CopyStatus>('idle');
-    const shouldReduceMotion = useReducedMotion();
-    const userEmail = 'joaosamuelg001@gmail.com';
+    const sectionRef = useRef<HTMLElement>(null);
+    const userEmail = 'contato@madebyjoaogomes.com';
     const mailSubject = encodeURIComponent('Novo projeto — vamos conversar');
     const mailBody = encodeURIComponent(
         'Olá, João.\n\nQuero conversar sobre um projeto de [site / sistema / automação].\n\nO que preciso resolver:\n\nPrazo, se houver:\n'
     );
     const mailto = `mailto:${userEmail}?subject=${mailSubject}&body=${mailBody}`;
+
+    useLayoutEffect(() => {
+        const section = sectionRef.current;
+        if (!section) return;
+
+        const media = gsap.matchMedia();
+        const context = gsap.context(() => {
+            media.add(fullMotionQuery, () => {
+                return animateWhenVisible(section, () => {
+                    gsap.timeline({ defaults: { ease: 'power4.out' } })
+                        .from('[data-contact-frame]', { scale: 0.985, opacity: 0.5, duration: 0.7 })
+                        .from('[data-contact-copy]', { y: 24, opacity: 0.4, stagger: 0.08, duration: 0.48 }, '-=0.35')
+                        .from('[data-contact-action]', { y: 16, opacity: 0.45, stagger: 0.06, duration: 0.4 }, '-=0.22');
+                });
+            });
+        }, section);
+
+        return () => {
+            media.revert();
+            context.revert();
+        };
+    }, []);
 
     const copyEmail = async () => {
         try {
@@ -27,28 +49,26 @@ export const ContactSection = () => {
     };
 
     return (
-        <section id="connect" className="mx-auto mb-24 max-w-5xl px-6 text-center">
-            <motion.div
-                initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.98 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        <section ref={sectionRef} id="connect" className="mx-auto mb-24 max-w-5xl px-6 text-center">
+            <div
+                data-contact-frame
                 className="corner-brackets relative overflow-hidden border-2 border-[#1a1c24] bg-[#0d0e14] p-8 shadow-2xl md:p-14"
             >
-                <div className="mb-8 inline-flex items-center gap-2 border border-neutral-800 bg-black px-3 py-1 font-mono text-xs uppercase tracking-widest text-[#ccff00]">
+                <div data-contact-copy className="mb-8 inline-flex items-center gap-2 border border-neutral-800 bg-black px-3 py-1 font-mono text-xs uppercase tracking-widest text-[#ccff00]">
                     <Radio size={14} className="animate-pulse text-[#00f0ff]" aria-hidden="true" />
                     NOVOS PROJETOS // CONTATO
                 </div>
 
-                <h2 className="mx-auto mb-8 max-w-[15ch] font-display text-4xl font-bold uppercase leading-[0.95] tracking-[-0.04em] text-white sm:text-6xl md:text-7xl">
-                    PRECISA DE UM SITE, SISTEMA
-                    <span className="text-[#ccff00]"> OU AUTOMAÇÃO?</span>
+                <h2 data-contact-copy className="mx-auto mb-8 max-w-[16ch] font-display text-4xl font-bold uppercase leading-[0.95] tracking-[-0.04em] text-white sm:text-6xl md:text-7xl">
+                    VOCÊ PRECISA
+                    <span className="text-[#ccff00]"> TIRAR ALGO DO PAPEL?</span>
                 </h2>
 
-                <p className="mx-auto mb-4 max-w-2xl text-base leading-relaxed text-neutral-300 md:text-lg">
-                    Conte brevemente o que precisa resolver. Eu retorno para entender o cenário, tirar dúvidas e avaliar o caminho mais adequado.
+                <p data-contact-copy className="mx-auto mb-4 max-w-2xl text-base leading-relaxed text-neutral-300 md:text-lg">
+                    Me conte o que hoje atrasa sua operação, limita suas vendas ou ainda não saiu do papel. Eu respondo pessoalmente para entender o contexto e desenhar o próximo passo.
                 </p>
                 <a
+                    data-contact-copy
                     href={`mailto:${userEmail}`}
                     className="mb-9 inline-block font-mono text-xs text-neutral-400 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white"
                 >
@@ -56,7 +76,7 @@ export const ContactSection = () => {
                 </a>
 
                 <div className="flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
-                    <Magnet className="w-full sm:w-auto" strength={7} maxOffset={6}>
+                    <Magnet className="w-full sm:w-auto" strength={7} maxOffset={6} data-contact-action="">
                         <a
                             href={mailto}
                             className="group flex min-h-12 w-full items-center justify-center gap-2 border border-black bg-[#ccff00] px-8 py-4 font-mono text-sm font-bold uppercase tracking-wider text-black transition-colors hover:bg-[#00f0ff] sm:w-auto"
@@ -68,6 +88,7 @@ export const ContactSection = () => {
                     </Magnet>
 
                     <button
+                        data-contact-action
                         type="button"
                         onClick={copyEmail}
                         className="flex min-h-12 items-center justify-center gap-2 border border-neutral-700 bg-neutral-900 px-6 py-4 font-mono text-xs font-bold uppercase tracking-wider text-neutral-200 transition-colors hover:border-[#ccff00] hover:text-white"
@@ -78,6 +99,7 @@ export const ContactSection = () => {
                     </button>
 
                     <a
+                        data-contact-action
                         href="https://www.linkedin.com/in/joaosamuelgomes/"
                         target="_blank"
                         rel="noreferrer"
@@ -92,7 +114,7 @@ export const ContactSection = () => {
                     {copyStatus === 'copied' && 'Endereço copiado para a área de transferência.'}
                     {copyStatus === 'error' && 'Não foi possível copiar. Use o endereço exibido acima.'}
                 </p>
-            </motion.div>
+            </div>
         </section>
     );
 };

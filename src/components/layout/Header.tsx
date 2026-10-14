@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { Terminal } from 'lucide-react';
 
 const NAV_ITEMS = [
@@ -42,7 +41,7 @@ export const Header = () => {
 
                 window.scrollTo({
                     top: offsetPosition,
-                    behavior: "smooth"
+                    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
                 });
             }
         }, 150);
@@ -70,11 +69,10 @@ export const Header = () => {
             {/* Main Header Bar */}
             <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-2.5 sm:px-4 md:px-6 md:py-3">
                 {/* Logo Branding */}
-                <motion.a
+                <a
                     href="#hero"
-                    whileHover={{ scale: 1.02 }}
                     onClick={(e) => handleScroll(e, '#hero')}
-                    className="group flex min-w-0 items-center gap-1.5 focus-visible:outline-none sm:gap-2"
+                    className="group flex min-w-0 items-center gap-1.5 transition-transform duration-200 hover:scale-[1.02] focus-visible:outline-none sm:gap-2"
                     aria-label="Made by João Gomes — voltar ao início"
                 >
                     <div className="w-7 h-7 md:w-8 md:h-8 bg-neutral-900 border border-[#ccff00]/40 flex items-center justify-center text-[#ccff00] font-mono text-xs font-bold group-hover:bg-[#ccff00] group-hover:text-black transition-colors shrink-0">
@@ -86,7 +84,7 @@ export const Header = () => {
                     <span className="hidden sm:inline-block px-1.5 py-0.5 text-[9px] font-mono bg-neutral-900 border border-neutral-700 text-neutral-400 tracking-wider">
                         DEV_UX
                     </span>
-                </motion.a>
+                </a>
 
                 <div className="flex shrink-0 items-center gap-2 lg:gap-5">
                     <nav className="hidden items-center gap-5 lg:flex" aria-label="Navegação principal">

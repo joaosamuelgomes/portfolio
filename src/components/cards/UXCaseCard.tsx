@@ -1,30 +1,41 @@
-import { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { useLayoutEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, CheckCircle2, Cpu } from 'lucide-react';
 import type { UXCaseData } from '../../data/content';
 import { getResponsiveImageProps } from '../../lib/responsiveImage';
+import { animateWhenVisible, fullMotionQuery, gsap } from '../../lib/gsap';
 
 export const UXCase = ({ data }: { data: UXCaseData }) => {
     const cardRef = useRef<HTMLElement>(null);
-    const shouldReduceMotion = useReducedMotion();
-    const { scrollYProgress } = useScroll({
-        target: cardRef,
-        offset: ['start 94%', 'end 8%'],
-    });
-    const progress = useSpring(scrollYProgress, { stiffness: 115, damping: 26 });
-    const cardY = useTransform(progress, [0, 0.5, 1], [24, 0, -14]);
-    const cardOpacity = useTransform(progress, [0, 0.22, 0.72, 1], [0.72, 1, 1, 0.86]);
-    const mediaY = useTransform(progress, [0, 1], [-12, 12]);
     const thumbnail = data.thumbnail || data.details.solutionImage || data.details.challengeImage;
 
+    useLayoutEffect(() => {
+        const card = cardRef.current;
+        if (!card) return;
+
+        const media = gsap.matchMedia();
+        const context = gsap.context(() => {
+            media.add(fullMotionQuery, () => {
+                return animateWhenVisible(card, () => {
+                    gsap.from(card, {
+                        y: 24,
+                        opacity: 0.72,
+                        duration: 0.62,
+                        ease: 'power3.out',
+                    });
+                });
+            });
+        }, card);
+
+        return () => {
+            media.revert();
+            context.revert();
+        };
+    }, []);
+
     return (
-        <motion.article
+        <article
             ref={cardRef}
-            style={{
-                y: shouldReduceMotion ? 0 : cardY,
-                opacity: shouldReduceMotion ? 1 : cardOpacity,
-            }}
             className="corner-brackets relative"
         >
             <Link
@@ -43,12 +54,12 @@ export const UXCase = ({ data }: { data: UXCaseData }) => {
                 </div>
 
                 <div className="relative aspect-[16/10] overflow-hidden border border-neutral-800 bg-neutral-950">
-                    <motion.img
+                    <img
+                        data-case-image
                         {...getResponsiveImageProps(thumbnail, '(max-width: 767px) calc(100vw - 80px), 40vw')}
                         alt={`Interface do projeto ${data.title}`}
                         loading="lazy"
                         decoding="async"
-                        style={{ y: shouldReduceMotion ? 0 : mediaY }}
                         className="-mt-3 h-[calc(100%+24px)] w-full scale-[1.03] object-cover opacity-90 contrast-110 transition duration-700 group-hover:scale-[1.07] group-hover:opacity-100"
                     />
                     <div className="bg-scanlines pointer-events-none absolute inset-0 opacity-35" aria-hidden="true" />
@@ -97,6 +108,6 @@ export const UXCase = ({ data }: { data: UXCaseData }) => {
                     </div>
                 </div>
             </Link>
-        </motion.article>
+        </article>
     );
 };

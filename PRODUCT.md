@@ -10,7 +10,7 @@ O site também atende recrutadores e profissionais de tecnologia, mas esse é um
 
 ## 2. Posicionamento
 
-**Promessa central:** software para problemas reais.
+**Promessa central:** ideias de negócio transformadas em produtos digitais claros, úteis e prontos para operar.
 
 **Oferta:** desenvolvimento de sites e experiências digitais, software sob medida, automações e integrações.
 
@@ -77,7 +77,7 @@ Ordem obrigatória:
 
 ### Hero
 
-- headline: “Software para problemas reais.”;
+- headline: “Ideias que viram produtos digitais.”;
 - explicação: sites, sistemas sob medida e automações;
 - CTA primário: falar sobre um projeto;
 - CTA secundário: ver projetos;
@@ -111,7 +111,7 @@ Carreira e cases são conteúdo estático versionado em `src/data/content.ts`. I
 - Vite 7;
 - React Router DOM 7;
 - Tailwind CSS 4;
-- Framer Motion;
+- GSAP com Intersection Observer e eventos nativos de scroll;
 - Lucide React;
 - componentes Magnet e Spotlight Card adaptados do React Bits e mantidos localmente.
 
@@ -154,7 +154,7 @@ Não adicionar por padrão: CMS, Playground, blog, autenticação, painel, comen
 
 - a proposta de valor é compreensível na primeira dobra;
 - os projetos demonstram problema, solução e contribuição;
-- o contato comercial é evidente;
+- o contato comercial principal é `contato@madebyjoaogomes.com` e está evidente;
 - a identidade brutalista continua reconhecível;
 - mouse, teclado e toque têm caminhos funcionais;
 - desktop e mobile foram observados;

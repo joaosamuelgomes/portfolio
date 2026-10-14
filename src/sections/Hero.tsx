@@ -1,28 +1,41 @@
-import React, { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { useLayoutEffect, useRef, type MouseEvent } from 'react';
 import { ArrowRight, Braces, Crosshair, FolderOpen, Zap } from 'lucide-react';
 import { Magnet } from '../components/react-bits/Magnet';
+import { fullMotionQuery, gsap } from '../lib/gsap';
 
 export const HeroSection = () => {
     const heroRef = useRef<HTMLElement>(null);
-    const shouldReduceMotion = useReducedMotion();
-    const { scrollYProgress } = useScroll({
-        target: heroRef,
-        offset: ['start start', 'end start'],
-    });
-    const smoothProgress = useSpring(scrollYProgress, { stiffness: 110, damping: 28 });
-    const copyY = useTransform(smoothProgress, [0, 1], [0, -48]);
-    const copyOpacity = useTransform(smoothProgress, [0, 0.76, 1], [1, 0.92, 0.4]);
-    const portraitY = useTransform(smoothProgress, [0, 1], [0, 88]);
-    const portraitScale = useTransform(smoothProgress, [0, 1], [1, 0.94]);
-    const portraitOpacity = useTransform(smoothProgress, [0, 0.8, 1], [1, 0.9, 0.45]);
-    const gridOpacity = useTransform(smoothProgress, [0, 1], [0.3, 0.05]);
 
-    const handleScroll = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    useLayoutEffect(() => {
+        const hero = heroRef.current;
+        if (!hero) return;
+
+        const media = gsap.matchMedia();
+        const context = gsap.context(() => {
+            media.add(fullMotionQuery, () => {
+                gsap.timeline({ defaults: { ease: 'power4.out' } })
+                    .from('[data-hero-kicker]', { opacity: 0.45, duration: 0.45 })
+                    .from('[data-hero-line]', { y: 16, opacity: 0.35, duration: 0.72, stagger: 0.1 }, '-=0.18')
+                    .from('[data-hero-panel]', { opacity: 0.45, duration: 0.58 }, '-=0.38')
+                    .from('[data-hero-actions]', { y: 18, opacity: 0.4, duration: 0.45 }, '-=0.25')
+                    .from('[data-hero-portrait]', { opacity: 0.4, scale: 0.96, duration: 0.78 }, '-=0.64');
+
+            });
+
+        }, hero);
+
+        return () => {
+            media.revert();
+            context.revert();
+        };
+    }, []);
+
+    const handleScroll = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
         event.preventDefault();
         const element = document.querySelector(id);
         if (!element) return;
 
+        const shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const headerOffset = 80;
         const elementPosition = element.getBoundingClientRect().top;
         window.scrollTo({
@@ -37,31 +50,18 @@ export const HeroSection = () => {
             id="hero"
             className="relative mx-auto mb-24 flex min-h-[82vh] max-w-7xl items-start px-4 pt-12 sm:px-6 sm:pt-16 md:mb-36 md:pt-24 lg:items-center lg:pt-16"
         >
-            <motion.div
-                style={{ opacity: shouldReduceMotion ? 0.3 : gridOpacity }}
-                className="bg-dot-grid pointer-events-none absolute inset-0 -z-10"
-                aria-hidden="true"
-            />
+            <div data-hero-grid className="bg-dot-grid pointer-events-none absolute inset-0 -z-10 opacity-30" aria-hidden="true" />
 
             <div className="grid w-full grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
-                <motion.div
-                    initial={shouldReduceMotion ? false : { opacity: 0, x: -24 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                    style={{
-                        y: shouldReduceMotion ? 0 : copyY,
-                        opacity: shouldReduceMotion ? 1 : copyOpacity,
-                    }}
-                    className="order-2 min-w-0 lg:order-1 lg:col-span-7"
-                >
-                    <div className="mb-6 flex w-full max-w-full flex-wrap items-center gap-2 border border-[#1a1c24] bg-[#0d0e14] px-3 py-2 font-mono text-[9px] tracking-wider text-neutral-300 sm:mb-8 sm:inline-flex sm:w-auto sm:flex-nowrap sm:text-xs">
+                <div data-hero-copy className="order-2 min-w-0 lg:order-1 lg:col-span-7">
+                    <div data-hero-kicker className="mb-6 flex w-full max-w-full flex-wrap items-center gap-2 border border-[#1a1c24] bg-[#0d0e14] px-3 py-2 font-mono text-[9px] tracking-wider text-neutral-300 sm:mb-8 sm:inline-flex sm:w-auto sm:flex-nowrap sm:text-xs">
                         <span className="relative flex h-2.5 w-2.5 shrink-0" aria-hidden="true">
                             <span className="absolute inline-flex h-full w-full animate-ping bg-[#ccff00] opacity-75" />
                             <span className="relative inline-flex h-2.5 w-2.5 bg-[#ccff00]" />
                         </span>
                         <span className="font-bold text-[#ccff00]">STATUS: DISPONÍVEL</span>
                         <span className="hidden text-neutral-600 sm:inline">|</span>
-                        <span className="min-w-0">PROJETOS DE DESENVOLVIMENTO</span>
+                        <span className="min-w-0">NOVOS PROJETOS // 2026</span>
                     </div>
 
                     <div className="relative mb-7">
@@ -69,25 +69,25 @@ export const HeroSection = () => {
                             <Crosshair size={12} className="shrink-0 text-[#00f0ff]" aria-hidden="true" />
                             <span className="min-w-0 break-words">SOFTWARE DEVELOPER // PRODUCT · UX · ENGINEERING</span>
                         </div>
-                        <h1 className="max-w-[11ch] font-display text-4xl font-bold uppercase leading-[0.94] tracking-[-0.04em] text-white sm:text-6xl md:text-7xl lg:text-[5.6rem]">
-                            SOFTWARE PARA
-                            <span className="mt-2 block font-mono text-[0.72em] tracking-[-0.04em] text-[#ccff00]">
-                                PROBLEMAS REAIS.
+                        <h1 className="max-w-[12ch] font-display text-4xl font-bold uppercase leading-[0.94] tracking-[-0.04em] text-white sm:text-6xl md:text-7xl lg:text-[5.6rem]">
+                            <span className="block"><span data-hero-line className="block">IDEIAS QUE VIRAM</span></span>
+                            <span className="mt-2 block font-mono text-[0.66em] tracking-[-0.04em] text-[#ccff00]">
+                                <span data-hero-line className="block">PRODUTOS DIGITAIS.</span>
                             </span>
                         </h1>
                     </div>
 
-                    <div className="corner-brackets mb-9 w-full min-w-0 max-w-2xl overflow-hidden border border-[#1a1c24] bg-[#0d0e14] p-5">
+                    <div data-hero-panel className="corner-brackets mb-9 w-full min-w-0 max-w-2xl overflow-hidden border border-[#1a1c24] bg-[#0d0e14] p-5">
                         <p className="max-w-[62ch] break-words text-base leading-relaxed text-neutral-200 md:text-lg">
-                            Sou João Gomes. Desenvolvo sites, sistemas sob medida e automações que ajudam empresas a vender, organizar processos e reduzir trabalho manual.
+                            Eu sou João Gomes. Projeto e desenvolvo sites, sistemas e automações que transformam oportunidades em experiências claras e operações mais simples.
                         </p>
                         <p className="mt-3 flex items-center gap-2 font-mono text-xs leading-relaxed text-neutral-400 md:text-sm">
                             <Braces size={14} className="shrink-0 text-[#00f0ff]" aria-hidden="true" />
-                            Do entendimento do problema à solução em produção.
+                            Estratégia, experiência e código — do primeiro rascunho ao produto no ar.
                         </p>
                     </div>
 
-                    <div className="flex flex-col gap-4 sm:flex-row">
+                    <div data-hero-actions className="flex flex-col gap-4 sm:flex-row">
                         <Magnet className="w-full sm:w-auto" strength={7} maxOffset={6}>
                             <a
                                 href="#connect"
@@ -108,19 +108,9 @@ export const HeroSection = () => {
                             VER PROJETOS
                         </a>
                     </div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                    initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.97 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.65, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-                    style={{
-                        y: shouldReduceMotion ? 0 : portraitY,
-                        scale: shouldReduceMotion ? 1 : portraitScale,
-                        opacity: shouldReduceMotion ? 1 : portraitOpacity,
-                    }}
-                    className="order-1 hidden justify-center min-[600px]:flex lg:order-2 lg:col-span-5 lg:justify-end"
-                >
+                <div data-hero-portrait className="order-1 hidden justify-center min-[600px]:flex lg:order-2 lg:col-span-5 lg:justify-end">
                     <div className="relative w-full max-w-md">
                         <div className="absolute -left-3 -top-3 z-20 border border-black bg-[#ccff00] px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-black sm:-left-4 sm:-top-4">
                             MADE_BY_JOAO
@@ -148,7 +138,7 @@ export const HeroSection = () => {
                             </div>
                         </div>
                     </div>
-                </motion.div>
+                </div>
             </div>
         </section>
     );
