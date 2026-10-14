@@ -4,7 +4,7 @@ import { ScrollNavigator } from "../components/motion/ScrollNavigator";
 import { CareerSection } from "../sections/Career";
 import { ContactSection } from "../sections/Contact";
 import { HeroSection } from "../sections/Hero";
-import { PlaygroundSection } from "../sections/Playground";
+import { ServicesSection } from "../sections/Services";
 import { UXLabSection } from "../sections/UXLab";
 
 
@@ -14,9 +14,9 @@ export const Home = () => (
         <ScrollNavigator />
         <main className="pt-24 pb-20">
             <HeroSection />
-            <CareerSection />
+            <ServicesSection />
             <UXLabSection />
-            <PlaygroundSection />
+            <CareerSection />
             <ContactSection />
         </main>
         <Footer />

@@ -50,7 +50,7 @@ export const CareerCard = ({ data, index }: { data: typeof CAREER_DATA[0], index
                 </span>
             </div>
 
-            <p className="text-neutral-300 font-sans text-sm md:text-base leading-relaxed mb-6 font-light">
+            <p className="text-neutral-300 font-sans text-sm md:text-base leading-relaxed mb-6">
                 {data.impact}
             </p>
 
