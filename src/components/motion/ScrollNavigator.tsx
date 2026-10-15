@@ -1,29 +1,26 @@
-import { useEffect, useState } from 'react';
-import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { gsap } from '../../lib/gsap';
 
 const CHAPTERS = [
     { id: 'hero', label: 'Início' },
-    { id: 'career', label: 'Carreira' },
+    { id: 'services', label: 'Serviços' },
     { id: 'ux-lab', label: 'Projetos' },
-    { id: 'vault', label: 'Playground' },
+    { id: 'career', label: 'Sobre' },
     { id: 'connect', label: 'Contato' },
 ];
 
 export const ScrollNavigator = () => {
     const [activeChapter, setActiveChapter] = useState(CHAPTERS[0].id);
-    const shouldReduceMotion = useReducedMotion();
-    const { scrollYProgress } = useScroll();
-    const progress = useSpring(scrollYProgress, {
-        stiffness: 120,
-        damping: 28,
-        restDelta: 0.001,
-    });
+    const progressRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const sections = CHAPTERS
             .map((chapter) => document.getElementById(chapter.id))
             .filter((section): section is HTMLElement => Boolean(section));
         let animationFrame = 0;
+        const setProgress = progressRef.current
+            ? gsap.quickTo(progressRef.current, 'scaleY', { duration: 0.2, ease: 'power2.out' })
+            : undefined;
 
         const updateActiveChapter = () => {
             cancelAnimationFrame(animationFrame);
@@ -50,6 +47,9 @@ export const ScrollNavigator = () => {
                 setActiveChapter((current) =>
                     current === closestSection.id ? current : closestSection.id,
                 );
+
+                const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+                setProgress?.(scrollable > 0 ? window.scrollY / scrollable : 0);
             });
         };
 
@@ -66,7 +66,7 @@ export const ScrollNavigator = () => {
 
     const navigateToChapter = (id: string) => {
         document.getElementById(id)?.scrollIntoView({
-            behavior: shouldReduceMotion ? 'auto' : 'smooth',
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
             block: 'start',
         });
     };
@@ -77,9 +77,9 @@ export const ScrollNavigator = () => {
             className="fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 2xl:flex items-stretch gap-3"
         >
             <div className="relative w-px bg-neutral-800">
-                <motion.div
+                <div
+                    ref={progressRef}
                     className="absolute inset-x-0 top-0 h-full origin-top bg-gradient-to-b from-[#ccff00] to-[#00f0ff] shadow-[0_0_8px_rgba(204,255,0,0.45)]"
-                    style={{ scaleY: shouldReduceMotion ? 1 : progress }}
                 />
             </div>
 
@@ -106,9 +106,8 @@ export const ScrollNavigator = () => {
                             <span className={isActive ? 'text-[#ccff00]' : 'text-neutral-600'}>
                                 0{index + 1}
                             </span>
-                            <motion.span
-                                animate={shouldReduceMotion ? undefined : { scale: isActive ? 1.35 : 1 }}
-                                className={`h-1.5 w-1.5 border ${
+                            <span
+                                className={`h-1.5 w-1.5 border transition-transform duration-200 ${isActive ? 'scale-[1.35]' : 'scale-100'} ${
                                     isActive
                                         ? 'border-[#ccff00] bg-[#ccff00] shadow-[0_0_8px_#ccff00]'
                                         : 'border-neutral-600 bg-[#08080c]'

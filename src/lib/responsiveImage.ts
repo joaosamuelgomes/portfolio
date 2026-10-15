@@ -1,5 +1,5 @@
 type ResponsiveImage = {
-    srcSet: string;
+    srcSet?: string;
     width: number;
     height: number;
 };
@@ -25,6 +25,22 @@ const RESPONSIVE_IMAGES: Record<string, ResponsiveImage> = {
         width: 1024,
         height: 1536,
     },
+    "/cm-advocacia-dashboard.png": {
+        width: 1536,
+        height: 1024,
+    },
+    "/cm-advocacia-clientes.png": {
+        width: 1536,
+        height: 1024,
+    },
+    "/cm-advocacia-audiencias.png": {
+        width: 1536,
+        height: 1024,
+    },
+    "/cm-advocacia-financeiro.png": {
+        width: 1536,
+        height: 1024,
+    },
 };
 
 export function getResponsiveImageProps(src: string, sizes: string) {
@@ -34,7 +50,7 @@ export function getResponsiveImageProps(src: string, sizes: string) {
 
     return {
         src,
-        srcSet: image.srcSet,
+        ...(image.srcSet ? { srcSet: image.srcSet } : {}),
         sizes,
         width: image.width,
         height: image.height,

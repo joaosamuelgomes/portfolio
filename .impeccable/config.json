@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-15T01:04:01.219Z",
+        "reason": "agent verified: static SEO fallback uses text-4xl/sm:text-6xl for H1, text-2xl/sm:text-3xl for H2, and text-base body; detector does not account for Tailwind utility classes"
+      }
+    ]
+  }
+}

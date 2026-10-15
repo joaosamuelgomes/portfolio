@@ -20,8 +20,6 @@ export default defineConfig({
         // Separação inteligente de Chunks para cache otimizado
         manualChunks(id) {
           if (id.includes("node_modules")) {
-            // Separa bibliotecas pesadas em chunks próprios
-            if (id.includes("framer-motion")) return "motion";
             if (id.includes("react")) return "react-vendor";
             return "vendor"; // Outras libs vão para vendor
           }

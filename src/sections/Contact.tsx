@@ -1,86 +1,113 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Copy, Check, Radio, Terminal } from 'lucide-react';
+import { useLayoutEffect, useRef, useState } from 'react';
+import { ArrowUpRight, Check, Copy, Mail, Radio } from 'lucide-react';
+import { Magnet } from '../components/react-bits/Magnet';
+import { animateWhenVisible, fullMotionQuery, gsap } from '../lib/gsap';
+
+type CopyStatus = 'idle' | 'copied' | 'error';
 
 export const ContactSection = () => {
-    const [emailCopied, setEmailCopied] = useState(false);
-    const userEmail = "joaosamuelg001@gmail.com";
+    const [copyStatus, setCopyStatus] = useState<CopyStatus>('idle');
+    const sectionRef = useRef<HTMLElement>(null);
+    const userEmail = 'contato@madebyjoaogomes.com';
+    const mailSubject = encodeURIComponent('Novo projeto — vamos conversar');
+    const mailBody = encodeURIComponent(
+        'Olá, João.\n\nQuero conversar sobre um projeto de [site / sistema / automação].\n\nO que preciso resolver:\n\nPrazo, se houver:\n'
+    );
+    const mailto = `mailto:${userEmail}?subject=${mailSubject}&body=${mailBody}`;
 
-    const copyEmail = () => {
-        navigator.clipboard.writeText(userEmail);
-        setEmailCopied(true);
-        setTimeout(() => setEmailCopied(false), 2000);
+    useLayoutEffect(() => {
+        const section = sectionRef.current;
+        if (!section) return;
+
+        const media = gsap.matchMedia();
+        const context = gsap.context(() => {
+            media.add(fullMotionQuery, () => {
+                return animateWhenVisible(section, () => {
+                    gsap.timeline({ defaults: { ease: 'power4.out' } })
+                        .from('[data-contact-frame]', { scale: 0.985, opacity: 0.5, duration: 0.7 })
+                        .from('[data-contact-copy]', { y: 24, opacity: 0.4, stagger: 0.08, duration: 0.48 }, '-=0.35')
+                        .from('[data-contact-action]', { y: 16, opacity: 0.45, stagger: 0.06, duration: 0.4 }, '-=0.22');
+                });
+            });
+        }, section);
+
+        return () => {
+            media.revert();
+            context.revert();
+        };
+    }, []);
+
+    const copyEmail = async () => {
+        try {
+            await navigator.clipboard.writeText(userEmail);
+            setCopyStatus('copied');
+        } catch {
+            setCopyStatus('error');
+        }
+
+        window.setTimeout(() => setCopyStatus('idle'), 3000);
     };
 
     return (
-        <section id="connect" className="max-w-5xl mx-auto px-6 mb-24 text-center">
-            <motion.div
-                initial={{ opacity: 0, scale: 0.97 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="p-8 md:p-14 bg-[#0d0e14] border-2 border-[#1a1c24] corner-brackets shadow-2xl relative overflow-hidden"
+        <section ref={sectionRef} id="connect" className="mx-auto mb-24 max-w-5xl px-6 text-center">
+            <div
+                data-contact-frame
+                className="corner-brackets relative overflow-hidden border-2 border-[#1a1c24] bg-[#0d0e14] p-8 shadow-2xl md:p-14"
             >
-                {/* Header Tag */}
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-black border border-neutral-800 font-mono text-xs text-[#ccff00] uppercase tracking-widest mb-8">
-                    <Radio size={14} className="animate-pulse text-[#00f0ff]" />
-                    TRANSMISSION_TERMINAL // READY
+                <div data-contact-copy className="mb-8 inline-flex items-center gap-2 border border-neutral-800 bg-black px-3 py-1 font-mono text-xs uppercase tracking-widest text-[#ccff00]">
+                    <Radio size={14} className="animate-pulse text-[#00f0ff]" aria-hidden="true" />
+                    NOVOS PROJETOS // CONTATO
                 </div>
 
-                <h2 className="text-4xl sm:text-6xl md:text-7xl font-display font-bold text-white uppercase tracking-tight mb-10 leading-[0.95]">
-                    VAMOS CONSTRUIR <br />
-                    <span className="text-[#ccff00]">ALGO JUNTOS?</span>
+                <h2 data-contact-copy className="mx-auto mb-8 max-w-[16ch] font-display text-4xl font-bold uppercase leading-[0.95] tracking-[-0.04em] text-white sm:text-6xl md:text-7xl">
+                    VOCÊ PRECISA
+                    <span className="text-[#ccff00]"> TIRAR ALGO DO PAPEL?</span>
                 </h2>
 
-                <p className="text-base md:text-lg text-neutral-400 max-w-xl mx-auto font-sans font-light mb-10">
-                    Disponível para novos desafios em desenvolvimento de produto, UX/UI e construção de experiências digitais de ponta a ponta.
+                <p data-contact-copy className="mx-auto mb-4 max-w-2xl text-base leading-relaxed text-neutral-300 md:text-lg">
+                    Conte o que você quer construir e o resultado que espera alcançar. Eu mesmo respondo para entender o contexto e avaliar o melhor caminho.
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    {/* Botão LinkedIn */}
+                <div className="flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
+                    <Magnet className="w-full sm:w-auto" strength={7} maxOffset={6} data-contact-action="">
+                        <a
+                            href={mailto}
+                            className="group flex min-h-12 w-full items-center justify-center gap-2 border border-black bg-[#ccff00] px-8 py-4 font-mono text-sm font-bold uppercase tracking-wider text-black transition-colors hover:bg-[#00f0ff] sm:w-auto"
+                        >
+                            <Mail size={18} aria-hidden="true" />
+                            CONTAR SOBRE O PROJETO
+                            <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+                        </a>
+                    </Magnet>
+
+                    <button
+                        data-contact-action
+                        type="button"
+                        onClick={copyEmail}
+                        className="flex min-h-12 items-center justify-center gap-2 border border-neutral-700 bg-neutral-900 px-6 py-4 font-mono text-xs font-bold uppercase tracking-wider text-neutral-200 transition-colors hover:border-[#ccff00] hover:text-white"
+                        aria-label={copyStatus === 'copied' ? 'E-mail copiado' : 'Copiar endereço de e-mail'}
+                    >
+                        {copyStatus === 'copied' ? <Check size={17} className="text-[#ccff00]" aria-hidden="true" /> : <Copy size={16} className="text-[#00f0ff]" aria-hidden="true" />}
+                        {copyStatus === 'copied' ? 'E-MAIL COPIADO' : 'COPIAR E-MAIL'}
+                    </button>
+
                     <a
+                        data-contact-action
                         href="https://www.linkedin.com/in/joaosamuelgomes/"
                         target="_blank"
                         rel="noreferrer"
-                        className="w-full sm:w-auto group relative px-8 py-4 bg-[#00f0ff] text-black font-mono font-bold text-sm uppercase tracking-wider hover:bg-[#ccff00] transition-colors border border-black flex items-center justify-center gap-2 active:scale-95"
+                        className="flex min-h-12 items-center justify-center gap-2 border border-[#1a1c24] bg-black px-6 py-4 font-mono text-xs font-bold uppercase tracking-wider text-neutral-300 transition-colors hover:border-[#00f0ff] hover:text-white"
                     >
-                        <span>CONECTAR NO LINKEDIN</span>
-                        <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        LINKEDIN
+                        <ArrowUpRight size={16} aria-hidden="true" />
                     </a>
-
-                    {/* Botão Email Copy Terminal */}
-                    <button
-                        onClick={copyEmail}
-                        className="w-full sm:w-auto relative px-3 sm:px-8 py-4 bg-neutral-900 border border-neutral-700 text-neutral-200 font-mono hover:border-[#ccff00] hover:text-white transition-all flex items-center justify-center gap-2 sm:gap-3 active:scale-95"
-                    >
-                        <Terminal size={16} className="hidden sm:block text-[#ccff00]" />
-                        <span className="text-[10px] min-[360px]:text-xs sm:text-sm">{userEmail}</span>
-                        <div className="w-5 h-5 flex items-center justify-center">
-                            <AnimatePresence mode="wait">
-                                {emailCopied ? (
-                                    <motion.div
-                                        key="check"
-                                        initial={{ opacity: 0, scale: 0.5 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0 }}
-                                    >
-                                        <Check size={18} className="text-[#ccff00]" />
-                                    </motion.div>
-                                ) : (
-                                    <motion.div
-                                        key="copy"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                    >
-                                        <Copy size={16} className="text-neutral-400 group-hover:text-[#00f0ff]" />
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </div>
-                    </button>
                 </div>
-            </motion.div>
+
+                <p className={`mt-5 min-h-5 font-mono text-xs ${copyStatus === 'error' ? 'text-[#ff6b7f]' : 'text-[#ccff00]'}`} aria-live="polite">
+                    {copyStatus === 'copied' && 'Endereço copiado para a área de transferência.'}
+                    {copyStatus === 'error' && 'Não foi possível copiar. Use o endereço exibido acima.'}
+                </p>
+            </div>
         </section>
     );
 };
