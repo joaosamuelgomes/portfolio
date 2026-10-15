@@ -1,0 +1,146 @@
+{
+  "siteUrl": "https://madebyjoaogomes.com",
+  "siteName": "Made by João Gomes",
+  "locale": "pt_BR",
+  "language": "pt-BR",
+  "pages": {
+    "home": {
+      "path": "/",
+      "title": "João Gomes | Sites, sistemas e produtos digitais",
+      "description": "João Gomes cria sites, sistemas sob medida, automações e integrações, unindo estratégia de produto, UX e desenvolvimento front-end.",
+      "image": "/og-image.png",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "Made by João Gomes — ideias que viram produtos digitais",
+      "type": "website",
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://madebyjoaogomes.com/#website",
+            "url": "https://madebyjoaogomes.com/",
+            "name": "Made by João Gomes",
+            "description": "Portfólio de João Samuel Gomes sobre sites, sistemas, automações, integrações, produto e UX.",
+            "inLanguage": "pt-BR",
+            "publisher": {
+              "@id": "https://madebyjoaogomes.com/#person"
+            }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://madebyjoaogomes.com/#profile",
+            "url": "https://madebyjoaogomes.com/",
+            "name": "João Samuel Gomes — Desenvolvedor de produtos digitais",
+            "isPartOf": {
+              "@id": "https://madebyjoaogomes.com/#website"
+            },
+            "mainEntity": {
+              "@id": "https://madebyjoaogomes.com/#person"
+            },
+            "inLanguage": "pt-BR"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://madebyjoaogomes.com/#person",
+            "name": "João Samuel Gomes",
+            "url": "https://madebyjoaogomes.com/",
+            "image": "https://madebyjoaogomes.com/photo.jpeg",
+            "email": "mailto:contato@madebyjoaogomes.com",
+            "jobTitle": "Desenvolvedor de produtos digitais",
+            "sameAs": [
+              "https://www.linkedin.com/in/joaosamuelgomes/"
+            ],
+            "knowsAbout": [
+              "Desenvolvimento de sites",
+              "Sistemas web sob medida",
+              "Automação de processos",
+              "Integração de sistemas",
+              "Estratégia de produto",
+              "Experiência do usuário",
+              "Desenvolvimento front-end"
+            ]
+          }
+        ]
+      }
+    },
+    "case-1": {
+      "path": "/case/1",
+      "title": "Gelatto Sorvetes | Case de UX/UI e Front-end | João Gomes",
+      "description": "Case Gelatto Sorvetes: direção de arte, UX/UI e front-end de uma landing page responsiva para varejo, presença local e oportunidades de revenda.",
+      "image": "/gelatto-hero-1280.webp",
+      "imageWidth": 1280,
+      "imageHeight": 960,
+      "imageAlt": "Landing page da Gelatto Sorvetes apresentada em um laptop",
+      "type": "article",
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "@id": "https://madebyjoaogomes.com/case/1#case",
+        "url": "https://madebyjoaogomes.com/case/1",
+        "name": "Gelatto Sorvetes — landing page para varejo e atacado",
+        "headline": "Gelatto Sorvetes: direção de arte, UX/UI e desenvolvimento front-end",
+        "description": "Landing page responsiva com jornadas próprias para varejo e atacado, criada para apresentar os produtos, a presença local e as oportunidades de revenda da Gelatto Sorvetes.",
+        "image": "https://madebyjoaogomes.com/gelatto-hero-1280.webp",
+        "inLanguage": "pt-BR",
+        "author": {
+          "@type": "Person",
+          "@id": "https://madebyjoaogomes.com/#person",
+          "name": "João Samuel Gomes",
+          "url": "https://madebyjoaogomes.com/"
+        },
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://madebyjoaogomes.com/#website",
+          "name": "Made by João Gomes",
+          "url": "https://madebyjoaogomes.com/"
+        },
+        "about": [
+          "Direção de arte",
+          "UX/UI",
+          "Desenvolvimento front-end",
+          "Landing page responsiva"
+        ]
+      }
+    },
+    "case-2": {
+      "path": "/case/2",
+      "title": "CM Advocacia | Case de produto e Front-end | João Gomes",
+      "description": "Case Cristhian Menezes Advocacia: produto, UX/UI e front-end de uma plataforma que centraliza clientes, processos, prazos e finanças.",
+      "image": "/cm-advocacia-dashboard.png",
+      "imageWidth": 1536,
+      "imageHeight": 1024,
+      "imageAlt": "Dashboard do sistema jurídico Cristhian Menezes Advocacia",
+      "type": "article",
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "@id": "https://madebyjoaogomes.com/case/2#case",
+        "url": "https://madebyjoaogomes.com/case/2",
+        "name": "Cristhian Menezes Advocacia — plataforma de gestão jurídica",
+        "headline": "Cristhian Menezes Advocacia: produto, UX/UI e desenvolvimento front-end",
+        "description": "Plataforma web responsiva que centraliza clientes, processos, prazos, audiências e finanças para a operação diária do escritório.",
+        "image": "https://madebyjoaogomes.com/cm-advocacia-dashboard.png",
+        "inLanguage": "pt-BR",
+        "author": {
+          "@type": "Person",
+          "@id": "https://madebyjoaogomes.com/#person",
+          "name": "João Samuel Gomes",
+          "url": "https://madebyjoaogomes.com/"
+        },
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://madebyjoaogomes.com/#website",
+          "name": "Made by João Gomes",
+          "url": "https://madebyjoaogomes.com/"
+        },
+        "about": [
+          "Produto digital",
+          "UX/UI",
+          "Desenvolvimento front-end",
+          "Gestão jurídica"
+        ]
+      }
+    }
+  }
+}

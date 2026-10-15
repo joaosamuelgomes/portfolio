@@ -1,9 +1,11 @@
 import { useEffect, useLayoutEffect, useRef } from 'react';
-import { useParams, useNavigate, Navigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Cpu, ShieldCheck, Terminal, AlertTriangle, CheckCircle2, Quote } from 'lucide-react';
 import { UX_CASES } from '../data/content';
 import { getResponsiveImageProps } from '../lib/responsiveImage';
 import { animateWhenVisible, fullMotionQuery, gsap } from '../lib/gsap';
+import { Seo } from '../components/Seo';
+import { NotFound } from './NotFound';
 
 export const CaseStudy = () => {
     const { id } = useParams();
@@ -60,7 +62,7 @@ export const CaseStudy = () => {
     }, [id]);
 
     if (!caseData || !caseData.details) {
-        return <Navigate to="/" replace />;
+        return <NotFound />;
     }
 
     const { details } = caseData; 
@@ -68,6 +70,7 @@ export const CaseStudy = () => {
 
     return (
         <article ref={articleRef} className="min-h-screen bg-[#08080c] text-neutral-300 font-sans pb-32 relative">
+            <Seo page={`case-${caseData.id}` as 'case-1' | 'case-2'} />
             <div className="absolute inset-0 bg-dot-grid opacity-20 pointer-events-none -z-10" />
 
             {/* Reading Telemetry Line */}

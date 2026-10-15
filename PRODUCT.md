@@ -140,7 +140,9 @@ Baseline da V15 em 14/10/2026: `npm audit` reportou 0 vulnerabilidades após atu
 
 ## 11. SEO e compartilhamento
 
-O idioma é `pt-BR`. Título, descrição e previews sociais devem priorizar a proposta comercial e usar apenas afirmações sustentadas pelo conteúdo. Metadados específicos por case ainda não existem.
+O idioma é `pt-BR`. Título, descrição e previews sociais priorizam a proposta comercial e usam apenas afirmações sustentadas pelo conteúdo. A homepage e cada case possuem canonical, metadados sociais, conteúdo inicial rastreável e JSON-LD próprios, centralizados em `src/data/seo.json` e materializados como HTML estático no build.
+
+`robots.txt` permite rastreamento geral e explicita o acesso do `OAI-SearchBot`; `sitemap.xml` lista apenas URLs canônicas. Rotas inexistentes recebem uma página 404 com `noindex, follow`. Não há `llms.txt`: descoberta por mecanismos generativos segue a mesma base técnica e editorial do SEO, sem arquivos paralelos de conteúdo.
 
 ## 12. Métricas futuras
 
