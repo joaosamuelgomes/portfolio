@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
+import React, { useLayoutEffect, useRef } from 'react';
+import { animateWhenVisible, fullMotionQuery, gsap } from '../../lib/gsap';
 
 interface SectionTitleProps {
     children: React.ReactNode;
@@ -9,14 +9,28 @@ interface SectionTitleProps {
 
 export const SectionTitle = ({ children, subtitle, indexCode = "// SEC_01" }: SectionTitleProps) => {
     const titleRef = useRef<HTMLDivElement>(null);
-    const shouldReduceMotion = useReducedMotion();
-    const { scrollYProgress } = useScroll({
-        target: titleRef,
-        offset: ['start 92%', 'start 54%'],
-    });
-    const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 26 });
-    const titleY = useTransform(progress, [0, 1], [34, 0]);
-    const titleOpacity = useTransform(progress, [0, 0.25, 1], [0.2, 0.65, 1]);
+
+    useLayoutEffect(() => {
+        const title = titleRef.current;
+        if (!title) return;
+
+        const media = gsap.matchMedia();
+        const context = gsap.context(() => {
+            media.add(fullMotionQuery, () => {
+                return animateWhenVisible(title, () => {
+                    gsap.timeline({ defaults: { ease: 'power4.out' } })
+                        .from('[data-section-title]', { y: 18, opacity: 0.35, duration: 0.62 })
+                        .from('[data-section-rule]', { scaleX: 0, duration: 0.48 }, '-=0.35')
+                        .from('[data-section-subtitle]', { opacity: 0.45, y: 12, duration: 0.38 }, '-=0.22');
+                });
+            });
+        }, title);
+
+        return () => {
+            media.revert();
+            context.revert();
+        };
+    }, []);
 
     return (
     <div ref={titleRef} className="mb-12 md:mb-16 relative">
@@ -31,23 +45,17 @@ export const SectionTitle = ({ children, subtitle, indexCode = "// SEC_01" }: Se
 
         {/* Headline */}
         <div className="overflow-hidden py-1">
-            <motion.h2
-                style={{
-                    y: shouldReduceMotion ? 0 : titleY,
-                    opacity: shouldReduceMotion ? 1 : titleOpacity,
-                }}
+            <h2
+                data-section-title
                 className="text-4xl md:text-6xl font-display font-bold tracking-tight text-white uppercase leading-none"
             >
                 {children}
-            </motion.h2>
+            </h2>
         </div>
 
         {/* Divider Line with Corner Accents */}
         <div className="mt-4 mb-3 h-[1px] bg-neutral-800 relative w-full flex items-center justify-between">
-            <motion.div
-                className="w-12 h-[2px] origin-left bg-[#ccff00]"
-                style={{ scaleX: shouldReduceMotion ? 1 : progress }}
-            />
+            <div data-section-rule className="w-12 h-[2px] origin-left bg-[#ccff00]" />
             <div className="text-[9px] font-mono text-neutral-500 uppercase tracking-widest px-2 bg-[#08080c]">
                 SYS_VERIFIED
             </div>
@@ -56,12 +64,12 @@ export const SectionTitle = ({ children, subtitle, indexCode = "// SEC_01" }: Se
 
         {/* Subtitle */}
         {subtitle && (
-            <motion.p
-                style={{ opacity: shouldReduceMotion ? 1 : titleOpacity }}
+            <p
+                data-section-subtitle
                 className="text-neutral-400 font-sans text-base md:text-lg max-w-2xl leading-relaxed"
             >
                 {subtitle}
-            </motion.p>
+            </p>
         )}
     </div>
     );

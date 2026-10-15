@@ -1,27 +1,36 @@
-# Portfolio - João Samuel Gomes
+# Made by João Gomes
 
-Este é um portfólio interativo desenvolvido com **React**, **TypeScript** e **Framer Motion**, utilizando **Sanity.io** como Headless CMS para gerenciamento dinâmico de conteúdo (como a seção Playground).
+Portfólio pessoal de João Samuel Gomes, voltado a projetos de desenvolvimento de software: sites, sistemas web, automações e integrações.
 
-## 🏗 Arquitetura do Projeto
+## Stack
 
-O projeto está dividido em duas partes principais:
+- React 19 e TypeScript
+- Vite 7
+- Tailwind CSS 4
+- GSAP
+- React Router
+- Lucide React
 
-1.  **Frontend (Raiz):** Aplicação React + Vite (Porta `3000`).
-2.  **CMS (Pasta `/studio`):** Painel administrativo Sanity V3 (Porta `3333`).
-
-## 🚀 Como Rodar o Projeto
-
-Para desenvolver, você precisará de **dois terminais** abertos simultaneamente (um para o site e outro para o CMS).
-
-### 1. Instalação das Dependências
-
-Primeiro, instale as dependências de ambas as partes:
+## Desenvolvimento
 
 ```bash
-# 1. Instalar dependências do Frontend (Raiz)
 npm install
+npm run dev
+```
 
-# 2. Instalar dependências do Sanity (Studio)
-cd studio
-npm install
-cd ..
+O servidor de desenvolvimento usa `http://localhost:3000`.
+
+## Verificações
+
+```bash
+npm run lint
+npm run build
+```
+
+O conteúdo profissional e os estudos de caso ficam versionados em `src/data/content.ts`. O projeto não depende de CMS ou backend próprio.
+
+## SEO e descoberta
+
+Os metadados ficam centralizados em `src/data/seo.json`. Durante o build, `scripts/generate-seo-pages.mjs` gera HTML estático para a homepage, para cada case e para a página 404. Isso garante títulos, canonicals, previews sociais, conteúdo inicial e JSON-LD específicos antes da execução do React.
+
+`public/robots.txt` libera a indexação, incluindo o `OAI-SearchBot`, e aponta para `public/sitemap.xml`. A configuração `vercel.json` publica os arquivos HTML dos cases em URLs limpas, sem extensão nem barra final.

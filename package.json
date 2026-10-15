@@ -5,15 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/generate-seo-pages.mjs && node scripts/validate-seo.mjs",
+    "check:seo": "node scripts/validate-seo.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@sanity/client": "^7.15.0",
-    "@sanity/image-url": "^2.0.3",
     "@tailwindcss/vite": "^4.1.18",
-    "framer-motion": "^12.34.2",
+    "gsap": "^3.15.0",
     "lucide-react": "^0.574.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

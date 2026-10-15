@@ -1,315 +1,164 @@
-# Produto: portfólio de João Samuel Gomes
+# Produto: Made by João Gomes
 
-> Guia vivo de produto para orientar decisões futuras. Ele documenta o que existe hoje, o propósito de cada superfície e os critérios que uma mudança deve atender. Não transforma hipóteses em fatos: itens ainda não medidos ou implementados são marcados como tal.
+> Fonte de verdade para o posicionamento, as jornadas e os critérios de evolução do portfólio.
 
 ## 1. Resumo
 
-O produto é um portfólio web interativo de João Samuel Gomes, Product Developer & UX Specialist que atua de ponta a ponta no ciclo de produtos digitais: descoberta, definição, experiência, implementação e evolução. Sua função é permitir que recrutadores, lideranças de engenharia, produto e design compreendam rapidamente esse posicionamento, encontrem evidências de execução e iniciem contato.
+Made by João Gomes é o portfólio comercial e profissional de João Samuel Gomes. Sua função principal é ajudar pequenas empresas, escritórios e profissionais a entenderem como João pode transformar problemas de negócio em sites, sistemas, automações e integrações.
 
-A experiência usa uma linguagem visual de “painel de engenharia” para demonstrar craft na própria interface. O valor, porém, vem da combinação entre narrativa profissional, estudos de caso, experimentos e acesso direto ao candidato — não do estilo isoladamente.
+O site também atende recrutadores e profissionais de tecnologia, mas esse é um objetivo secundário. A comunicação começa pelo problema e pelo valor; tecnologias aparecem como evidência de execução.
 
-## 2. Objetivo do produto
+## 2. Posicionamento
 
-Converter uma visita de avaliação profissional em uma destas ações:
+**Promessa central:** ideias de negócio transformadas em produtos digitais claros, úteis e prontos para operar.
 
-1. compreender claramente o perfil e a proposta de valor de João;
-2. validar competências por meio da trajetória e dos cases;
-3. explorar a capacidade experimental no playground;
-4. iniciar contato pelo LinkedIn ou copiar o e-mail.
+**Oferta:** desenvolvimento de sites e experiências digitais, software sob medida, automações e integrações.
 
-O produto não é, hoje, um blog, currículo completo, plataforma autenticada, loja ou sistema de captação com formulário próprio.
+**Diferencial:** atuação entre engenharia, produto e experiência — do entendimento do problema à solução em produção.
 
-## 3. Público e contexto de uso
+**Marca:** Made by João Gomes, com voz de desenvolvedor independente. Não deve parecer uma agência ou software house genérica.
 
-### Público primário
+**Tom:** humano, direto, profissional e tecnicamente confiável. Evitar jargão sem contexto, percentuais arbitrários, métricas sem fonte e promessas exageradas.
 
-- recrutadores técnicos avaliando aderência a uma vaga;
-- engineering managers e tech leads avaliando capacidade de implementação;
-- product designers e lideranças de produto avaliando raciocínio de UX e colaboração multidisciplinar.
+## 3. Público prioritário
 
-### Público secundário
+1. Pequenas empresas que precisam de presença digital profissional.
+2. Empresas que precisam organizar ou digitalizar processos com sistemas personalizados.
+3. Negócios que desejam automatizar tarefas e integrar ferramentas.
+4. Profissionais e escritórios que precisam de soluções de gestão sob medida.
 
-- potenciais clientes ou parceiros buscando desenvolvimento de produto, UX/UI e engenharia front-end;
-- pares da comunidade interessados em referências, experimentos e networking.
+Público secundário: recrutadores, lideranças de engenharia/produto/design e outros desenvolvedores.
 
-### Contexto
+## 4. Objetivos do visitante
 
-A avaliação tende a ser rápida, em desktop ou celular, e pode começar por um link direto para a home ou para um case. A primeira leitura precisa responder sem esforço:
+Em poucos segundos, a homepage precisa responder:
 
 - quem é João;
-- que tipo de problema ele resolve;
-- qual experiência possui;
-- quais provas apresenta;
-- como entrar em contato.
+- o que ele desenvolve;
+- quais problemas consegue resolver;
+- quais projetos comprovam sua capacidade;
+- como iniciar uma conversa.
 
-## 4. Posicionamento
+A principal conversão é o envio de um e-mail sobre um projeto. Copiar o endereço e acessar o LinkedIn são alternativas.
 
-**Título profissional:** Product Developer & UX Specialist.
+## 5. Princípios
 
-**Proposta central:** profissional de produto que transforma problemas e requisitos complexos em experiências digitais claras, viáveis e implementadas.
-
-**Diferencial demonstrado:** capacidade de atravessar descoberta, definição do problema, arquitetura de informação, prototipação, implementação e evolução, combinando visão de produto, experiência do usuário e profundidade técnica em front-end.
-
-**Promessa de marca:** alta precisão visual e técnica a serviço de problemas concretos.
-
-**Tom:** profissional, contemporâneo, direto, técnico e humano. Evitar grandiosidade vaga, jargão sem explicação e métricas sem contexto.
-
-## 5. Princípios de produto
-
-1. **Clareza antes de espetáculo.** A identidade pode impressionar, mas a leitura da carreira, cases e contato é prioritária.
-2. **Prova antes de afirmação.** Competências devem ser sustentadas por experiência, processo, artefatos ou resultados.
-3. **Problema → decisão → impacto.** Essa é a estrutura preferencial para todo case e relato profissional.
-4. **Baixa fricção para contato.** LinkedIn e e-mail precisam estar visíveis, confiáveis e acessíveis.
-5. **Conteúdo editável onde há recorrência.** O Sanity atende o playground, que muda com maior frequência; o restante ainda é versionado no código.
-6. **Engenharia faz parte do produto.** Performance, qualidade técnica e capacidade de entrega sustentam a experiência e as decisões de produto.
-7. **Honestidade de estado.** Falha de rede, ausência de conteúdo e conteúdo em carregamento não devem parecer a mesma coisa.
+1. **Clareza antes de espetáculo.** A identidade visual reforça a mensagem, não compete com ela.
+2. **Problema antes da tecnologia.** O visitante entende o valor sem precisar conhecer React ou TypeScript.
+3. **Prova antes de afirmação.** Cases usam contexto, solução, contribuição e fatos verificáveis.
+4. **Contato com baixa fricção.** O caminho comercial fica disponível no header, hero e fechamento.
+5. **Engenharia faz parte do produto.** Performance, acessibilidade e manutenção sustentam a experiência.
+6. **Menos, com mais intenção.** Não adicionar seções, efeitos ou integrações sem função clara.
 
 ## 6. Arquitetura de informação
 
 | Rota/superfície | Função | Conteúdo principal | Ação esperada |
 |---|---|---|---|
-| `/` | visão geral e conversão | posicionamento, capacidades, carreira, cases, playground, contato | abrir um case ou iniciar contato |
-| `/#career` | prova de trajetória | cargos, empresas, períodos, impacto e stack | avaliar experiência |
-| `/#ux-lab` | prova de processo | Gelatto Sorvetes e Cristhian Menezes Advocacia & Consultoria | abrir um case |
-| `/#vault` | amostra experimental | até seis itens do Sanity | abrir item ou vault completo |
-| `/#connect` | conversão | LinkedIn e e-mail | conectar ou copiar e-mail |
-| `/case/:id` | narrativa profunda | desafio, pesquisa, solução, features e resultados | validar capacidade de produto/UX |
-| `/playground` | arquivo exploratório | todos os experimentos publicados | inspecionar um item |
+| `/` | posicionamento e conversão | hero, serviços, projetos, sobre/experiência e contato | abrir um case ou enviar e-mail |
+| `/#services` | apresentar oferta | websites, software sob medida, automações e integrações | reconhecer uma necessidade |
+| `/#ux-lab` | provar capacidade | sistema jurídico e presença digital Gelatto | abrir um case |
+| `/#career` | dar contexto profissional | visão de trabalho e experiência | validar confiança |
+| `/#connect` | converter | e-mail, cópia e LinkedIn | iniciar conversa |
+| `/case/:id` | aprofundar evidência | problema, estratégia, solução, contribuição e resultados | validar capacidade de execução |
 
-Rotas de case inexistentes redirecionam para `/`. Não há página 404 dedicada.
+Não existe CMS, Playground, formulário próprio, autenticação ou backend.
 
-## 7. Jornadas essenciais
+## 7. Homepage
 
-### Jornada A: avaliação rápida
+Ordem obrigatória:
 
-1. visitante chega à home;
-2. entende posicionamento no hero;
-3. verifica experiência e stack;
-4. abre um case ou vai direto ao contato;
-5. conecta no LinkedIn ou copia o e-mail.
+1. header com marca, navegação e contato;
+2. hero com proposta de valor e CTAs;
+3. serviços;
+4. projetos selecionados;
+5. sobre e experiência;
+6. contato;
+7. footer.
 
-Critério de qualidade: proposta, evidência e contato continuam fáceis de encontrar sem depender de efeitos ou conhecimento prévio da navegação.
+### Hero
 
-### Jornada B: validação de case
+- headline: “Ideias que viram produtos digitais.”;
+- explicação: sites, sistemas sob medida e automações;
+- CTA primário: falar sobre um projeto;
+- CTA secundário: ver projetos;
+- foto, status de disponibilidade e linguagem técnica permanecem como identidade.
 
-1. visitante seleciona Gelatto Sorvetes ou Cristhian Menezes Advocacia & Consultoria;
-2. lê contexto, papel, duração e plataforma;
-3. percorre desafio, estratégia, solução e resultados;
-4. usa o retorno fixo para voltar à home.
+### Serviços
 
-Critério de qualidade: cada afirmação relevante deve ter contexto suficiente para distinguir trabalho real, estudo conceitual e resultado medido.
+- Websites & experiências digitais;
+- Software sob medida;
+- Automações & integrações permanecem na oferta geral, mas estão temporariamente fora da seção da homepage.
 
-### Jornada C: exploração experimental
+### Projetos
 
-1. visitante vê a amostra do playground na home;
-2. abre o vault completo;
-3. seleciona um experimento;
-4. consulta imagem, contexto, desafio e ferramentas;
-5. fecha o modal e continua explorando.
+Cada card comunica problema, solução, contribuição e uma prova verificável. Gelatto aparece primeiro para abrir a seleção com presença digital, direção visual e adaptação responsiva; o sistema Cristhian Menezes vem em seguida como demonstração de software operacional sob medida.
 
-Critério de qualidade: loading, vazio e erro precisam ser distinguíveis e a interação deve funcionar por mouse, toque e teclado.
+### Sobre e experiência
 
-## 8. Capacidades atuais
-
-### Home
-
-- header fixo com identidade e CTA de contato;
-- hero animado com disponibilidade, posicionamento e três capacidades;
-- timeline de carreira com dois registros;
-- dois cards de case study;
-- preview do playground limitado a seis itens;
-- CTA de LinkedIn e cópia do e-mail;
-- footer com ano dinâmico e retorno ao topo.
-
-### Cases
-
-- dados estáticos tipados por inferência em `src/data/content.ts`;
-- rota dinâmica por ID;
-- barra de progresso de leitura;
-- imagens do problema, estratégia, solução e detalhe;
-- pain points, features, resultados e conclusão;
-- redirecionamento para a home quando o ID não existe.
-
-### Playground
-
-- consulta GROQ ao dataset `production` do Sanity;
-- ordenação por criação, do mais recente para o mais antigo;
-- limite opcional para o preview da home;
-- masonry por altura informada no conteúdo;
-- modal de detalhe;
-- skeleton e estado vazio.
+Apresenta a visão integrada de engenharia, produto e experiência, seguida de uma trajetória compacta. Não funciona como currículo completo.
 
 ### Contato
 
-- link externo para o LinkedIn;
-- cópia do e-mail para o clipboard com confirmação visual temporária;
-- não há formulário, backend de contato ou rastreamento de conversão.
+O e-mail com assunto e mensagem inicial predefinidos é a ação principal. Copiar endereço e LinkedIn são alternativas.
 
-## 9. Conteúdo e propriedade
+## 8. Conteúdo e propriedade
 
-### Conteúdo estático no código
+Carreira e cases são conteúdo estático versionado em `src/data/content.ts`. Imagens ficam em `public/`. Não há conteúdo remoto nem variáveis de ambiente necessárias para a aplicação.
 
-Arquivo: `src/data/content.ts`.
-
-- carreira: empresa, cargo, período, setor, stack e impacto;
-- cases: ID, título, categoria, processo, thumbnail e detalhes editoriais;
-- imagens de cases: arquivos locais em `public/`.
-
-Alterar esses conteúdos exige edição, build e nova publicação do frontend.
-
-### Conteúdo dinâmico no Sanity
-
-Studio: `portfolio-cms/`.
-
-Documento `playground`:
-
-- `title` — obrigatório;
-- `type` — obrigatório;
-- `heightClass` — obrigatório e atualmente aceita texto livre de classe Tailwind;
-- `image` — obrigatória, com hotspot;
-- `context` — opcional;
-- `challenge` — opcional;
-- `stack` — lista opcional de strings.
-
-O frontend consulta `_id`, título, tipo, altura, imagem, contexto, desafio e stack. O projeto Sanity configurado no Studio é `uj1gbu7g`, dataset `production`; o frontend recebe projeto e dataset por variáveis `VITE_SANITY_PROJECT_ID` e `VITE_SANITY_DATASET`.
-
-Guardrail: não colocar segredos em variáveis prefixadas com `VITE_`, pois elas são expostas ao cliente. As variáveis atuais são identificadores públicos de configuração.
-
-## 10. Requisitos funcionais para novas entregas
-
-Uma mudança só deve ser considerada pronta quando, conforme o escopo:
-
-- preserva navegação direta e por âncoras;
-- mantém as rotas atuais ou fornece migração explícita;
-- apresenta estados loading, sucesso, vazio e erro para dados remotos;
-- funciona com mouse, toque e teclado;
-- não depende de hover para informação essencial;
-- preserva retorno claro em páginas internas;
-- mantém links de contato válidos;
-- não quebra o schema do Sanity nem o conteúdo já publicado;
-- inclui conteúdo real ou um estado vazio honesto, nunca dados fictícios apresentados como produção.
-
-## 11. Requisitos não funcionais
-
-### Performance
-
-- preservar carregamento rápido e divisão de bundle;
-- otimizar imagens conforme contexto e evitar baixar originais desnecessários;
-- não adicionar animações contínuas pesadas;
-- tratar o aviso atual de chunks circulares antes de sofisticar a estratégia manual de bundles.
-
-Não existem budgets formais ou métricas Lighthouse versionadas hoje. Qualquer meta numérica futura deve ser medida e registrada antes de virar compromisso.
-
-### Acessibilidade
-
-- contraste mínimo WCAG AA;
-- navegação completa por teclado e foco visível;
-- semântica adequada para links, botões, headings e modais;
-- textos alternativos específicos;
-- suporte a movimento reduzido;
-- mensagens de erro perceptíveis e não apenas no console.
-
-O estado atual ainda não foi auditado como conforme; estes são requisitos de evolução.
-
-### Confiabilidade
-
-- falha do CMS não pode impedir acesso à carreira, cases ou contato;
-- o playground deve comunicar indisponibilidade de rede separadamente de coleção vazia;
-- URLs inválidas não devem produzir tela quebrada;
-- integrações externas devem falhar de forma segura.
-
-### Compatibilidade
-
-- experiência responsiva em desktop, tablet e mobile;
-- navegadores modernos compatíveis com o target atual `esnext`;
-- qualquer ampliação de compatibilidade exige revisão consciente do target do build.
-
-### SEO e compartilhamento
-
-Estado atual: idioma `pt-BR`, título, favicon, meta description e tags básicas Open Graph/Twitter com imagem em `public/og-image.png`. Ainda não há canonical nem metadados específicos por case.
-
-Novas páginas públicas devem definir título, descrição e preview coerentes. SEO por rota exigirá uma estratégia compatível com a SPA atual.
-
-## 12. Arquitetura técnica atual
-
-### Frontend
+## 9. Arquitetura técnica
 
 - React 19 + TypeScript;
 - Vite 7;
 - React Router DOM 7;
-- Tailwind CSS 4 via plugin do Vite;
-- Framer Motion para animação;
-- Lucide React para ícones;
-- `@sanity/client` e `@sanity/image-url` para conteúdo remoto;
-- SPA servida na porta 3000 em desenvolvimento.
+- Tailwind CSS 4;
+- GSAP com Intersection Observer e eventos nativos de scroll;
+- Lucide React;
+- componentes Magnet, Glare Hover, Decrypted Text e Dot Grid adaptados do React Bits e mantidos localmente.
 
-### CMS
+## 10. Requisitos de qualidade
 
-- Sanity 5 em `portfolio-cms/`;
-- Structure Tool e Vision Tool;
-- schema único para `playground`;
-- porta padrão do Sanity em desenvolvimento, quando iniciado pelo próprio pacote.
+- navegação completa por teclado e foco visível;
+- contraste mínimo WCAG AA;
+- elementos semânticos para links, botões e headings;
+- suporte a movimento reduzido;
+- nenhum conteúdo essencial dependente de hover;
+- alvos interativos de pelo menos 44 × 44 px quando não forem links textuais claramente espaçados;
+- composição responsiva em mobile, tablet e desktop;
+- imagens adequadas ao contexto e carregamento tardio fora da primeira dobra;
+- links de contato e rotas de case funcionais;
+- build e lint aprovados antes da entrega;
+- `npm audit --audit-level=low` sem vulnerabilidades conhecidas no lockfile entregue.
 
-### Fronteiras
+### Manutenção de dependências
 
-- o frontend deve continuar útil quando o CMS estiver indisponível;
-- o CMS gerencia apenas playground no estado atual;
-- carreira e cases continuam versionados com o frontend até decisão explícita de migração;
-- nenhuma camada de API própria, autenticação ou banco adicional existe no repositório.
+- `package-lock.json` é a fonte reproduzível da árvore instalada e deve permanecer versionado;
+- correções de segurança devem começar com `npm audit fix`, sem `--force`;
+- qualquer alteração do lockfile exige nova execução de audit, lint e build;
+- upgrades incompatíveis ou novas dependências precisam de decisão explícita e verificação dedicada.
 
-## 13. Métricas de sucesso
+Baseline da V15 em 14/10/2026: `npm audit` reportou 0 vulnerabilidades após atualizar apenas versões compatíveis com os intervalos já declarados no `package.json`.
 
-Hoje não existe analytics implementado no repositório, portanto não há baseline verificável. Se instrumentação for aprovada no futuro, priorizar:
+## 11. SEO e compartilhamento
 
-- cliques em “Iniciar contato” e LinkedIn;
-- cópias de e-mail;
-- abertura e conclusão aproximada de cases;
-- abertura do playground completo e dos modais;
-- erros de carregamento do Sanity;
-- Core Web Vitals por tipo de dispositivo.
+O idioma é `pt-BR`. Título, descrição e previews sociais priorizam a proposta comercial e usam apenas afirmações sustentadas pelo conteúdo. A homepage e cada case possuem canonical, metadados sociais, conteúdo inicial rastreável e JSON-LD próprios, centralizados em `src/data/seo.json` e materializados como HTML estático no build.
 
-Coletar apenas o necessário, com transparência e respeito à privacidade. Não adicionar analytics sem decisão explícita de produto.
+`robots.txt` permite rastreamento geral e explicita o acesso do `OAI-SearchBot`; `sitemap.xml` lista apenas URLs canônicas. Rotas inexistentes recebem uma página 404 com `noindex, follow`. Não há `llms.txt`: descoberta por mecanismos generativos segue a mesma base técnica e editorial do SEO, sem arquivos paralelos de conteúdo.
 
-## 14. Estado técnico e dívidas conhecidas
+## 12. Métricas futuras
 
-Observado em 28 de setembro de 2026:
+Não há analytics implementado. Caso seja aprovado futuramente, priorizar cliques em contato, abertura de cases e Core Web Vitals, coletando apenas o necessário e com transparência.
 
-- `npm run build` passa;
-- o build emite aviso de dependência circular entre os chunks `vendor` e `react-vendor`;
-- `npm run lint` falha com 2 ocorrências de `any` explícito no playground e no helper do Sanity;
-- não há testes automatizados no repositório;
-- durante a validação local, a requisição ao CDN do Sanity falhou por indisponibilidade de rede e o playground não exibiu um estado de erro dedicado;
-- `README.md` ainda aponta o CMS para `/studio` e Sanity V3, mas a implementação real está em `/portfolio-cms` com Sanity 5; `/studio` está vazio;
-- `VAULT_ITEMS` em `src/data/content.ts` não é usado;
-- a estratégia de SEO é mínima;
-- existe uma política global de `prefers-reduced-motion` para scroll suave, animações contínuas e transições, complementada por fallbacks nos componentes ligados ao scroll;
-- o `heightClass` do CMS aceita classe Tailwind livre, criando risco de conteúdo inválido ou classe ausente no build;
-- o modal do playground bloqueia o body, mas não implementa foco preso, fechamento por Escape ou restauração do valor anterior de overflow.
+## 13. Fora do escopo padrão
 
-Esses itens não impedem a função central, mas devem orientar prioridade antes de ampliar complexidade.
+Não adicionar por padrão: CMS, Playground, blog, autenticação, painel, comentários, formulário complexo, analytics ou novas dependências. Cada item exige necessidade concreta e decisão explícita.
 
-## 15. Critérios para decisões futuras
+## 14. Definição de pronto
 
-Antes de adicionar uma funcionalidade, responder:
-
-1. qual público e jornada ela melhora?
-2. qual evidência passa a existir que hoje falta?
-3. ela reduz ou aumenta a fricção para avaliar e contatar João?
-4. precisa ser conteúdo editável ou pode permanecer versionada no código?
-5. quais estados de falha, vazio e carregamento existem?
-6. como será verificada em desktop, mobile, teclado e build?
-7. exige medição, privacidade, serviço externo ou custo recorrente?
-
-Não adicionar por padrão: autenticação, painel próprio, comentários, feed social, blog, formulário complexo, analytics ou novas dependências. Cada um exige uma necessidade concreta e uma decisão explícita.
-
-## 16. Definição de pronto do produto
-
-Para mudanças futuras, “pronto” significa:
-
-- o comportamento solicitado foi observado funcionando;
-- o build completo continua passando;
-- lint e testes do escopo passam, ou falhas preexistentes ficam claramente separadas;
-- estados responsivos e de teclado foram verificados;
-- conteúdo e métricas não fazem afirmações sem fonte;
-- mudanças sistêmicas atualizam `DESIGN.md` e/ou `PRODUCT.md`;
-- README e estrutura técnica não entram em contradição com a implementação.
+- a proposta de valor é compreensível na primeira dobra;
+- os projetos demonstram problema, solução e contribuição;
+- o contato comercial principal é `contato@madebyjoaogomes.com` e está evidente;
+- a identidade brutalista continua reconhecível;
+- mouse, teclado e toque têm caminhos funcionais;
+- desktop e mobile foram observados;
+- audit, lint e build passam;
+- README, PRODUCT.md e DESIGN.md refletem a implementação.

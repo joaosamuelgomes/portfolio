@@ -16,11 +16,12 @@ export function Footer() {
 
                 {/* Status Bar Links */}
                 <div className="flex items-center justify-center gap-6 text-[10px] tracking-widest uppercase w-full min-[600px]:w-auto">
-                    <span>BUILD: 09.2026</span>
+                    <span>BUILD: 10.2026</span>
                     <span className="text-neutral-700">|</span>
                     <button 
                         onClick={scrollToTop}
-                        className="flex items-center gap-1 text-[#ccff00] hover:text-[#00f0ff] transition-colors cursor-pointer"
+                        className="flex min-h-11 min-w-11 items-center justify-center gap-1 text-[#ccff00] transition-colors hover:text-[#00f0ff]"
+                        aria-label="Voltar ao topo"
                     >
                         <span>TOP</span>
                         <ArrowUp size={12} />

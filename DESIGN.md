@@ -20,7 +20,7 @@ A interface não é um tema cyberpunk genérico. Cada elemento técnico precisa 
 
 ## 2. Princípios de interface
 
-1. **Conteúdo antes do efeito.** Uma pessoa recrutadora deve identificar papel, experiência, projetos e contato rapidamente, mesmo sem acompanhar as animações.
+1. **Conteúdo antes do efeito.** Um potencial cliente deve identificar oferta, projetos e contato rapidamente, mesmo sem acompanhar as animações.
 2. **Acentos são sinais.** Verde, ciano e vermelho têm significado; não são decoração distribuída de forma uniforme.
 3. **Densidade com hierarquia.** Metadados podem ser compactos, mas títulos, descrições e ações precisam continuar escaneáveis.
 4. **Movimento explica estado.** Animações introduzem, confirmam, revelam ou orientam. Nunca escondem informação essencial nem bloqueiam a interação.
@@ -106,20 +106,20 @@ Containers de conteúdo usam `max-w-7xl`; cases usam uma régua editorial compar
 
 - Header fixo com microbarra de telemetria a partir de `lg`.
 - Hero em grid de 12 colunas: conteúdo ocupa 7; retrato ocupa 5.
-- Cases em duas colunas; features internas em três colunas.
-- Playground usa masonry por CSS columns em três colunas.
+- Cases permanecem em uma única coluna; features internas usam três colunas.
+- Serviços usam dois módulos independentes e alternados; cada solução combina problema reconhecível, resultado, prova ou ação e uma microvisualização funcional. Automações permanecem temporariamente fora desta seção.
 
 ### Tablet
 
 - Header preserva marca e CTA sem introduzir uma navegação intermediária.
 - Hero passa para uma coluna antes de `lg`.
-- Cards de cases passam a duas colunas a partir de `md`; conteúdo editorial ajusta tamanho e espaçamento.
+- Cases permanecem em uma única coluna; a partir de `lg`, cada item organiza preview à esquerda e conteúdo editorial à direita.
 
 ### Mobile
 
 - Header mantém apenas marca e CTA compacto de contato.
 - Abaixo de 600 px, a foto do hero é removida para priorizar mensagem e CTAs.
-- Cards, grids editoriais e playground ficam em uma coluna.
+- Serviços, cards e grids editoriais ficam em uma coluna.
 - CTAs ocupam a largura disponível quando isso melhora a área de toque.
 - Alvos interativos novos devem ter pelo menos 44 × 44 px, salvo links textuais dentro de navegação claramente espaçada.
 - Nenhum conteúdo essencial pode depender de hover.
@@ -133,10 +133,10 @@ Breakpoints existentes seguem os defaults do Tailwind (`sm`, `md`, `lg`) mais o 
 Ordem obrigatória atual:
 
 1. header fixo com identidade e CTA;
-2. hero com posicionamento, manifesto, capacidades e CTAs;
-3. carreira em timeline;
-4. Projetos com estudos de caso;
-5. preview do Creative Playground;
+2. hero com proposta comercial e CTAs;
+3. serviços;
+4. projetos selecionados;
+5. sobre e experiência profissional;
 6. bloco de contato;
 7. footer e retorno ao topo.
 
@@ -154,19 +154,17 @@ Estrutura editorial padrão:
 6. resultados;
 7. conclusão.
 
-O indicador de leitura fica fixo no topo. O botão de retorno permanece visível. Cases inexistentes redirecionam para a home.
+O indicador de leitura fica fixo no topo. O botão de retorno permanece visível. Cases inexistentes seguem para a superfície 404.
 
-### Playground (`/playground`)
+### Página não encontrada (`404`)
 
-O grid é uma vitrine exploratória alimentada pelo Sanity. Cada item abre um modal com imagem, contexto, desafio e stack. O preview da home mostra até seis itens; a página dedicada mostra o conjunto completo.
-
-Estados obrigatórios: skeleton durante carregamento, vazio quando não há documentos, modal de detalhe e feedback de erro. Hoje o erro de rede apenas é enviado ao console e termina visualmente como vazio; evoluções devem diferenciar “sem conteúdo” de “falha ao carregar”.
+A resposta 404 preserva a linguagem industrial do portfólio, explica o problema em texto direto e oferece um único caminho de volta para a homepage. Ela deve permanecer fora do índice de busca com `noindex, follow`.
 
 ## 6. Componentes e padrões
 
 ### Header
 
-- Logomarca textual à esquerda e contato à direita.
+- Logomarca textual à esquerda, navegação curta no desktop e contato à direita.
 - Estado fixo com fundo quase opaco e blur leve.
 - A navegação contextual por capítulos pertence ao conteúdo, não ao header.
 
@@ -185,6 +183,7 @@ Estados obrigatórios: skeleton durante carregamento, vazio quando não há docu
 ### Cards de case
 
 - Toda a superfície é clicável.
+- A lista é vertical, com Gelatto antes de Cristhian Menezes; em desktop, preview fica à esquerda e conteúdo à direita.
 - Preview visual, plataforma, título, categoria, resumo e até três tags de processo.
 - Hover pode enriquecer a prévia, mas título, categoria e affordance precisam funcionar sem hover.
 
@@ -200,17 +199,20 @@ Estados obrigatórios: skeleton durante carregamento, vazio quando não há docu
 - Servem para indicar disponibilidade, contexto, posição ou estado do sistema.
 - Dados simulados devem parecer ornamentais, não métricas reais. `CORE_LOAD: 14%` é atualmente estático; não tomar decisões funcionais com base nele.
 
-### Modal do playground
+### React Bits adaptado
 
-- Desktop: imagem à esquerda, detalhes à direita.
-- Mobile: empilhado, com altura máxima e rolagem interna.
-- Fecha pelo botão visível e pelo backdrop. Deve também aceitar `Escape` e restaurar o scroll original quando essa melhoria for implementada.
+- `Magnet` aparece apenas nos CTAs comerciais principais e nunca altera o caminho de toque.
+- `GlareHover` envolve cada solução com uma passagem curta de luz na entrada do ponteiro, sem rastreamento contínuo nem conteúdo dependente de hover.
+- `DecryptedText` transforma “Produtos digitais” em uma wordmark decodificada: glifos ciano se resolvem uma única vez no texto verde, sem interação no ponteiro.
+- `DotGrid` substitui a textura estática do hero por um campo global discreto: repouso neutro, resposta ciano ao cursor e pulso verde no clique.
+- Os quatro respeitam `prefers-reduced-motion` e são mantidos localmente, sem dependências adicionais.
 
 ## 7. Movimento
 
-Padrões existentes:
+Padrões existentes, implementados com GSAP, Intersection Observer e eventos nativos de scroll:
 
-- entrada: fade + deslocamento de aproximadamente 20-30 px, 500-700 ms;
+- momento focal do hero: “Produtos digitais” passa por uma decodificação curta na entrada e permanece estático depois, deixando o Dot Grid como única interação contínua com o ponteiro;
+- entrada de apoio: máscara, fade ou deslocamento de aproximadamente 12-28 px, 380-700 ms, apenas quando reforça hierarquia;
 - capítulos de scroll: indicador lateral acompanha a seção ativa em telas amplas, sem disputar espaço com o conteúdo;
 - profundidade: hero e cards respondem ao progresso do viewport com deslocamento e escala sutis;
 - títulos: revelação vertical com máscara e linha de especificação progressiva;
@@ -231,14 +233,14 @@ Guardrails:
 
 O idioma principal é português do Brasil; termos técnicos em inglês podem permanecer quando são comuns à área ou fazem parte da linguagem visual.
 
-A assinatura profissional principal é **Product Developer & UX Specialist**. Textos de apoio devem explicar essa combinação como atuação de ponta a ponta — descoberta, definição, experiência, implementação e evolução — sem apagar a especialidade técnica em front-end nem alterar cargos históricos.
+A promessa principal é **Ideias que viram produtos digitais**. A assinatura técnica **Software Developer // Product · UX · Engineering** aparece como evidência secundária, sem apagar cargos históricos.
 
 - Headlines: diretas, curtas e confiantes.
 - Corpo: claro, concreto e orientado a problema, decisão e impacto.
 - Metadados: técnicos e compactos.
 - CTAs: verbos de ação.
 - Não exagerar resultados, senioridade ou certeza. Métricas devem ser sustentáveis e contextualizadas.
-- A metáfora de sistema (`DEPLOY`, `SPEC`, `VAULT`, `TELEMETRY`) deve apoiar a leitura, não obscurecer o significado.
+- A metáfora de sistema (`DEPLOY`, `SPEC`, `TELEMETRY`) deve apoiar a leitura, não obscurecer o significado.
 
 ## 9. Acessibilidade e qualidade mínima
 
@@ -253,7 +255,7 @@ Toda nova entrega deve:
 - preservar leitura e ação com movimento reduzido;
 - validar desktop e mobile antes de concluir.
 
-Estado atual conhecido: o projeto tem nomes acessíveis, textos alternativos e política global de `prefers-reduced-motion`, mas ainda não há uma política global de foco ou teste automatizado de acessibilidade. Essas exigências são guardrails para a evolução, não uma declaração de conformidade completa.
+Estado atual conhecido: o projeto tem nomes acessíveis, textos alternativos, foco visível global e política de `prefers-reduced-motion`. Ainda não há teste automatizado de acessibilidade; essas exigências são guardrails para a evolução, não uma declaração de conformidade completa.
 
 ## 10. Implementação e governança
 
@@ -263,7 +265,6 @@ Fontes de verdade:
 - estrutura global e rotas: `src/App.tsx` e `src/pages/`;
 - componentes compartilhados: `src/components/`;
 - conteúdo estático: `src/data/content.ts`;
-- conteúdo dinâmico do playground: `portfolio-cms/schemaTypes/playground.ts`;
 - fontes externas: `index.html`.
 
 Ao criar ou alterar UI:
@@ -272,7 +273,10 @@ Ao criar ou alterar UI:
 2. preferir componentes existentes antes de introduzir variantes;
 3. testar estado padrão, hover, focus, active, loading, vazio e erro quando aplicável;
 4. conferir pelo menos uma largura desktop e uma mobile;
-5. atualizar este documento quando uma decisão sistêmica mudar.
+5. executar `npm audit --audit-level=low`, lint e build quando o lockfile mudar;
+6. atualizar este documento quando uma decisão sistêmica mudar.
+
+Dependências não são parte do vocabulário visual por padrão. Bibliotecas novas só devem entrar quando um componente local ou a stack existente não resolverem a necessidade com qualidade comparável. Correções automáticas de segurança usam `npm audit fix` sem `--force`; upgrades incompatíveis exigem revisão explícita da UI, do movimento e do bundle.
 
 Evitar:
 

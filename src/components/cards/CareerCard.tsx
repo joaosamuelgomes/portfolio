@@ -1,26 +1,18 @@
-import { motion } from "framer-motion";
 import { CAREER_DATA } from "../../data/content";
 import { Terminal, Shield } from "lucide-react";
 
 export const CareerCard = ({ data, index }: { data: typeof CAREER_DATA[0], index: number }) => (
     <div className="relative pl-8 md:pl-20">
         {/* Nó da Timeline: Bloco LED Cyberpunk */}
-        <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: 0.2 + (index * 0.15), duration: 0.4 }}
+        <div
             className="absolute left-[3px] md:left-[21px] top-6 w-5 h-5 bg-[#08080c] border-2 border-[#ccff00] z-10 flex items-center justify-center shadow-[0_0_10px_rgba(204,255,0,0.5)]"
         >
             <div className="w-1.5 h-1.5 bg-[#ccff00] animate-pulse" />
-        </motion.div>
+        </div>
 
         {/* Card em estilo Dossiê Operacional */}
-        <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: index * 0.15 }}
+        <div
+            data-career-card
             className="relative group p-6 md:p-8 bg-[#0d0e14] border border-[#1a1c24] hover:border-[#ccff00]/60 transition-all duration-300 overflow-hidden corner-brackets"
         >
             {/* Decal de Serial de Dossiê */}
@@ -50,7 +42,7 @@ export const CareerCard = ({ data, index }: { data: typeof CAREER_DATA[0], index
                 </span>
             </div>
 
-            <p className="text-neutral-300 font-sans text-sm md:text-base leading-relaxed mb-6 font-light">
+            <p className="text-neutral-300 font-sans text-sm md:text-base leading-relaxed mb-6">
                 {data.impact}
             </p>
 
@@ -72,6 +64,6 @@ export const CareerCard = ({ data, index }: { data: typeof CAREER_DATA[0], index
                     ))}
                 </div>
             </div>
-        </motion.div>
+        </div>
     </div>
 );
