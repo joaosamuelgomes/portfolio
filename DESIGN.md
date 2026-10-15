@@ -154,7 +154,11 @@ Estrutura editorial padrão:
 6. resultados;
 7. conclusão.
 
-O indicador de leitura fica fixo no topo. O botão de retorno permanece visível. Cases inexistentes redirecionam para a home.
+O indicador de leitura fica fixo no topo. O botão de retorno permanece visível. Cases inexistentes seguem para a superfície 404.
+
+### Página não encontrada (`404`)
+
+A resposta 404 preserva a linguagem industrial do portfólio, explica o problema em texto direto e oferece um único caminho de volta para a homepage. Ela deve permanecer fora do índice de busca com `noindex, follow`.
 
 ## 6. Componentes e padrões
 

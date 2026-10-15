@@ -128,6 +128,8 @@ export const HeroSection = () => {
                                 <img
                                     src="/photo.jpeg"
                                     alt="João Samuel Gomes"
+                                    width={848}
+                                    height={1264}
                                     fetchPriority="high"
                                     className="h-full w-full object-cover object-top grayscale contrast-125 transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
                                 />
