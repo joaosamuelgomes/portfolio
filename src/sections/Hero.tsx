@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef, type MouseEvent } from 'react';
 import { ArrowRight, Braces, Crosshair, FolderOpen, Zap } from 'lucide-react';
 import { Magnet } from '../components/react-bits/Magnet';
+import { DecryptedText } from '../components/react-bits/DecryptedText';
 import { fullMotionQuery, gsap } from '../lib/gsap';
 
 export const HeroSection = () => {
@@ -50,8 +51,6 @@ export const HeroSection = () => {
             id="hero"
             className="relative mx-auto mb-24 flex min-h-[82vh] max-w-7xl items-start px-4 pt-12 sm:px-6 sm:pt-16 md:mb-36 md:pt-24 lg:items-center lg:pt-16"
         >
-            <div data-hero-grid className="bg-dot-grid pointer-events-none absolute inset-0 -z-10 opacity-30" aria-hidden="true" />
-
             <div className="grid w-full grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
                 <div data-hero-copy className="order-2 min-w-0 lg:order-1 lg:col-span-7">
                     <div data-hero-kicker className="mb-6 flex w-full max-w-full flex-wrap items-center gap-2 border border-[#1a1c24] bg-[#0d0e14] px-3 py-2 font-mono text-[9px] tracking-wider text-neutral-300 sm:mb-8 sm:inline-flex sm:w-auto sm:flex-nowrap sm:text-xs">
@@ -60,8 +59,6 @@ export const HeroSection = () => {
                             <span className="relative inline-flex h-2.5 w-2.5 bg-[#ccff00]" />
                         </span>
                         <span className="font-bold text-[#ccff00]">STATUS: DISPONÍVEL</span>
-                        <span className="hidden text-neutral-600 sm:inline">|</span>
-                        <span className="min-w-0">NOVOS PROJETOS // 2026</span>
                     </div>
 
                     <div className="relative mb-7">
@@ -69,21 +66,26 @@ export const HeroSection = () => {
                             <Crosshair size={12} className="shrink-0 text-[#00f0ff]" aria-hidden="true" />
                             <span className="min-w-0 break-words">SOFTWARE DEVELOPER // PRODUCT · UX · ENGINEERING</span>
                         </div>
-                        <h1 className="max-w-[12ch] font-display text-4xl font-bold uppercase leading-[0.94] tracking-[-0.04em] text-white sm:text-6xl md:text-7xl lg:text-[5.6rem]">
-                            <span className="block"><span data-hero-line className="block">IDEIAS QUE VIRAM</span></span>
-                            <span className="mt-2 block font-mono text-[0.66em] tracking-[-0.04em] text-[#ccff00]">
-                                <span data-hero-line className="block">PRODUTOS DIGITAIS.</span>
+                        <h1 className="max-w-[12ch] font-display text-4xl font-bold uppercase leading-[0.94] tracking-[-0.04em] text-white sm:text-6xl md:text-7xl lg:text-[5.6rem] xl:max-w-none xl:text-[4.9rem]">
+                            <span className="block"><span data-hero-line className="block xl:whitespace-nowrap">IDEIAS QUE VIRAM</span></span>
+                            <span className="mt-1 block font-mono text-[0.66em] tracking-[-0.04em] text-[#ccff00]">
+                                <span data-hero-line className="block">
+                                    <DecryptedText
+                                        text="PRODUTOS DIGITAIS."
+                                        className="block tracking-[0.015em]"
+                                    />
+                                </span>
                             </span>
                         </h1>
                     </div>
 
                     <div data-hero-panel className="corner-brackets mb-9 w-full min-w-0 max-w-2xl overflow-hidden border border-[#1a1c24] bg-[#0d0e14] p-5">
                         <p className="max-w-[62ch] break-words text-base leading-relaxed text-neutral-200 md:text-lg">
-                            Eu sou João Gomes. Projeto e desenvolvo sites, sistemas e automações que transformam oportunidades em experiências claras e operações mais simples.
+                            Eai, eu sou o João Samuel. Com mais de 7 anos de experiência em desenvolvimento de produtos, ajudo empresas a transformarem ideias em produtos funcionais e impactantes.
                         </p>
                         <p className="mt-3 flex items-center gap-2 font-mono text-xs leading-relaxed text-neutral-400 md:text-sm">
                             <Braces size={14} className="shrink-0 text-[#00f0ff]" aria-hidden="true" />
-                            Estratégia, experiência e código — do primeiro rascunho ao produto no ar.
+                            Estratégia, experiência e código.
                         </p>
                     </div>
 
@@ -112,11 +114,11 @@ export const HeroSection = () => {
 
                 <div data-hero-portrait className="order-1 hidden justify-center min-[600px]:flex lg:order-2 lg:col-span-5 lg:justify-end">
                     <div className="relative w-full max-w-md">
-                        <div className="absolute -left-3 -top-3 z-20 border border-black bg-[#ccff00] px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-black sm:-left-4 sm:-top-4">
-                            MADE_BY_JOAO
+                        <div className="absolute left-4 top-0 z-20 -translate-y-1/2 border border-black bg-[#ccff00] px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-black">
+                            PROFILE_PHOTO
                         </div>
 
-                        <div className="absolute -bottom-3 -right-1 z-20 flex items-center gap-1.5 border border-[#00f0ff] bg-black/90 px-2.5 py-1 font-mono text-[10px] text-[#00f0ff] sm:-bottom-4 sm:-right-2">
+                        <div className="absolute bottom-0 right-4 z-20 flex translate-y-1/2 items-center gap-1.5 border border-[#00f0ff] bg-black/90 px-2.5 py-1 font-mono text-[10px] text-[#00f0ff]">
                             <Zap size={12} className="animate-pulse" aria-hidden="true" />
                             PRODUCT · UX · CODE
                         </div>

@@ -40,10 +40,10 @@ export const UXCase = ({ data }: { data: UXCaseData }) => {
         >
             <Link
                 to={`/case/${data.id}`}
-                className="group flex h-full flex-col gap-6 border border-[#1a1c24] bg-[#0d0e14] p-5 shadow-xl transition-colors duration-300 hover:border-[#ccff00]/80 focus-visible:outline-none sm:p-6"
+                className="group grid h-full grid-cols-1 gap-6 border border-[#1a1c24] bg-[#0d0e14] p-5 shadow-xl transition-colors duration-300 hover:border-[#ccff00]/80 focus-visible:outline-none sm:p-6 lg:grid-cols-[minmax(0,1.12fr)_minmax(20rem,0.88fr)] lg:items-stretch lg:gap-8"
                 aria-label={`Abrir estudo de caso: ${data.title}`}
             >
-                <div className="flex items-center justify-between border-b border-[#1a1c24] pb-2 font-mono text-[9px] text-neutral-400">
+                <div className="flex items-center justify-between border-b border-[#1a1c24] pb-2 font-mono text-[9px] text-neutral-400 lg:col-span-2">
                     <span className="flex items-center gap-1.5">
                         <Cpu size={12} className="text-[#00f0ff]" aria-hidden="true" />
                         PROJETO REAL // 0{data.id}
@@ -53,7 +53,7 @@ export const UXCase = ({ data }: { data: UXCaseData }) => {
                     </span>
                 </div>
 
-                <div className="relative aspect-[16/10] overflow-hidden border border-neutral-800 bg-neutral-950">
+                <div className="relative aspect-[16/10] overflow-hidden border border-neutral-800 bg-neutral-950 lg:aspect-auto lg:min-h-[28rem]">
                     <img
                         data-case-image
                         {...getResponsiveImageProps(thumbnail, '(max-width: 767px) calc(100vw - 80px), 40vw')}
@@ -72,7 +72,7 @@ export const UXCase = ({ data }: { data: UXCaseData }) => {
                     )}
                 </div>
 
-                <div className="flex flex-1 flex-col">
+                <div className="flex min-w-0 flex-1 flex-col lg:py-2">
                     <div className="flex items-start justify-between gap-4">
                         <div>
                             <h3 className="font-display text-2xl font-bold uppercase tracking-tight text-white transition-colors group-hover:text-[#ccff00]">

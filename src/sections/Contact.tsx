@@ -65,15 +65,8 @@ export const ContactSection = () => {
                 </h2>
 
                 <p data-contact-copy className="mx-auto mb-4 max-w-2xl text-base leading-relaxed text-neutral-300 md:text-lg">
-                    Me conte o que hoje atrasa sua operação, limita suas vendas ou ainda não saiu do papel. Eu respondo pessoalmente para entender o contexto e desenhar o próximo passo.
+                    Conte o que você quer construir e o resultado que espera alcançar. Eu mesmo respondo para entender o contexto e avaliar o melhor caminho.
                 </p>
-                <a
-                    data-contact-copy
-                    href={`mailto:${userEmail}`}
-                    className="mb-9 inline-block font-mono text-xs text-neutral-400 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white"
-                >
-                    {userEmail}
-                </a>
 
                 <div className="flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
                     <Magnet className="w-full sm:w-auto" strength={7} maxOffset={6} data-contact-action="">
