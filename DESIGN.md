@@ -106,14 +106,14 @@ Containers de conteúdo usam `max-w-7xl`; cases usam uma régua editorial compar
 
 - Header fixo com microbarra de telemetria a partir de `lg`.
 - Hero em grid de 12 colunas: conteúdo ocupa 7; retrato ocupa 5.
-- Cases em duas colunas; features internas em três colunas.
-- Serviços usam uma matriz única com três linhas; projetos permanecem em duas colunas.
+- Cases permanecem em uma única coluna; features internas usam três colunas.
+- Serviços usam dois módulos independentes e alternados; cada solução combina problema reconhecível, resultado, prova ou ação e uma microvisualização funcional. Automações permanecem temporariamente fora desta seção.
 
 ### Tablet
 
 - Header preserva marca e CTA sem introduzir uma navegação intermediária.
 - Hero passa para uma coluna antes de `lg`.
-- Cards de cases passam a duas colunas a partir de `md`; conteúdo editorial ajusta tamanho e espaçamento.
+- Cases permanecem em uma única coluna; a partir de `lg`, cada item organiza preview à esquerda e conteúdo editorial à direita.
 
 ### Mobile
 
@@ -179,6 +179,7 @@ O indicador de leitura fica fixo no topo. O botão de retorno permanece visível
 ### Cards de case
 
 - Toda a superfície é clicável.
+- A lista é vertical, com Gelatto antes de Cristhian Menezes; em desktop, preview fica à esquerda e conteúdo à direita.
 - Preview visual, plataforma, título, categoria, resumo e até três tags de processo.
 - Hover pode enriquecer a prévia, mas título, categoria e affordance precisam funcionar sem hover.
 
@@ -197,14 +198,16 @@ O indicador de leitura fica fixo no topo. O botão de retorno permanece visível
 ### React Bits adaptado
 
 - `Magnet` aparece apenas nos CTAs comerciais principais e nunca altera o caminho de toque.
-- `SpotlightCard` envolve a matriz de serviços como um único campo de foco, sem arredondamento ou aparência de card SaaS.
-- Ambos respeitam `prefers-reduced-motion` e são mantidos localmente, sem dependências adicionais.
+- `GlareHover` envolve cada solução com uma passagem curta de luz na entrada do ponteiro, sem rastreamento contínuo nem conteúdo dependente de hover.
+- `DecryptedText` transforma “Produtos digitais” em uma wordmark decodificada: glifos ciano se resolvem uma única vez no texto verde, sem interação no ponteiro.
+- `DotGrid` substitui a textura estática do hero por um campo global discreto: repouso neutro, resposta ciano ao cursor e pulso verde no clique.
+- Os quatro respeitam `prefers-reduced-motion` e são mantidos localmente, sem dependências adicionais.
 
 ## 7. Movimento
 
 Padrões existentes, implementados com GSAP, Intersection Observer e eventos nativos de scroll:
 
-- momento focal do hero: headline revelada por máscara, painel técnico e retrato sincronizados em uma sequência curta;
+- momento focal do hero: “Produtos digitais” passa por uma decodificação curta na entrada e permanece estático depois, deixando o Dot Grid como única interação contínua com o ponteiro;
 - entrada de apoio: máscara, fade ou deslocamento de aproximadamente 12-28 px, 380-700 ms, apenas quando reforça hierarquia;
 - capítulos de scroll: indicador lateral acompanha a seção ativa em telas amplas, sem disputar espaço com o conteúdo;
 - profundidade: hero e cards respondem ao progresso do viewport com deslocamento e escala sutis;

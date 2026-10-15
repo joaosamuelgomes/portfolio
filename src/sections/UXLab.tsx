@@ -2,6 +2,8 @@ import { SectionTitle } from '../components/ui/SectionTitle';
 import { UXCase } from '../components/cards/UXCaseCard';
 import { UX_CASES } from '../data/content'; 
 
+const orderedCases = [...UX_CASES].sort((first, second) => first.id - second.id);
+
 export const UXLabSection = () => {
     return (
         <section id="ux-lab" className="max-w-7xl mx-auto px-6 mb-28 md:mb-40">
@@ -12,8 +14,8 @@ export const UXLabSection = () => {
                 PROJETOS SELECIONADOS
             </SectionTitle>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-12">
-                {UX_CASES.map((project) => (
+            <div className="mt-12 grid grid-cols-1 gap-10 md:gap-12">
+                {orderedCases.map((project) => (
                     <UXCase key={project.id} data={project} />
                 ))}
             </div>

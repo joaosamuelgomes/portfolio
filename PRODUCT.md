@@ -87,11 +87,11 @@ Ordem obrigatória:
 
 - Websites & experiências digitais;
 - Software sob medida;
-- Automações & integrações.
+- Automações & integrações permanecem na oferta geral, mas estão temporariamente fora da seção da homepage.
 
 ### Projetos
 
-Cada card comunica problema, solução, contribuição e uma prova verificável. O sistema Cristhian Menezes aparece primeiro por demonstrar software operacional sob medida; Gelatto demonstra presença digital, direção visual e adaptação responsiva.
+Cada card comunica problema, solução, contribuição e uma prova verificável. Gelatto aparece primeiro para abrir a seleção com presença digital, direção visual e adaptação responsiva; o sistema Cristhian Menezes vem em seguida como demonstração de software operacional sob medida.
 
 ### Sobre e experiência
 
@@ -113,7 +113,7 @@ Carreira e cases são conteúdo estático versionado em `src/data/content.ts`. I
 - Tailwind CSS 4;
 - GSAP com Intersection Observer e eventos nativos de scroll;
 - Lucide React;
-- componentes Magnet e Spotlight Card adaptados do React Bits e mantidos localmente.
+- componentes Magnet, Glare Hover, Decrypted Text e Dot Grid adaptados do React Bits e mantidos localmente.
 
 ## 10. Requisitos de qualidade
 

@@ -49,22 +49,21 @@
   }
 }
 
-.spotlight-card {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.spotlight-card__light {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    circle var(--spotlight-size) at var(--spotlight-x) var(--spotlight-y),
-    var(--spotlight-color),
-    transparent 68%
-  );
+@keyframes glare-hover-sweep {
+  0% {
+    opacity: 0;
+    transform: translateX(var(--glare-from));
+  }
+  18% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(var(--glare-to));
+  }
 }
 
 /* Surface Dot Grid */
