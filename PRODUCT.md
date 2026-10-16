@@ -4,13 +4,13 @@
 
 ## 1. Resumo
 
-Made by João Gomes é o portfólio comercial e profissional de João Samuel Gomes. Sua função principal é ajudar pequenas empresas, escritórios e profissionais a entenderem como João pode transformar problemas de negócio em sites, sistemas, automações e integrações.
+Made by João Gomes é o portfólio comercial e profissional de João Samuel Gomes. Sua função é mostrar como João atua entre produto, experiência e engenharia para levar necessidades de negócio da descoberta à implementação.
 
-O site também atende recrutadores e profissionais de tecnologia, mas esse é um objetivo secundário. A comunicação começa pelo problema e pelo valor; tecnologias aparecem como evidência de execução.
+O site atende com o mesmo peso fundadores e gestores buscando capacidade de execução, empresas com projetos concretos e recrutadores interessados em um perfil multidisciplinar. A comunicação começa pelo problema, passa pela experiência comprovada e termina em como João pode contribuir.
 
 ## 2. Posicionamento
 
-**Promessa central:** ideias de negócio transformadas em produtos digitais claros, úteis e prontos para operar.
+**Promessa central:** da decisão ao produto em produção.
 
 **Oferta:** desenvolvimento de sites e experiências digitais, software sob medida, automações e integrações.
 
@@ -22,24 +22,22 @@ O site também atende recrutadores e profissionais de tecnologia, mas esse é um
 
 ## 3. Público prioritário
 
-1. Pequenas empresas que precisam de presença digital profissional.
-2. Empresas que precisam organizar ou digitalizar processos com sistemas personalizados.
-3. Negócios que desejam automatizar tarefas e integrar ferramentas.
-4. Profissionais e escritórios que precisam de soluções de gestão sob medida.
-
-Público secundário: recrutadores, lideranças de engenharia/produto/design e outros desenvolvedores.
+1. Fundadores que precisam transformar necessidades de negócio em produtos executáveis.
+2. Gestores de produto, engenharia e design que buscam alguém capaz de conectar descoberta, experiência e implementação.
+3. Empresas e profissionais com projetos concretos de sites, sistemas, automações ou integrações.
+4. Recrutadores avaliando experiência, repertório multidisciplinar e capacidade de entrega.
 
 ## 4. Objetivos do visitante
 
 Em poucos segundos, a homepage precisa responder:
 
 - quem é João;
-- o que ele desenvolve;
-- quais problemas consegue resolver;
+- como ele atua entre produto, UX e engenharia;
+- em quais problemas e times pode contribuir;
 - quais projetos comprovam sua capacidade;
 - como iniciar uma conversa.
 
-A principal conversão é o envio de um e-mail sobre um projeto. Copiar o endereço e acessar o LinkedIn são alternativas.
+A principal conversão é o envio de um e-mail sobre um projeto, oportunidade ou colaboração. Copiar o endereço e acessar o LinkedIn são alternativas.
 
 ## 5. Princípios
 
@@ -54,8 +52,7 @@ A principal conversão é o envio de um e-mail sobre um projeto. Copiar o endere
 
 | Rota/superfície | Função | Conteúdo principal | Ação esperada |
 |---|---|---|---|
-| `/` | posicionamento e conversão | hero, serviços, projetos, sobre/experiência e contato | abrir um case ou enviar e-mail |
-| `/#services` | apresentar oferta | websites, software sob medida, automações e integrações | reconhecer uma necessidade |
+| `/` | posicionamento e conversão | hero, projetos, sobre/experiência e contato | abrir um case ou enviar e-mail |
 | `/#ux-lab` | provar capacidade | sistema jurídico e presença digital Gelatto | abrir um case |
 | `/#career` | dar contexto profissional | visão de trabalho e experiência | validar confiança |
 | `/#connect` | converter | e-mail, cópia e LinkedIn | iniciar conversa |
@@ -69,25 +66,23 @@ Ordem obrigatória:
 
 1. header com marca, navegação e contato;
 2. hero com proposta de valor e CTAs;
-3. serviços;
-4. projetos selecionados;
-5. sobre e experiência;
-6. contato;
-7. footer.
+3. projetos selecionados;
+4. sobre e experiência;
+5. contato;
+6. footer.
 
 ### Hero
 
-- headline: “Ideias que viram produtos digitais.”;
-- explicação: sites, sistemas sob medida e automações;
-- CTA primário: falar sobre um projeto;
-- CTA secundário: ver projetos;
+- headline: “Da decisão ao produto em produção.”;
+- explicação: participação entre descoberta, definição e implementação, combinando produto, UX e desenvolvimento;
+- prova secundária: mais de 7 anos de experiência;
+- CTA primário: ver projetos;
+- CTA secundário: entender como João pode contribuir;
 - foto, status de disponibilidade e linguagem técnica permanecem como identidade.
 
-### Serviços
+### Oferta
 
-- Websites & experiências digitais;
-- Software sob medida;
-- Automações & integrações permanecem na oferta geral, mas estão temporariamente fora da seção da homepage.
+A oferta de websites, software sob medida, automações e integrações permanece na proposta de valor e nos projetos, sem uma seção dedicada na homepage. A página prioriza provas concretas em vez de uma enumeração genérica de serviços.
 
 ### Projetos
 
@@ -99,7 +94,7 @@ Apresenta a visão integrada de engenharia, produto e experiência, seguida de u
 
 ### Contato
 
-O e-mail com assunto e mensagem inicial predefinidos é a ação principal. Copiar endereço e LinkedIn são alternativas.
+O e-mail com assunto e mensagem inicial neutros para projetos, oportunidades e colaborações é a ação principal. Copiar endereço e LinkedIn são alternativas.
 
 ## 8. Conteúdo e propriedade
 
@@ -113,7 +108,7 @@ Carreira e cases são conteúdo estático versionado em `src/data/content.ts`. I
 - Tailwind CSS 4;
 - GSAP com Intersection Observer e eventos nativos de scroll;
 - Lucide React;
-- componentes Magnet, Glare Hover, Decrypted Text e Dot Grid adaptados do React Bits e mantidos localmente.
+- componentes Magnet, Decrypted Text e Dot Grid adaptados do React Bits e mantidos localmente.
 
 ## 10. Requisitos de qualidade
 

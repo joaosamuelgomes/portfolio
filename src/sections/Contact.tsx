@@ -9,9 +9,9 @@ export const ContactSection = () => {
     const [copyStatus, setCopyStatus] = useState<CopyStatus>('idle');
     const sectionRef = useRef<HTMLElement>(null);
     const userEmail = 'contato@madebyjoaogomes.com';
-    const mailSubject = encodeURIComponent('Novo projeto — vamos conversar');
+    const mailSubject = encodeURIComponent('Vamos conversar — projeto ou oportunidade');
     const mailBody = encodeURIComponent(
-        'Olá, João.\n\nQuero conversar sobre um projeto de [site / sistema / automação].\n\nO que preciso resolver:\n\nPrazo, se houver:\n'
+        'Olá, João.\n\nQuero conversar sobre [um projeto / uma oportunidade / uma colaboração].\n\nContexto:\n\nO que precisamos resolver ou alcançar:\n'
     );
     const mailto = `mailto:${userEmail}?subject=${mailSubject}&body=${mailBody}`;
 
@@ -54,18 +54,18 @@ export const ContactSection = () => {
                 data-contact-frame
                 className="corner-brackets relative overflow-hidden border-2 border-[#1a1c24] bg-[#0d0e14] p-8 shadow-2xl md:p-14"
             >
-                <div data-contact-copy className="mb-8 inline-flex items-center gap-2 border border-neutral-800 bg-black px-3 py-1 font-mono text-xs uppercase tracking-widest text-[#ccff00]">
+                <div data-contact-copy className="mb-8 inline-flex max-w-full flex-wrap items-center justify-center gap-2 border border-neutral-800 bg-black px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#ccff00] sm:text-xs">
                     <Radio size={14} className="animate-pulse text-[#00f0ff]" aria-hidden="true" />
-                    NOVOS PROJETOS // CONTATO
+                    PROJETOS · OPORTUNIDADES · COLABORAÇÕES
                 </div>
 
                 <h2 data-contact-copy className="mx-auto mb-8 max-w-[16ch] font-display text-4xl font-bold uppercase leading-[0.95] tracking-[-0.04em] text-white sm:text-6xl md:text-7xl">
-                    VOCÊ PRECISA
-                    <span className="text-[#ccff00]"> TIRAR ALGO DO PAPEL?</span>
+                    COMO POSSO
+                    <span className="text-[#ccff00]"> CONTRIBUIR?</span>
                 </h2>
 
                 <p data-contact-copy className="mx-auto mb-4 max-w-2xl text-base leading-relaxed text-neutral-300 md:text-lg">
-                    Conte o que você quer construir e o resultado que espera alcançar. Eu mesmo respondo para entender o contexto e avaliar o melhor caminho.
+                    Se você está estruturando um produto, fortalecendo um time ou tirando uma solução do papel, conte o contexto. Eu mesmo respondo para entender o desafio e avaliar como posso ajudar.
                 </p>
 
                 <div className="flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
@@ -75,7 +75,7 @@ export const ContactSection = () => {
                             className="group flex min-h-12 w-full items-center justify-center gap-2 border border-black bg-[#ccff00] px-8 py-4 font-mono text-sm font-bold uppercase tracking-wider text-black transition-colors hover:bg-[#00f0ff] sm:w-auto"
                         >
                             <Mail size={18} aria-hidden="true" />
-                            CONTAR SOBRE O PROJETO
+                            INICIAR CONVERSA
                             <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
                         </a>
                     </Magnet>

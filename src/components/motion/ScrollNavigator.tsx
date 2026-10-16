@@ -3,9 +3,8 @@ import { gsap } from '../../lib/gsap';
 
 const CHAPTERS = [
     { id: 'hero', label: 'Início' },
-    { id: 'services', label: 'Serviços' },
-    { id: 'ux-lab', label: 'Projetos' },
-    { id: 'career', label: 'Sobre' },
+    { id: 'ux-lab', label: 'Trabalho' },
+    { id: 'career', label: 'Experiência' },
     { id: 'connect', label: 'Contato' },
 ];
 

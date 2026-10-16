@@ -49,23 +49,6 @@
   }
 }
 
-@keyframes glare-hover-sweep {
-  0% {
-    opacity: 0;
-    transform: translateX(var(--glare-from));
-  }
-  18% {
-    opacity: 1;
-  }
-  82% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(var(--glare-to));
-  }
-}
-
 /* Surface Dot Grid */
 .bg-dot-grid, .bg-cyber-grid {
   background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
