@@ -39,7 +39,7 @@ export const CareerSection = () => {
     return (
         <section ref={sectionRef} id="career" className="max-w-7xl mx-auto px-6 mb-28 md:mb-40">
             <SectionTitle 
-                indexCode="SEC_04"
+                indexCode="SEC_03"
                 subtitle="Experiência profissional que sustenta uma forma de trabalhar entre negócio, experiência e implementação."
             >
                 SOBRE & EXPERIÊNCIA

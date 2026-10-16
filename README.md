@@ -1,6 +1,6 @@
 # Made by João Gomes
 
-Portfólio pessoal de João Samuel Gomes, voltado a projetos de desenvolvimento de software: sites, sistemas web, automações e integrações.
+Portfólio profissional e comercial de João Samuel Gomes, conectando produto, UX e engenharia da descoberta à implementação.
 
 ## Stack
 

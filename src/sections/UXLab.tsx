@@ -8,7 +8,7 @@ export const UXLabSection = () => {
     return (
         <section id="ux-lab" className="max-w-7xl mx-auto px-6 mb-28 md:mb-40">
             <SectionTitle 
-                indexCode="SEC_03"
+                indexCode="SEC_02"
                 subtitle="Problemas reais transformados em software, do entendimento à entrega."
             >
                 PROJETOS SELECIONADOS
