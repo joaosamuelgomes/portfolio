@@ -3,9 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Terminal } from 'lucide-react';
 
 const NAV_ITEMS = [
-    { href: '#services', label: 'SERVIÇOS' },
-    { href: '#ux-lab', label: 'PROJETOS' },
-    { href: '#career', label: 'SOBRE' },
+    { href: '#ux-lab', label: 'TRABALHO' },
+    { href: '#career', label: 'EXPERIÊNCIA' },
 ];
 
 export const Header = () => {
@@ -106,8 +105,8 @@ export const Header = () => {
                         className="flex min-h-11 shrink-0 items-center gap-1.5 border border-black bg-[#ccff00] px-2.5 font-mono text-[10px] font-bold uppercase tracking-wider text-black transition-colors hover:bg-[#00f0ff] active:scale-95 sm:px-3 sm:text-[11px] md:text-xs"
                     >
                         <Terminal size={13} aria-hidden="true" />
-                        <span className="hidden sm:inline">INICIAR_CONTATO</span>
-                        <span className="sm:hidden">CONTATO</span>
+                        <span className="hidden sm:inline">COMO_POSSO_AJUDAR</span>
+                        <span className="sm:hidden">CONVERSAR</span>
                     </a>
                 </div>
             </div>

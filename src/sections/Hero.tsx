@@ -67,11 +67,11 @@ export const HeroSection = () => {
                             <span className="min-w-0 break-words">SOFTWARE DEVELOPER // PRODUCT · UX · ENGINEERING</span>
                         </div>
                         <h1 className="max-w-[12ch] font-display text-4xl font-bold uppercase leading-[0.94] tracking-[-0.04em] text-white sm:text-6xl md:text-7xl lg:text-[5.6rem] xl:max-w-none xl:text-[4.9rem]">
-                            <span className="block"><span data-hero-line className="block xl:whitespace-nowrap">IDEIAS QUE VIRAM</span></span>
+                            <span className="block"><span data-hero-line className="block xl:whitespace-nowrap">DA DECISÃO AO</span></span>
                             <span className="mt-1 block font-mono text-[0.66em] tracking-[-0.04em] text-[#ccff00]">
                                 <span data-hero-line className="block">
                                     <DecryptedText
-                                        text="PRODUTOS DIGITAIS."
+                                        text="PRODUTO EM PRODUÇÃO."
                                         className="block tracking-[0.015em]"
                                     />
                                 </span>
@@ -81,33 +81,34 @@ export const HeroSection = () => {
 
                     <div data-hero-panel className="corner-brackets mb-9 w-full min-w-0 max-w-2xl overflow-hidden border border-[#1a1c24] bg-[#0d0e14] p-5">
                         <p className="max-w-[62ch] break-words text-base leading-relaxed text-neutral-200 md:text-lg">
-                            Eai, eu sou o João Samuel. Com mais de 7 anos de experiência em desenvolvimento de produtos, ajudo empresas a transformarem ideias em produtos funcionais e impactantes.
+                            Ajudo empresas e times a transformar necessidades de negócio em experiências claras e software funcional — participando da descoberta, da definição e da implementação.
                         </p>
                         <p className="mt-3 flex items-center gap-2 font-mono text-xs leading-relaxed text-neutral-400 md:text-sm">
                             <Braces size={14} className="shrink-0 text-[#00f0ff]" aria-hidden="true" />
-                            Estratégia, experiência e código.
+                            Produto, UX e desenvolvimento reunidos em mais de 7 anos de experiência.
                         </p>
                     </div>
 
                     <div data-hero-actions className="flex flex-col gap-4 sm:flex-row">
                         <Magnet className="w-full sm:w-auto" strength={7} maxOffset={6}>
                             <a
-                                href="#connect"
-                                onClick={(event) => handleScroll(event, '#connect')}
+                                href="#ux-lab"
+                                onClick={(event) => handleScroll(event, '#ux-lab')}
                                 className="group inline-flex min-h-12 w-full items-center justify-center gap-3 border border-black bg-[#ccff00] px-7 py-4 font-mono text-sm font-bold uppercase tracking-wider text-black shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)] transition-colors duration-200 hover:bg-[#00f0ff] sm:w-auto"
                             >
-                                <span>FALAR SOBRE UM PROJETO</span>
+                                <FolderOpen size={16} aria-hidden="true" />
+                                <span>VER PROJETOS</span>
                                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                             </a>
                         </Magnet>
 
                         <a
-                            href="#ux-lab"
-                            onClick={(event) => handleScroll(event, '#ux-lab')}
+                            href="#connect"
+                            onClick={(event) => handleScroll(event, '#connect')}
                             className="inline-flex min-h-12 items-center justify-center gap-2 border border-[#1a1c24] bg-[#0d0e14] px-7 py-4 font-mono text-sm uppercase tracking-wider text-neutral-200 transition-colors hover:border-[#ccff00]/60 hover:text-white"
                         >
-                            <FolderOpen size={16} className="text-[#00f0ff]" aria-hidden="true" />
-                            VER PROJETOS
+                            <Braces size={16} className="text-[#00f0ff]" aria-hidden="true" />
+                            COMO POSSO CONTRIBUIR
                         </a>
                     </div>
                 </div>
