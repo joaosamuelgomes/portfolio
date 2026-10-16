@@ -6,7 +6,6 @@ import { Seo } from "../components/Seo";
 import { CareerSection } from "../sections/Career";
 import { ContactSection } from "../sections/Contact";
 import { HeroSection } from "../sections/Hero";
-import { ServicesSection } from "../sections/Services";
 import { UXLabSection } from "../sections/UXLab";
 
 
@@ -23,7 +22,6 @@ export const Home = () => (
             <ScrollNavigator />
             <main className="pb-20 pt-24">
                 <HeroSection />
-                <ServicesSection />
                 <UXLabSection />
                 <CareerSection />
                 <ContactSection />

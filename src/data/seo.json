@@ -6,12 +6,12 @@
   "pages": {
     "home": {
       "path": "/",
-      "title": "João Gomes | Sites, sistemas e produtos digitais",
-      "description": "João Gomes cria sites, sistemas sob medida, automações e integrações, unindo estratégia de produto, UX e desenvolvimento front-end.",
+      "title": "João Gomes | Produto, UX e Engenharia",
+      "description": "João Gomes atua entre produto, UX e engenharia para transformar necessidades de negócio em experiências claras e software funcional.",
       "image": "/og-image.png",
       "imageWidth": 1200,
       "imageHeight": 630,
-      "imageAlt": "Made by João Gomes — ideias que viram produtos digitais",
+      "imageAlt": "Made by João Gomes — da decisão ao produto em produção",
       "type": "website",
       "structuredData": {
         "@context": "https://schema.org",
@@ -21,7 +21,7 @@
             "@id": "https://madebyjoaogomes.com/#website",
             "url": "https://madebyjoaogomes.com/",
             "name": "Made by João Gomes",
-            "description": "Portfólio de João Samuel Gomes sobre sites, sistemas, automações, integrações, produto e UX.",
+            "description": "Portfólio de João Samuel Gomes sobre produto, UX e engenharia, da descoberta à implementação.",
             "inLanguage": "pt-BR",
             "publisher": {
               "@id": "https://madebyjoaogomes.com/#person"

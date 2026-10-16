@@ -107,7 +107,7 @@ Containers de conteúdo usam `max-w-7xl`; cases usam uma régua editorial compar
 - Header fixo com microbarra de telemetria a partir de `lg`.
 - Hero em grid de 12 colunas: conteúdo ocupa 7; retrato ocupa 5.
 - Cases permanecem em uma única coluna; features internas usam três colunas.
-- Serviços usam dois módulos independentes e alternados; cada solução combina problema reconhecível, resultado, prova ou ação e uma microvisualização funcional. Automações permanecem temporariamente fora desta seção.
+- A homepage vai do hero diretamente aos projetos, priorizando prova concreta e reduzindo conteúdo comercial genérico.
 
 ### Tablet
 
@@ -119,7 +119,7 @@ Containers de conteúdo usam `max-w-7xl`; cases usam uma régua editorial compar
 
 - Header mantém apenas marca e CTA compacto de contato.
 - Abaixo de 600 px, a foto do hero é removida para priorizar mensagem e CTAs.
-- Serviços, cards e grids editoriais ficam em uma coluna.
+- Cards e grids editoriais ficam em uma coluna.
 - CTAs ocupam a largura disponível quando isso melhora a área de toque.
 - Alvos interativos novos devem ter pelo menos 44 × 44 px, salvo links textuais dentro de navegação claramente espaçada.
 - Nenhum conteúdo essencial pode depender de hover.
@@ -134,11 +134,10 @@ Ordem obrigatória atual:
 
 1. header fixo com identidade e CTA;
 2. hero com proposta comercial e CTAs;
-3. serviços;
-4. projetos selecionados;
-5. sobre e experiência profissional;
-6. bloco de contato;
-7. footer e retorno ao topo.
+3. projetos selecionados;
+4. sobre e experiência profissional;
+5. bloco de contato;
+6. footer e retorno ao topo.
 
 O fluxo deve levar da proposta de valor à prova e terminar em contato. Novas seções precisam justificar onde entram nessa narrativa.
 
@@ -164,7 +163,7 @@ A resposta 404 preserva a linguagem industrial do portfólio, explica o problema
 
 ### Header
 
-- Logomarca textual à esquerda, navegação curta no desktop e contato à direita.
+- Logomarca textual à esquerda, navegação `Trabalho` e `Experiência` no desktop e CTA `Como posso ajudar` à direita.
 - Estado fixo com fundo quase opaco e blur leve.
 - A navegação contextual por capítulos pertence ao conteúdo, não ao header.
 
@@ -202,10 +201,9 @@ A resposta 404 preserva a linguagem industrial do portfólio, explica o problema
 ### React Bits adaptado
 
 - `Magnet` aparece apenas nos CTAs comerciais principais e nunca altera o caminho de toque.
-- `GlareHover` envolve cada solução com uma passagem curta de luz na entrada do ponteiro, sem rastreamento contínuo nem conteúdo dependente de hover.
 - `DecryptedText` transforma “Produtos digitais” em uma wordmark decodificada: glifos ciano se resolvem uma única vez no texto verde, sem interação no ponteiro.
 - `DotGrid` substitui a textura estática do hero por um campo global discreto: repouso neutro, resposta ciano ao cursor e pulso verde no clique.
-- Os quatro respeitam `prefers-reduced-motion` e são mantidos localmente, sem dependências adicionais.
+- Os três respeitam `prefers-reduced-motion` e são mantidos localmente, sem dependências adicionais.
 
 ## 7. Movimento
 
@@ -233,7 +231,7 @@ Guardrails:
 
 O idioma principal é português do Brasil; termos técnicos em inglês podem permanecer quando são comuns à área ou fazem parte da linguagem visual.
 
-A promessa principal é **Ideias que viram produtos digitais**. A assinatura técnica **Software Developer // Product · UX · Engineering** aparece como evidência secundária, sem apagar cargos históricos.
+A promessa principal é **Da decisão ao produto em produção**. A assinatura técnica **Software Developer // Product · UX · Engineering** explica a combinação de competências; os mais de 7 anos de experiência aparecem como prova secundária, sem apagar cargos históricos.
 
 - Headlines: diretas, curtas e confiantes.
 - Corpo: claro, concreto e orientado a problema, decisão e impacto.
