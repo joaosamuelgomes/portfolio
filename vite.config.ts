@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import path from "path"
 import react from "@vitejs/plugin-react"
 import { defineConfig, type Plugin } from "vite"
@@ -57,5 +58,10 @@ export default defineConfig({
   server: {
     port: 3000, // Porta padrão profissional
     open: true,
+  },
+  test: {
+    environment: "jsdom",
+    include: ["src/**/*.test.{ts,tsx}", "scripts/**/*.test.mjs"],
+    setupFiles: ["src/test/setup.ts"],
   },
 })
