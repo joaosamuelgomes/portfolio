@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Terminal } from 'lucide-react';
+import { articles } from '../../content';
 
 const NAV_ITEMS = [
     { href: '#ux-lab', label: 'TRABALHO' },
@@ -72,15 +73,15 @@ export const Header = () => {
                     href="#hero"
                     onClick={(e) => handleScroll(e, '#hero')}
                     className="group flex min-w-0 items-center gap-1.5 transition-transform duration-200 hover:scale-[1.02] focus-visible:outline-none sm:gap-2"
-                    aria-label="Made by João Gomes — voltar ao início"
                 >
-                    <div className="w-7 h-7 md:w-8 md:h-8 bg-neutral-900 border border-[#ccff00]/40 flex items-center justify-center text-[#ccff00] font-mono text-xs font-bold group-hover:bg-[#ccff00] group-hover:text-black transition-colors shrink-0">
+                    <div aria-hidden="true" className="w-7 h-7 md:w-8 md:h-8 bg-neutral-900 border border-[#ccff00]/40 flex items-center justify-center text-[#ccff00] font-mono text-xs font-bold group-hover:bg-[#ccff00] group-hover:text-black transition-colors shrink-0">
                         JG
                     </div>
                     <span className="whitespace-nowrap font-display text-sm font-bold uppercase tracking-tight text-white sm:text-lg md:text-xl">
                         JOAO<span className="text-[#ccff00]">.</span>GOMES
+                        <span className="sr-only"> — voltar ao início</span>
                     </span>
-                    <span className="hidden sm:inline-block px-1.5 py-0.5 text-[9px] font-mono bg-neutral-900 border border-neutral-700 text-neutral-400 tracking-wider">
+                    <span aria-hidden="true" className="hidden sm:inline-block px-1.5 py-0.5 text-[9px] font-mono bg-neutral-900 border border-neutral-700 text-neutral-400 tracking-wider">
                         DEV_UX
                     </span>
                 </a>
@@ -97,6 +98,15 @@ export const Header = () => {
                                 {item.label}
                             </a>
                         ))}
+                        {articles.length > 0 && (
+                            <Link
+                                to="/artigos"
+                                aria-current={location.pathname.startsWith('/artigos') ? 'page' : undefined}
+                                className="font-mono text-[10px] font-bold tracking-widest text-neutral-300 transition-colors hover:text-[#ccff00] aria-[current=page]:text-[#ccff00]"
+                            >
+                                ARTIGOS
+                            </Link>
+                        )}
                     </nav>
 
                     <a

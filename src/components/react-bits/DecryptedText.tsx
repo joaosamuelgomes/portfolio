@@ -75,7 +75,8 @@ export const DecryptedText = ({
     );
 
     return (
-        <span className={`inline-block whitespace-nowrap ${className}`.trim()} aria-label={text}>
+        <span className={`inline-block whitespace-nowrap ${className}`.trim()}>
+            <span className="sr-only">{text}</span>
             <span aria-hidden="true">
                 {Array.from(displayText).map((character, index) => (
                     <span

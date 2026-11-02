@@ -6,7 +6,7 @@ export function Footer() {
     };
 
     return (
-        <footer className="border-t border-[#1a1c24] bg-[#08080c] py-8 px-6 font-mono text-xs text-neutral-500">
+        <footer className="border-t border-[#1a1c24] bg-[#08080c] py-8 px-6 font-mono text-xs text-neutral-400">
             <div className="max-w-7xl mx-auto flex flex-col min-[600px]:flex-row justify-between items-center gap-4 text-center min-[600px]:text-left">
                 {/* Copyright info (Centralizado em <600px) */}
                 <div className="flex items-center justify-center min-[600px]:justify-start gap-2.5 w-full min-[600px]:w-auto">
@@ -21,10 +21,10 @@ export function Footer() {
                     <button 
                         onClick={scrollToTop}
                         className="flex min-h-11 min-w-11 items-center justify-center gap-1 text-[#ccff00] transition-colors hover:text-[#00f0ff]"
-                        aria-label="Voltar ao topo"
                     >
                         <span>TOP</span>
-                        <ArrowUp size={12} />
+                        <span className="sr-only">: voltar ao topo</span>
+                        <ArrowUp size={12} aria-hidden="true" />
                     </button>
                 </div>
             </div>
