@@ -85,7 +85,6 @@ export const ContactSection = () => {
                         type="button"
                         onClick={copyEmail}
                         className="flex min-h-12 items-center justify-center gap-2 border border-neutral-700 bg-neutral-900 px-6 py-4 font-mono text-xs font-bold uppercase tracking-wider text-neutral-200 transition-colors hover:border-[#ccff00] hover:text-white"
-                        aria-label={copyStatus === 'copied' ? 'E-mail copiado' : 'Copiar endereço de e-mail'}
                     >
                         {copyStatus === 'copied' ? <Check size={17} className="text-[#ccff00]" aria-hidden="true" /> : <Copy size={16} className="text-[#00f0ff]" aria-hidden="true" />}
                         {copyStatus === 'copied' ? 'E-MAIL COPIADO' : 'COPIAR E-MAIL'}

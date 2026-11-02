@@ -105,19 +105,19 @@ export const CaseStudy = () => {
                         {/* Metadata HUD Bar */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-[#1a1c24] text-left font-mono text-xs">
                             <div className="p-3 bg-neutral-900/60 border border-neutral-800">
-                                <span className="block text-neutral-500 text-[9px] uppercase tracking-widest mb-1">// PAPEL</span>
+                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">// PAPEL</span>
                                 <span className="text-[#ccff00] font-bold">{details.role}</span>
                             </div>
                             <div className="p-3 bg-neutral-900/60 border border-neutral-800">
-                                <span className="block text-neutral-500 text-[9px] uppercase tracking-widest mb-1">// TIMELINE</span>
+                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">// TIMELINE</span>
                                 <span className="text-white font-bold">{details.timeline}</span>
                             </div>
                             <div className="p-3 bg-neutral-900/60 border border-neutral-800">
-                                <span className="block text-neutral-500 text-[9px] uppercase tracking-widest mb-1">// PLATAFORMA</span>
+                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">// PLATAFORMA</span>
                                 <span className="text-white font-bold">{details.platform}</span>
                             </div>
                             <div className="p-3 bg-neutral-900/60 border border-neutral-800">
-                                <span className="block text-neutral-500 text-[9px] uppercase tracking-widest mb-1">// SETOR</span>
+                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">// SETOR</span>
                                 <span className="text-[#00f0ff] font-bold">{details.sector || caseData.category}</span>
                             </div>
                         </div>
