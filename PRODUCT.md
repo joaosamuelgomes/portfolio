@@ -75,7 +75,7 @@ Ordem obrigatória:
 
 - headline: “Da decisão ao produto em produção.”;
 - explicação: participação entre descoberta, definição e implementação, combinando produto, UX e desenvolvimento;
-- prova secundária: mais de 7 anos de experiência;
+- prova secundária: mais de 5 anos de experiência;
 - CTA primário: ver projetos;
 - CTA secundário: entender como João pode contribuir;
 - foto, status de disponibilidade e linguagem técnica permanecem como identidade.

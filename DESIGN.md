@@ -231,7 +231,7 @@ Guardrails:
 
 O idioma principal é português do Brasil; termos técnicos em inglês podem permanecer quando são comuns à área ou fazem parte da linguagem visual.
 
-A promessa principal é **Da decisão ao produto em produção**. A assinatura técnica **Software Developer // Product · UX · Engineering** explica a combinação de competências; os mais de 7 anos de experiência aparecem como prova secundária, sem apagar cargos históricos.
+A promessa principal é **Da decisão ao produto em produção**. A assinatura técnica **Software Developer // Product · UX · Engineering** explica a combinação de competências; os mais de 5 anos de experiência aparecem como prova secundária, sem apagar cargos históricos.
 
 - Headlines: diretas, curtas e confiantes.
 - Corpo: claro, concreto e orientado a problema, decisão e impacto.
