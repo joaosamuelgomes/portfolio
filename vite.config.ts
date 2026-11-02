@@ -5,10 +5,12 @@ import { defineConfig, type Plugin } from "vite"
 import tailwindcss from '@tailwindcss/vite'
 import { buildContent } from "./scripts/build-content.mjs"
 
-// Regenerates src/generated/content.json from content/. Drafts only show up in dev.
+// Regenerates src/generated/content.json from content/, or from the API when CONTENT_API_URL
+// is set. Drafts only show up in dev, and only from content/ (the API serves published content).
 const contentSnapshot = (): Plugin => {
   let includeDrafts = false
   const contentDir = path.resolve(__dirname, "content")
+  const apiUrl = process.env.CONTENT_API_URL || undefined
 
   return {
     name: "content-snapshot",
@@ -16,9 +18,10 @@ const contentSnapshot = (): Plugin => {
       includeDrafts = config.command === "serve" || process.env.CONTENT_DRAFTS === "1"
     },
     async buildStart() {
-      await buildContent({ includeDrafts })
+      await buildContent({ includeDrafts, apiUrl })
     },
     configureServer(server) {
+      if (apiUrl) return
       server.watcher.add(contentDir)
       const rebuild = (file: string) => {
         if (!path.resolve(file).startsWith(contentDir)) return
