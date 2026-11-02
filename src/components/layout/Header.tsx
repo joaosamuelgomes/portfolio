@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Terminal } from 'lucide-react';
+import { articles } from '../../content';
 
 const NAV_ITEMS = [
     { href: '#ux-lab', label: 'TRABALHO' },
@@ -97,6 +98,15 @@ export const Header = () => {
                                 {item.label}
                             </a>
                         ))}
+                        {articles.length > 0 && (
+                            <Link
+                                to="/artigos"
+                                aria-current={location.pathname.startsWith('/artigos') ? 'page' : undefined}
+                                className="font-mono text-[10px] font-bold tracking-widest text-neutral-300 transition-colors hover:text-[#ccff00] aria-[current=page]:text-[#ccff00]"
+                            >
+                                ARTIGOS
+                            </Link>
+                        )}
                     </nav>
 
                     <a
