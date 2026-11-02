@@ -27,7 +27,18 @@ npm run lint
 npm run build
 ```
 
-O conteúdo profissional e os estudos de caso ficam versionados em `src/data/content.ts`. O projeto não depende de CMS ou backend próprio.
+## Conteúdo
+
+Projetos e artigos chegam ao site por um snapshot gerado no build (`scripts/build-content.mjs` → `src/generated/content.json`). A fonte depende de `CONTENT_API_URL`:
+
+- **Definida** (produção no Vercel): o build lê `GET /public/content` da [API do portfólio](https://github.com/joaosamuelgomes/portfolio-platform), onde o conteúdo é editado pelo painel admin. Se a API não responder depois de três tentativas, o build falha e o site publicado continua como está.
+- **Ausente** (desenvolvimento, CI e testes): o build lê a pasta [`content/`](content/README.md).
+
+```bash
+CONTENT_API_URL=http://localhost:8080 npm run build
+```
+
+O site continua estático: depois do build ele não depende da API.
 
 ## SEO e descoberta
 
