@@ -1,6 +1,7 @@
 // Builds the content snapshot (projects, articles and per-page SEO) that the app and
-// the static page generator read. Today the source is the local `content/` folder;
-// the snapshot shape is the contract a future API source has to produce.
+// the static page generator read. The source is the portfolio API's GET /public/content
+// when CONTENT_API_URL is set (production builds), and the local `content/` folder otherwise
+// (dev, CI and tests). Both go through the same checks and produce the same snapshot.
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -14,6 +15,10 @@ export const snapshotPath = resolve(projectRoot, 'src/generated/content.json');
 const DEFAULT_ARTICLE_IMAGE = { image: '/og-image.png', imageWidth: 1200, imageHeight: 630 };
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const WORDS_PER_MINUTE = 200;
+const API_SCHEMA_VERSION = 1;
+const API_ATTEMPTS = 3;
+// Generous: a free-tier API host may need a while to wake up.
+const API_TIMEOUT_MS = 30_000;
 
 export class ContentError extends Error {}
 
@@ -40,6 +45,49 @@ const listFiles = async (contentDir, folder, extension) => {
     return entries.filter((name) => name.endsWith(extension)).sort();
 };
 
+/** What the page generator relies on, whatever the source. */
+const checkProject = (file, data, previous) => {
+    if (!Number.isInteger(data.id)) fail(file, '"id" must be an integer');
+    if (!Number.isInteger(data.order)) fail(file, '"order" must be an integer');
+    requireString(file, data.title, 'title');
+    requireString(file, data.thumbnail, 'thumbnail');
+    for (const field of ['title', 'description', 'image', 'imageAlt', 'name', 'headline', 'summary']) {
+        requireString(file, data.seo?.[field], `seo.${field}`);
+    }
+    if (previous.some((project) => project.id === data.id)) fail(file, `duplicate project id ${data.id}`);
+};
+
+const byOrder = (first, second) => first.order - second.order;
+const newestFirst = (first, second) => second.publishedAt.localeCompare(first.publishedAt);
+
+/** Frontmatter fields plus the Markdown body, from a file or from the API, to the snapshot's article. */
+const toArticle = (file, slug, data, markdown, draft) => {
+    if (/^# /m.test(markdown)) fail(file, 'the title is the page h1; start body headings at "##"');
+    if (data.tags !== undefined && !(Array.isArray(data.tags) && data.tags.every((tag) => typeof tag === 'string'))) {
+        fail(file, '"tags" must be a list of strings');
+    }
+    if (data.image !== undefined && !(Number.isInteger(data.imageWidth) && Number.isInteger(data.imageHeight))) {
+        fail(file, '"image" needs integer "imageWidth" and "imageHeight"');
+    }
+
+    return {
+        slug,
+        title: requireString(file, data.title, 'title'),
+        description: requireString(file, data.description, 'description'),
+        publishedAt: toIsoDate(file, data.publishedAt, 'publishedAt'),
+        updatedAt: data.updatedAt ? toIsoDate(file, data.updatedAt, 'updatedAt') : undefined,
+        tags: data.tags ?? [],
+        readingMinutes: Math.max(1, Math.ceil(markdown.split(/\s+/).filter(Boolean).length / WORDS_PER_MINUTE)),
+        image: data.image ?? DEFAULT_ARTICLE_IMAGE.image,
+        imageWidth: data.imageWidth ?? DEFAULT_ARTICLE_IMAGE.imageWidth,
+        imageHeight: data.imageHeight ?? DEFAULT_ARTICLE_IMAGE.imageHeight,
+        imageAlt: data.imageAlt ?? `Artigo: ${data.title}`,
+        // Code blocks scroll horizontally, so they must be reachable by keyboard.
+        html: marked.parse(markdown, { async: false }).replaceAll('<pre>', '<pre tabindex="0">'),
+        draft,
+    };
+};
+
 const readProjects = async (contentDir, includeDrafts) => {
     const projects = [];
 
@@ -47,22 +95,15 @@ const readProjects = async (contentDir, includeDrafts) => {
         const file = `content/projects/${name}`;
         const data = JSON.parse(await readFile(resolve(contentDir, 'projects', name), 'utf8'));
 
-        if (!Number.isInteger(data.id)) fail(file, '"id" must be an integer');
         if (typeof data.published !== 'boolean') fail(file, '"published" must be true or false');
-        if (!Number.isInteger(data.order)) fail(file, '"order" must be an integer');
-        requireString(file, data.title, 'title');
-        requireString(file, data.thumbnail, 'thumbnail');
-        for (const field of ['title', 'description', 'image', 'imageAlt', 'name', 'headline', 'summary']) {
-            requireString(file, data.seo?.[field], `seo.${field}`);
-        }
-        if (projects.some((project) => project.id === data.id)) fail(file, `duplicate project id ${data.id}`);
+        checkProject(file, data, projects);
 
         if (!data.published && !includeDrafts) continue;
         const { published, ...project } = data;
         projects.push({ ...project, draft: !published });
     }
 
-    return projects.sort((first, second) => first.order - second.order);
+    return projects.sort(byOrder);
 };
 
 const readArticles = async (contentDir, includeDrafts) => {
@@ -75,36 +116,50 @@ const readArticles = async (contentDir, includeDrafts) => {
 
         const { data, content: markdown } = matter(await readFile(resolve(contentDir, 'articles', name), 'utf8'));
         if (typeof data.published !== 'boolean') fail(file, '"published" must be true or false');
-        if (/^# /m.test(markdown)) fail(file, 'the title is the page h1; start body headings at "##"');
-        if (data.tags !== undefined && !(Array.isArray(data.tags) && data.tags.every((tag) => typeof tag === 'string'))) {
-            fail(file, '"tags" must be a list of strings');
-        }
-        if (data.image !== undefined && !(Number.isInteger(data.imageWidth) && Number.isInteger(data.imageHeight))) {
-            fail(file, '"image" needs integer "imageWidth" and "imageHeight"');
-        }
 
-        const article = {
-            slug,
-            title: requireString(file, data.title, 'title'),
-            description: requireString(file, data.description, 'description'),
-            publishedAt: toIsoDate(file, data.publishedAt, 'publishedAt'),
-            updatedAt: data.updatedAt ? toIsoDate(file, data.updatedAt, 'updatedAt') : undefined,
-            tags: data.tags ?? [],
-            readingMinutes: Math.max(1, Math.ceil(markdown.split(/\s+/).filter(Boolean).length / WORDS_PER_MINUTE)),
-            image: data.image ?? DEFAULT_ARTICLE_IMAGE.image,
-            imageWidth: data.imageWidth ?? DEFAULT_ARTICLE_IMAGE.imageWidth,
-            imageHeight: data.imageHeight ?? DEFAULT_ARTICLE_IMAGE.imageHeight,
-            imageAlt: data.imageAlt ?? `Artigo: ${data.title}`,
-            // Code blocks scroll horizontally, so they must be reachable by keyboard.
-            html: marked.parse(markdown, { async: false }).replaceAll('<pre>', '<pre tabindex="0">'),
-            draft: !data.published,
-        };
-
+        const article = toArticle(file, slug, data, markdown, !data.published);
         if (article.draft && !includeDrafts) continue;
         articles.push(article);
     }
 
-    return articles.sort((first, second) => second.publishedAt.localeCompare(first.publishedAt));
+    return articles.sort(newestFirst);
+};
+
+const fetchSnapshot = async (url, fetchImpl) => {
+    let lastError;
+    for (let attempt = 1; attempt <= API_ATTEMPTS; attempt++) {
+        try {
+            const response = await fetchImpl(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(API_TIMEOUT_MS) });
+            if (response.ok) return await response.json();
+            lastError = `HTTP ${response.status}`;
+            // A client error will not change on a retry.
+            if (response.status < 500) break;
+        } catch (error) {
+            lastError = error.cause?.code ?? error.message;
+        }
+        if (attempt < API_ATTEMPTS) await new Promise((done) => setTimeout(done, attempt * 2_000));
+    }
+    fail(url, `the content API did not answer (${lastError}). The build stops here, so the deployed site stays as it is.`);
+};
+
+/** Published content from the API's GET /public/content (docs/adr/0003 in portfolio-platform). */
+const readFromApi = async (apiUrl, fetchImpl) => {
+    const url = new URL('public/content', apiUrl.endsWith('/') ? apiUrl : `${apiUrl}/`).href;
+    const data = await fetchSnapshot(url, fetchImpl);
+    if (data?.schemaVersion !== API_SCHEMA_VERSION) {
+        fail(url, `expected schemaVersion ${API_SCHEMA_VERSION}, got ${data?.schemaVersion}; update this script to the new format`);
+    }
+    if (!Array.isArray(data.projects) || !Array.isArray(data.articles)) fail(url, '"projects" and "articles" must be lists');
+
+    const projects = [];
+    for (const { slug, ...project } of data.projects) {
+        checkProject(`${url} project ${slug}`, project, projects);
+        projects.push({ ...project, draft: false });
+    }
+    const articles = data.articles.map(({ markdown, ...article }) =>
+        toArticle(`${url} article ${article.slug}`, article.slug, article, markdown ?? '', false),
+    );
+    return { projects: projects.sort(byOrder), articles: articles.sort(newestFirst) };
 };
 
 const buildPages = (seo, projects, articles) => {
@@ -205,14 +260,26 @@ const buildPages = (seo, projects, articles) => {
     return pages;
 };
 
-export const buildContent = async ({ includeDrafts = false, contentDir = contentPath, outputPath = snapshotPath } = {}) => {
+/**
+ * With `apiUrl`, reads the API (which only serves published content, so `includeDrafts` has no
+ * effect); without it, reads `contentDir`. An unreachable API fails the build instead of
+ * falling back to `content/`, which stops being the source of truth once the API is.
+ */
+export const buildContent = async ({
+    includeDrafts = false,
+    contentDir = contentPath,
+    outputPath = snapshotPath,
+    apiUrl,
+    fetchImpl = fetch,
+} = {}) => {
     const seo = JSON.parse(await readFile(resolve(projectRoot, 'src/data/seo.json'), 'utf8'));
-    const projects = await readProjects(contentDir, includeDrafts);
-    const articles = await readArticles(contentDir, includeDrafts);
+    const { projects, articles } = apiUrl
+        ? await readFromApi(apiUrl, fetchImpl)
+        : { projects: await readProjects(contentDir, includeDrafts), articles: await readArticles(contentDir, includeDrafts) };
 
     const snapshot = {
-        source: 'local',
-        includesDrafts: includeDrafts,
+        source: apiUrl ? 'api' : 'local',
+        includesDrafts: apiUrl ? false : includeDrafts,
         projects,
         articles,
         pages: buildPages(seo, projects, articles),
@@ -226,8 +293,11 @@ export const buildContent = async ({ includeDrafts = false, contentDir = content
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
     try {
-        const snapshot = await buildContent({ includeDrafts: process.env.CONTENT_DRAFTS === '1' });
-        console.log(`Content snapshot: ${snapshot.projects.length} projects, ${snapshot.articles.length} articles.`);
+        const snapshot = await buildContent({
+            includeDrafts: process.env.CONTENT_DRAFTS === '1',
+            apiUrl: process.env.CONTENT_API_URL || undefined,
+        });
+        console.log(`Content snapshot (${snapshot.source}): ${snapshot.projects.length} projects, ${snapshot.articles.length} articles.`);
     } catch (error) {
         if (!(error instanceof ContentError)) throw error;
         console.error(error.message);
