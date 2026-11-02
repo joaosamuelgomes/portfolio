@@ -130,3 +130,90 @@ describe('buildContent', () => {
         await expect(result).rejects.toThrow(message);
     });
 });
+
+describe('buildContent from the API', () => {
+    const API_URL = 'https://api.example.test';
+
+    // GET /public/content, as documented in portfolio-platform docs/adr/0003.
+    const apiSnapshot = (overrides = {}) => {
+        const { published: _published, ...fields } = project({ order: 1 });
+        return {
+            schemaVersion: 1,
+            generatedAt: '2026-11-02T20:00:00Z',
+            projects: [{ ...fields, slug: 'projeto' }],
+            articles: [
+                {
+                    slug: 'artigo-da-api',
+                    title: 'Artigo',
+                    description: 'Descrição do artigo',
+                    publishedAt: '2026-11-01',
+                    tags: ['Java'],
+                    markdown: '## Seção\n\nTexto.',
+                },
+            ],
+            ...overrides,
+        };
+    };
+
+    const respond = (...responses) => {
+        const calls = [];
+        const fetchImpl = async (url) => {
+            calls.push(url);
+            const next = responses.length > 1 ? responses.shift() : responses[0];
+            if (next instanceof Error) throw next;
+            return next;
+        };
+        return { calls, fetchImpl };
+    };
+    const json = (body, status = 200) => new Response(JSON.stringify(body), { status });
+
+    it('builds the same snapshot from the API as from the equivalent files', async () => {
+        await writeProject('projeto', project());
+        await writeArticle('artigo-da-api', article());
+        const { calls, fetchImpl } = respond(json(apiSnapshot()));
+
+        const fromApi = await build({ apiUrl: API_URL, fetchImpl });
+        const fromFiles = await build();
+
+        expect(calls).toEqual(['https://api.example.test/public/content']);
+        expect(fromApi.source).toBe('api');
+        expect({ ...fromApi, source: 'local' }).toEqual(fromFiles);
+    });
+
+    it('never includes drafts, since the API only serves published content', async () => {
+        const { fetchImpl } = respond(json(apiSnapshot()));
+        const snapshot = await build({ apiUrl: API_URL, fetchImpl, includeDrafts: true });
+        expect(snapshot.includesDrafts).toBe(false);
+        expect(snapshot.projects.every((item) => !item.draft)).toBe(true);
+    });
+
+    it('retries server errors and network failures', { timeout: 15_000 }, async () => {
+        const { calls, fetchImpl } = respond(json({}, 503), new TypeError('fetch failed'), json(apiSnapshot()));
+        await expect(build({ apiUrl: `${API_URL}/`, fetchImpl })).resolves.toMatchObject({ source: 'api' });
+        expect(calls).toHaveLength(3);
+    });
+
+    it('fails the build instead of falling back to content/ when the API is down', { timeout: 15_000 }, async () => {
+        await writeProject('projeto', project());
+        const { calls, fetchImpl } = respond(json({}, 503));
+        const result = build({ apiUrl: API_URL, fetchImpl });
+        await expect(result).rejects.toBeInstanceOf(ContentError);
+        await expect(result).rejects.toThrow(/did not answer \(HTTP 503\)/);
+        expect(calls).toHaveLength(3);
+    });
+
+    it('does not retry client errors', async () => {
+        const { calls, fetchImpl } = respond(json({}, 404));
+        await expect(build({ apiUrl: API_URL, fetchImpl })).rejects.toThrow(/HTTP 404/);
+        expect(calls).toHaveLength(1);
+    });
+
+    it.each([
+        ['an unknown schema version', apiSnapshot({ schemaVersion: 2 }), /schemaVersion 1, got 2/],
+        ['a project without SEO image', apiSnapshot({ projects: [{ ...apiSnapshot().projects[0], seo: { ...project().seo, image: '' } }] }), /seo\.image/],
+        ['an article with an h1', apiSnapshot({ articles: [{ ...apiSnapshot().articles[0], markdown: '# Título' }] }), /start body headings/],
+    ])('rejects %s', async (_, body, message) => {
+        const { fetchImpl } = respond(json(body));
+        await expect(build({ apiUrl: API_URL, fetchImpl })).rejects.toThrow(message);
+    });
+});

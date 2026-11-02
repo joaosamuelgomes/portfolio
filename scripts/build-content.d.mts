@@ -6,4 +6,7 @@ export function buildContent(options?: {
     contentDir?: string;
     /** Where to write the snapshot; `null` skips writing. */
     outputPath?: string | null;
+    /** Portfolio API base URL; when set, content comes from its GET /public/content. */
+    apiUrl?: string;
+    fetchImpl?: typeof fetch;
 }): Promise<unknown>;

@@ -2,6 +2,8 @@
 
 Projetos e artigos ficam aqui, separados do código. `scripts/build-content.mjs` valida esta pasta e gera `src/generated/content.json`, que o site e o gerador de páginas estáticas leem. No `npm run dev` o snapshot é refeito a cada alteração e os rascunhos aparecem com o selo RASCUNHO; no `npm run build` os rascunhos ficam de fora.
 
+> Com `CONTENT_API_URL` definida no Vercel, a fonte de produção passa a ser a API do portfólio, editada pelo painel admin. Esta pasta continua sendo a fonte do desenvolvimento, do CI e dos testes, e o ponto de partida do import para a API (`scripts/import-content.mjs` no repositório portfolio-platform); a partir daí, uma alteração feita só aqui não chega ao site publicado.
+
 ## Projetos — `projects/<nome>.json`
 
 - `id`: número usado na URL (`/case/<id>`). Não troque depois de publicado.
