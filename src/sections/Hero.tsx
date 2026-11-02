@@ -85,7 +85,7 @@ export const HeroSection = () => {
                         </p>
                         <p className="mt-3 flex items-center gap-2 font-mono text-xs leading-relaxed text-neutral-400 md:text-sm">
                             <Braces size={14} className="shrink-0 text-[#00f0ff]" aria-hidden="true" />
-                            Produto, UX e desenvolvimento reunidos em mais de 7 anos de experiência.
+                            Produto, UX e desenvolvimento reunidos em mais de 5 anos de experiência.
                         </p>
                     </div>
 
