@@ -8,14 +8,14 @@ import matter from 'gray-matter';
 import { marked } from 'marked';
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const contentPath = resolve(projectRoot, 'content');
+export const contentPath = resolve(projectRoot, 'content');
 export const snapshotPath = resolve(projectRoot, 'src/generated/content.json');
 
 const DEFAULT_ARTICLE_IMAGE = { image: '/og-image.png', imageWidth: 1200, imageHeight: 630 };
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const WORDS_PER_MINUTE = 200;
 
-class ContentError extends Error {}
+export class ContentError extends Error {}
 
 const fail = (file, message) => {
     throw new ContentError(`[content] ${file}: ${message}`);
@@ -32,17 +32,20 @@ const toIsoDate = (file, value, field) => {
     return date.toISOString().slice(0, 10);
 };
 
-const listFiles = async (folder, extension) => {
-    const entries = await readdir(resolve(contentPath, folder));
+const listFiles = async (contentDir, folder, extension) => {
+    const entries = await readdir(resolve(contentDir, folder)).catch((error) => {
+        if (error.code === 'ENOENT') return [];
+        throw error;
+    });
     return entries.filter((name) => name.endsWith(extension)).sort();
 };
 
-const readProjects = async (includeDrafts) => {
+const readProjects = async (contentDir, includeDrafts) => {
     const projects = [];
 
-    for (const name of await listFiles('projects', '.json')) {
+    for (const name of await listFiles(contentDir, 'projects', '.json')) {
         const file = `content/projects/${name}`;
-        const data = JSON.parse(await readFile(resolve(contentPath, 'projects', name), 'utf8'));
+        const data = JSON.parse(await readFile(resolve(contentDir, 'projects', name), 'utf8'));
 
         if (!Number.isInteger(data.id)) fail(file, '"id" must be an integer');
         if (typeof data.published !== 'boolean') fail(file, '"published" must be true or false');
@@ -62,15 +65,15 @@ const readProjects = async (includeDrafts) => {
     return projects.sort((first, second) => first.order - second.order);
 };
 
-const readArticles = async (includeDrafts) => {
+const readArticles = async (contentDir, includeDrafts) => {
     const articles = [];
 
-    for (const name of await listFiles('articles', '.md')) {
+    for (const name of await listFiles(contentDir, 'articles', '.md')) {
         const file = `content/articles/${name}`;
         const slug = basename(name, '.md');
         if (!SLUG_PATTERN.test(slug)) fail(file, 'file name must be a lowercase slug (letters, numbers and hyphens)');
 
-        const { data, content: markdown } = matter(await readFile(resolve(contentPath, 'articles', name), 'utf8'));
+        const { data, content: markdown } = matter(await readFile(resolve(contentDir, 'articles', name), 'utf8'));
         if (typeof data.published !== 'boolean') fail(file, '"published" must be true or false');
         if (/^# /m.test(markdown)) fail(file, 'the title is the page h1; start body headings at "##"');
         if (data.tags !== undefined && !(Array.isArray(data.tags) && data.tags.every((tag) => typeof tag === 'string'))) {
@@ -92,7 +95,8 @@ const readArticles = async (includeDrafts) => {
             imageWidth: data.imageWidth ?? DEFAULT_ARTICLE_IMAGE.imageWidth,
             imageHeight: data.imageHeight ?? DEFAULT_ARTICLE_IMAGE.imageHeight,
             imageAlt: data.imageAlt ?? `Artigo: ${data.title}`,
-            html: marked.parse(markdown, { async: false }),
+            // Code blocks scroll horizontally, so they must be reachable by keyboard.
+            html: marked.parse(markdown, { async: false }).replaceAll('<pre>', '<pre tabindex="0">'),
             draft: !data.published,
         };
 
@@ -201,10 +205,10 @@ const buildPages = (seo, projects, articles) => {
     return pages;
 };
 
-export const buildContent = async ({ includeDrafts = false } = {}) => {
+export const buildContent = async ({ includeDrafts = false, contentDir = contentPath, outputPath = snapshotPath } = {}) => {
     const seo = JSON.parse(await readFile(resolve(projectRoot, 'src/data/seo.json'), 'utf8'));
-    const projects = await readProjects(includeDrafts);
-    const articles = await readArticles(includeDrafts);
+    const projects = await readProjects(contentDir, includeDrafts);
+    const articles = await readArticles(contentDir, includeDrafts);
 
     const snapshot = {
         source: 'local',
@@ -214,8 +218,9 @@ export const buildContent = async ({ includeDrafts = false } = {}) => {
         pages: buildPages(seo, projects, articles),
     };
 
-    await mkdir(dirname(snapshotPath), { recursive: true });
-    await writeFile(snapshotPath, `${JSON.stringify(snapshot, null, 2)}\n`, 'utf8');
+    if (outputPath === null) return snapshot;
+    await mkdir(dirname(outputPath), { recursive: true });
+    await writeFile(outputPath, `${JSON.stringify(snapshot, null, 2)}\n`, 'utf8');
     return snapshot;
 };
 
