@@ -45,7 +45,8 @@ const sitemapUrls = matches(sitemap, /<loc>(.*?)<\/loc>/g).map((match) => match[
 const canonicalUrls = Object.values(seo.pages).map((page) => new URL(page.path, seo.siteUrl).href);
 assert(JSON.stringify(sitemapUrls) === JSON.stringify(canonicalUrls), 'sitemap URLs must match the canonical page list');
 
-const robots = await readFile(resolve(distPath, 'robots.txt'), 'utf8');
+// Checkouts on Windows may convert robots.txt to CRLF; compare line content only.
+const robots = (await readFile(resolve(distPath, 'robots.txt'), 'utf8')).replace(/\r\n/g, '\n');
 assert(robots.includes('User-agent: OAI-SearchBot\nAllow: /'), 'robots.txt must explicitly allow OAI-SearchBot');
 assert(robots.includes(`Sitemap: ${seo.siteUrl}/sitemap.xml`), 'robots.txt must reference the canonical sitemap');
 
