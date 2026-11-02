@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Cpu, ShieldCheck, Terminal, AlertTriangle, CheckCircle2, Quote } from 'lucide-react';
-import { UX_CASES } from '../data/content';
+import { findProject } from '../content';
 import { getResponsiveImageProps } from '../lib/responsiveImage';
 import { animateWhenVisible, fullMotionQuery, gsap } from '../lib/gsap';
 import { Seo } from '../components/Seo';
@@ -11,7 +11,7 @@ export const CaseStudy = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const caseData = UX_CASES.find((item) => item.id.toString() === id);
+    const caseData = findProject(id);
 
     const articleRef = useRef<HTMLElement>(null);
     const progressRef = useRef<HTMLDivElement>(null);
@@ -70,7 +70,7 @@ export const CaseStudy = () => {
 
     return (
         <article ref={articleRef} className="min-h-screen bg-[#08080c] text-neutral-300 font-sans pb-32 relative">
-            <Seo page={`case-${caseData.id}` as 'case-1' | 'case-2'} />
+            <Seo path={`/case/${caseData.id}`} />
             <div className="absolute inset-0 bg-dot-grid opacity-20 pointer-events-none -z-10" />
 
             {/* Reading Telemetry Line */}

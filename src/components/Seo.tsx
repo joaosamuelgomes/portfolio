@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
+import { seoPages } from '../content';
 import seoData from '../data/seo.json';
 
-export type SeoPageKey = keyof typeof seoData.pages;
-
 type SeoProps = {
-    page: SeoPageKey;
+    path: string;
 };
 
 const upsertMeta = (selector: string, attributes: Record<string, string>) => {
@@ -30,9 +29,10 @@ const upsertCanonical = (href: string) => {
     element.href = href;
 };
 
-export const Seo = ({ page }: SeoProps) => {
+export const Seo = ({ path }: SeoProps) => {
     useEffect(() => {
-        const metadata = seoData.pages[page];
+        const metadata = seoPages[path];
+        if (!metadata) return;
         const canonical = new URL(metadata.path, seoData.siteUrl).href;
         const image = new URL(metadata.image, seoData.siteUrl).href;
 
@@ -66,7 +66,7 @@ export const Seo = ({ page }: SeoProps) => {
             document.head.appendChild(structuredData);
         }
         structuredData.textContent = JSON.stringify(metadata.structuredData).replace(/</g, '\\u003c');
-    }, [page]);
+    }, [path]);
 
     return null;
 };

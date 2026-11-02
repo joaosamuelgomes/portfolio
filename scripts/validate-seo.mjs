@@ -5,6 +5,8 @@ import { fileURLToPath } from 'node:url';
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const distPath = resolve(projectRoot, 'dist');
 const seo = JSON.parse(await readFile(resolve(projectRoot, 'src/data/seo.json'), 'utf8'));
+const content = JSON.parse(await readFile(resolve(projectRoot, 'src/generated/content.json'), 'utf8'));
+const pages = Object.values(content.pages);
 
 const assert = (condition, message) => {
     if (!condition) throw new Error(message);
@@ -12,8 +14,15 @@ const assert = (condition, message) => {
 
 const matches = (html, pattern) => [...html.matchAll(pattern)];
 
-for (const [key, page] of Object.entries(seo.pages)) {
-    const filePath = key === 'home'
+assert(!content.includesDrafts, 'content snapshot includes drafts; production builds must exclude them');
+assert(
+    [...content.projects, ...content.articles].every((item) => !item.draft),
+    'content snapshot contains draft items',
+);
+
+for (const page of pages) {
+    const key = page.path;
+    const filePath = page.path === '/'
         ? resolve(distPath, 'index.html')
         : resolve(distPath, `${page.path.slice(1)}.html`);
     const html = await readFile(filePath, 'utf8');
@@ -42,8 +51,15 @@ for (const [key, page] of Object.entries(seo.pages)) {
 
 const sitemap = await readFile(resolve(distPath, 'sitemap.xml'), 'utf8');
 const sitemapUrls = matches(sitemap, /<loc>(.*?)<\/loc>/g).map((match) => match[1]);
-const canonicalUrls = Object.values(seo.pages).map((page) => new URL(page.path, seo.siteUrl).href);
+const canonicalUrls = pages.map((page) => new URL(page.path, seo.siteUrl).href);
 assert(JSON.stringify(sitemapUrls) === JSON.stringify(canonicalUrls), 'sitemap URLs must match the canonical page list');
+
+if (content.articles.length > 0) {
+    const rss = await readFile(resolve(distPath, 'rss.xml'), 'utf8');
+    const rssLinks = matches(rss, /<item>[\s\S]*?<link>(.*?)<\/link>/g).map((match) => match[1]);
+    const articleUrls = content.articles.map((article) => new URL(`/artigos/${article.slug}`, seo.siteUrl).href);
+    assert(JSON.stringify(rssLinks) === JSON.stringify(articleUrls), 'RSS items must match the published articles');
+}
 
 // Checkouts on Windows may convert robots.txt to CRLF; compare line content only.
 const robots = (await readFile(resolve(distPath, 'robots.txt'), 'utf8')).replace(/\r\n/g, '\n');

@@ -1,11 +1,11 @@
 import { useLayoutEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, CheckCircle2, Cpu } from 'lucide-react';
-import type { UXCaseData } from '../../data/content';
+import type { Project } from '../../content';
 import { getResponsiveImageProps } from '../../lib/responsiveImage';
 import { animateWhenVisible, fullMotionQuery, gsap } from '../../lib/gsap';
 
-export const UXCase = ({ data }: { data: UXCaseData }) => {
+export const UXCase = ({ data }: { data: Project }) => {
     const cardRef = useRef<HTMLElement>(null);
     const thumbnail = data.thumbnail || data.details.solutionImage || data.details.challengeImage;
 
@@ -47,6 +47,7 @@ export const UXCase = ({ data }: { data: UXCaseData }) => {
                     <span className="flex items-center gap-1.5">
                         <Cpu size={12} className="text-[#00f0ff]" aria-hidden="true" />
                         PROJETO REAL // 0{data.id}
+                        {data.draft && <span className="ml-2 border border-[#ff003c]/60 px-1.5 text-[#ff6b7f]">RASCUNHO</span>}
                     </span>
                     <span className="font-bold uppercase tracking-wider text-[#ccff00]">
                         {data.details.platform}
