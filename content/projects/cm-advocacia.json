@@ -1,0 +1,95 @@
+{
+  "id": 2,
+  "published": true,
+  "order": 2,
+  "title": "Cristhian Menezes Advocacia & Consultoria",
+  "category": "LegalTech & Gestão Jurídica",
+  "summary": {
+    "problem": "Clientes, processos, prazos, audiências e finanças precisavam deixar de viver em controles separados.",
+    "solution": "Uma plataforma web responsiva que centraliza a operação diária do escritório.",
+    "contribution": "Produto, UX/UI, arquitetura front-end e integração com APIs.",
+    "proof": "Plataforma em uso pelo escritório"
+  },
+  "thumbnail": "/cm-advocacia-dashboard.png",
+  "logo": "/cm-white.svg",
+  "details": {
+    "heroSubtitle": "Centralizando clientes, processos, prazos, audiências e finanças em uma plataforma jurídica simples para a operação diária.",
+    "role": "Product Developer & Front-end",
+    "timeline": "1 Mês",
+    "platform": "Web App Responsivo",
+    "sector": "Jurídico & Operações",
+    "challenge": "O escritório Cristhian Menezes Advocacia & Consultoria precisava concentrar sua operação em um único ambiente. Clientes, processos, prazos, audiências e controle financeiro faziam parte do mesmo fluxo de trabalho, mas precisavam ser organizados em uma experiência simples, funcional e segura para o uso cotidiano.",
+    "challengeImage": "/cm-advocacia-clientes.png",
+    "challengeImageAlt": "Carteira de clientes do sistema jurídico CM Advocacia",
+    "challengeImageLabel": "PRODUCT_SCOPE // CLIENT_OPERATIONS",
+    "painPoints": [
+      "Informações essenciais da operação jurídica distribuídas entre diferentes controles.",
+      "Necessidade de acompanhar processos, prazos, audiências e tarefas sem perder contexto.",
+      "Controle financeiro diretamente ligado aos clientes e processos do escritório.",
+      "Demanda por uma interface consistente que pudesse evoluir junto com o produto."
+    ],
+    "strategy": "O trabalho começou pela definição de requisitos e das jornadas prioritárias com o cliente. Atuei nas decisões de produto, UX/UI, arquitetura do front-end e integração com as APIs, enquanto Marceli Lausch conduziu o back-end, as regras de negócio e a persistência dos dados. Estruturei um design system documentado no Storybook e adotamos OpenAPI com geração de clientes TypeScript para manter os contratos entre front-end e back-end sincronizados.",
+    "strategyImage": "/cm-advocacia-audiencias.png",
+    "strategyImageAlt": "Calendário de audiências, prazos e tarefas do sistema jurídico",
+    "strategyImageLabel": "WORKFLOW_ARCHITECTURE // DEADLINES_AND_HEARINGS",
+    "solutionImage": "/cm-advocacia-dashboard.png",
+    "solutionImageAlt": "Dashboard operacional do sistema jurídico CM Advocacia",
+    "solutionImageLabel": "PRODUCTION_UI // LEGAL_OPERATIONS_HUB",
+    "features": [
+      {
+        "title": "Visão Operacional Unificada",
+        "desc": "O dashboard reúne clientes ativos, processos, compromissos, movimentações prioritárias e previsão financeira em uma leitura única para orientar o dia de trabalho.",
+        "image": "/cm-advocacia-financeiro.png"
+      },
+      {
+        "title": "Agenda Jurídica Integrada",
+        "desc": "Audiências, prazos e tarefas convivem em calendário e pauta diária, com filtros por período, tipo e status para facilitar o acompanhamento dos compromissos."
+      },
+      {
+        "title": "Contratos Tipados por OpenAPI",
+        "desc": "A geração de clientes TypeScript a partir do contrato OpenAPI mantém front-end e back-end sincronizados e reduz inconsistências durante a evolução do produto."
+      }
+    ],
+    "additionalImages": [],
+    "results": [
+      {
+        "value": "Produção",
+        "label": "Plataforma em uso pelo escritório"
+      },
+      {
+        "value": "1 Hub",
+        "label": "Operação jurídica centralizada"
+      },
+      {
+        "value": "OpenAPI",
+        "label": "Contratos front-end e back-end sincronizados"
+      }
+    ],
+    "testimonial": {
+      "quote": "O sistema ficou muito bom, prático e intuitivo, carregando tudo o que o escritório precisa no dia a dia: clientes, prazos, compromissos, audiências e financeiro em um só lugar.\n\nObrigado pela dedicação e pela parceria.\n\nSucesso!",
+      "author": "Cristhian Menezes",
+      "role": "Advogado · Cliente",
+      "image": "/advogado-image.webp",
+      "imageAlt": "Retrato de Cristhian Menezes, advogado e cliente do projeto",
+      "source": "Comentário no LinkedIn"
+    },
+    "conclusion": "O projeto reforçou uma direção importante da minha carreira: ir além do código, entender o problema real e participar de todo o ciclo de construção do produto. A IA apoiou discussões, revisões e tarefas de execução, mas a qualidade da entrega veio das decisões técnicas e de produto tomadas em parceria."
+  },
+  "seo": {
+    "title": "CM Advocacia | Case de produto e Front-end | João Gomes",
+    "description": "Case Cristhian Menezes Advocacia: produto, UX/UI e front-end de uma plataforma que centraliza clientes, processos, prazos e finanças.",
+    "image": "/cm-advocacia-dashboard.png",
+    "imageWidth": 1536,
+    "imageHeight": 1024,
+    "imageAlt": "Dashboard do sistema jurídico Cristhian Menezes Advocacia",
+    "name": "Cristhian Menezes Advocacia — plataforma de gestão jurídica",
+    "headline": "Cristhian Menezes Advocacia: produto, UX/UI e desenvolvimento front-end",
+    "summary": "Plataforma web responsiva que centraliza clientes, processos, prazos, audiências e finanças para a operação diária do escritório.",
+    "about": [
+      "Produto digital",
+      "UX/UI",
+      "Desenvolvimento front-end",
+      "Gestão jurídica"
+    ]
+  }
+}

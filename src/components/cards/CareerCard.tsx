@@ -16,7 +16,7 @@ export const CareerCard = ({ data, index }: { data: typeof CAREER_DATA[0], index
             className="relative group p-6 md:p-8 bg-[#0d0e14] border border-[#1a1c24] hover:border-[#ccff00]/60 transition-all duration-300 overflow-hidden corner-brackets"
         >
             {/* Decal de Serial de Dossiê */}
-            <div className="flex justify-between items-center text-[9px] font-mono text-neutral-500 mb-4 border-b border-[#1a1c24] pb-2">
+            <div className="flex justify-between items-center text-[9px] font-mono text-neutral-400 mb-4 border-b border-[#1a1c24] pb-2">
                 <span className="flex items-center gap-1">
                     <Terminal size={12} className="text-[#00f0ff]" />
                     LOG_ID // 0{index + 1}
@@ -48,7 +48,7 @@ export const CareerCard = ({ data, index }: { data: typeof CAREER_DATA[0], index
 
             {/* Stack de Tecnologias */}
             <div>
-                <div className="text-[10px] font-mono text-neutral-500 uppercase mb-2 flex items-center gap-1">
+                <div className="text-[10px] font-mono text-neutral-400 uppercase mb-2 flex items-center gap-1">
                     <Shield size={10} className="text-[#ccff00]" />
                     TECH_STACK_SPECIFICATION
                 </div>

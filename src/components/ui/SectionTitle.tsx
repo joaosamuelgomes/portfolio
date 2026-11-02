@@ -56,7 +56,7 @@ export const SectionTitle = ({ children, subtitle, indexCode = "// SEC_01" }: Se
         {/* Divider Line with Corner Accents */}
         <div className="mt-4 mb-3 h-[1px] bg-neutral-800 relative w-full flex items-center justify-between">
             <div data-section-rule className="w-12 h-[2px] origin-left bg-[#ccff00]" />
-            <div className="text-[9px] font-mono text-neutral-500 uppercase tracking-widest px-2 bg-[#08080c]">
+            <div className="text-[9px] font-mono text-neutral-400 uppercase tracking-widest px-2 bg-[#08080c]">
                 SYS_VERIFIED
             </div>
             <div className="w-2 h-2 border border-[#ccff00] bg-black" />

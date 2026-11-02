@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Cpu, ShieldCheck, Terminal, AlertTriangle, CheckCircle2, Quote } from 'lucide-react';
-import { UX_CASES } from '../data/content';
+import { findProject } from '../content';
 import { getResponsiveImageProps } from '../lib/responsiveImage';
 import { animateWhenVisible, fullMotionQuery, gsap } from '../lib/gsap';
 import { Seo } from '../components/Seo';
@@ -11,7 +11,7 @@ export const CaseStudy = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const caseData = UX_CASES.find((item) => item.id.toString() === id);
+    const caseData = findProject(id);
 
     const articleRef = useRef<HTMLElement>(null);
     const progressRef = useRef<HTMLDivElement>(null);
@@ -70,7 +70,7 @@ export const CaseStudy = () => {
 
     return (
         <article ref={articleRef} className="min-h-screen bg-[#08080c] text-neutral-300 font-sans pb-32 relative">
-            <Seo page={`case-${caseData.id}` as 'case-1' | 'case-2'} />
+            <Seo path={`/case/${caseData.id}`} />
             <div className="absolute inset-0 bg-dot-grid opacity-20 pointer-events-none -z-10" />
 
             {/* Reading Telemetry Line */}
@@ -105,19 +105,19 @@ export const CaseStudy = () => {
                         {/* Metadata HUD Bar */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-[#1a1c24] text-left font-mono text-xs">
                             <div className="p-3 bg-neutral-900/60 border border-neutral-800">
-                                <span className="block text-neutral-500 text-[9px] uppercase tracking-widest mb-1">// PAPEL</span>
+                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">// PAPEL</span>
                                 <span className="text-[#ccff00] font-bold">{details.role}</span>
                             </div>
                             <div className="p-3 bg-neutral-900/60 border border-neutral-800">
-                                <span className="block text-neutral-500 text-[9px] uppercase tracking-widest mb-1">// TIMELINE</span>
+                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">// TIMELINE</span>
                                 <span className="text-white font-bold">{details.timeline}</span>
                             </div>
                             <div className="p-3 bg-neutral-900/60 border border-neutral-800">
-                                <span className="block text-neutral-500 text-[9px] uppercase tracking-widest mb-1">// PLATAFORMA</span>
+                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">// PLATAFORMA</span>
                                 <span className="text-white font-bold">{details.platform}</span>
                             </div>
                             <div className="p-3 bg-neutral-900/60 border border-neutral-800">
-                                <span className="block text-neutral-500 text-[9px] uppercase tracking-widest mb-1">// SETOR</span>
+                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">// SETOR</span>
                                 <span className="text-[#00f0ff] font-bold">{details.sector || caseData.category}</span>
                             </div>
                         </div>
