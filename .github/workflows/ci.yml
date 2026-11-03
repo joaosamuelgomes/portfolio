@@ -9,6 +9,10 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+# Read-only token: the jobs only check out, test and build.
+permissions:
+  contents: read
+
 jobs:
   checks:
     name: Lint, unit tests and build
