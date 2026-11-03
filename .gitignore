@@ -29,3 +29,6 @@ src/generated/
 dist-e2e
 playwright-report
 test-results
+
+# Storybook build
+storybook-static
