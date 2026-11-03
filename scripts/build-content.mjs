@@ -5,7 +5,9 @@
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import createDOMPurify from 'dompurify';
 import matter from 'gray-matter';
+import { JSDOM } from 'jsdom';
 import { marked } from 'marked';
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -19,6 +21,10 @@ const API_SCHEMA_VERSION = 1;
 const API_ATTEMPTS = 3;
 // Generous: a free-tier API host may need a while to wake up.
 const API_TIMEOUT_MS = 30_000;
+
+// Markdown allows raw HTML, and the article body now comes from the API: sanitizing keeps a
+// compromised admin account from planting script in the published pages.
+const purify = createDOMPurify(new JSDOM('').window);
 
 export class ContentError extends Error {}
 
@@ -62,6 +68,8 @@ const newestFirst = (first, second) => second.publishedAt.localeCompare(first.pu
 
 /** Frontmatter fields plus the Markdown body, from a file or from the API, to the snapshot's article. */
 const toArticle = (file, slug, data, markdown, draft) => {
+    // The slug becomes a file name under dist/, so it is checked whatever the source.
+    if (typeof slug !== 'string' || !SLUG_PATTERN.test(slug)) fail(file, '"slug" must be a lowercase slug (letters, numbers and hyphens)');
     if (/^# /m.test(markdown)) fail(file, 'the title is the page h1; start body headings at "##"');
     if (data.tags !== undefined && !(Array.isArray(data.tags) && data.tags.every((tag) => typeof tag === 'string'))) {
         fail(file, '"tags" must be a list of strings');
@@ -83,7 +91,7 @@ const toArticle = (file, slug, data, markdown, draft) => {
         imageHeight: data.imageHeight ?? DEFAULT_ARTICLE_IMAGE.imageHeight,
         imageAlt: data.imageAlt ?? `Artigo: ${data.title}`,
         // Code blocks scroll horizontally, so they must be reachable by keyboard.
-        html: marked.parse(markdown, { async: false }).replaceAll('<pre>', '<pre tabindex="0">'),
+        html: purify.sanitize(marked.parse(markdown, { async: false })).replaceAll('<pre>', '<pre tabindex="0">'),
         draft,
     };
 };
