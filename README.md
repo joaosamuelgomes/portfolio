@@ -27,6 +27,17 @@ npm run lint
 npm run build
 ```
 
+## Design system
+
+Os componentes, os tokens e os padrões do [DESIGN.md](DESIGN.md) estão documentados no Storybook, publicado em [joaosamuelgomes.github.io/portfolio](https://joaosamuelgomes.github.io/portfolio/) a cada push na `main`.
+
+```bash
+npm run storybook        # http://localhost:6006
+npm run build-storybook  # gera storybook-static/
+```
+
+Cada story passa pelo addon de acessibilidade (axe); violações aparecem como erro no painel Accessibility.
+
 ## Conteúdo
 
 Projetos e artigos chegam ao site por um snapshot gerado no build (`scripts/build-content.mjs` → `src/generated/content.json`). A fonte depende de `CONTENT_API_URL`:

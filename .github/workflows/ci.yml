@@ -28,6 +28,8 @@ jobs:
       - run: npm test
       # Includes the content build, type-check, static SEO pages and their validation.
       - run: npm run build
+      # Pull requests only build it; storybook.yml publishes from main.
+      - run: npm run build-storybook
 
   e2e:
     name: End-to-end and accessibility
