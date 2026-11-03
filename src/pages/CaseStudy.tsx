@@ -91,7 +91,7 @@ export const CaseStudy = () => {
                     <div data-case-header>
                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-black border border-neutral-800 font-mono text-xs text-[#00f0ff] uppercase tracking-widest mb-6">
                             <Cpu size={14} />
-                            DECLASSIFIED_CASE // 0{caseData.id} // {caseData.category}
+                            {`DECLASSIFIED_CASE // 0${caseData.id} // ${caseData.category}`}
                         </div>
                         
                         <h1 className="text-4xl sm:text-6xl md:text-7xl font-display font-bold uppercase tracking-tight text-white mb-6 leading-tight">
@@ -105,19 +105,19 @@ export const CaseStudy = () => {
                         {/* Metadata HUD Bar */}
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-[#1a1c24] text-left font-mono text-xs">
                             <div className="p-3 bg-neutral-900/60 border border-neutral-800">
-                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">// PAPEL</span>
+                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">{'// PAPEL'}</span>
                                 <span className="text-[#ccff00] font-bold">{details.role}</span>
                             </div>
                             <div className="p-3 bg-neutral-900/60 border border-neutral-800">
-                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">// TIMELINE</span>
+                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">{'// TIMELINE'}</span>
                                 <span className="text-white font-bold">{details.timeline}</span>
                             </div>
                             <div className="p-3 bg-neutral-900/60 border border-neutral-800">
-                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">// PLATAFORMA</span>
+                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">{'// PLATAFORMA'}</span>
                                 <span className="text-white font-bold">{details.platform}</span>
                             </div>
                             <div className="p-3 bg-neutral-900/60 border border-neutral-800">
-                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">// SETOR</span>
+                                <span className="block text-neutral-400 text-[9px] uppercase tracking-widest mb-1">{'// SETOR'}</span>
                                 <span className="text-[#00f0ff] font-bold">{details.sector || caseData.category}</span>
                             </div>
                         </div>
@@ -357,7 +357,7 @@ export const CaseStudy = () => {
 
                     {details.conclusion && (
                         <div className="mb-24 p-6 bg-[#0d0e14] border border-[#1a1c24]">
-                            <h2 className="text-2xl font-display font-bold uppercase text-white mb-4">// CONCLUSÃO</h2>
+                            <h2 className="text-2xl font-display font-bold uppercase text-white mb-4">{'// CONCLUSÃO'}</h2>
                             <p className="text-justify [hyphens:auto] text-base md:text-lg leading-relaxed text-neutral-300 font-sans font-light">
                                 {details.conclusion}
                             </p>

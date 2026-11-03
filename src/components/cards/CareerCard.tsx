@@ -31,7 +31,7 @@ export const CareerCard = ({ data, index }: { data: typeof CAREER_DATA[0], index
                     </h3>
                     <div className="flex items-center gap-2 text-neutral-400 mt-1 font-mono text-xs md:text-sm">
                         <span className="text-[#00f0ff] font-bold">{data.company}</span>
-                        <span className="text-neutral-600">//</span>
+                        <span className="text-neutral-600">{'//'}</span>
                         <span>{data.sector}</span>
                     </div>
                 </div>

@@ -74,12 +74,12 @@ export const ArticlePage = () => {
 
                     <dl className="mt-10 grid grid-cols-2 gap-4 border-t border-[#1a1c24] pt-8 font-mono text-xs sm:grid-cols-3">
                         <div className="border border-neutral-800 bg-neutral-900/60 p-3">
-                            <dt className="mb-1 text-[9px] uppercase tracking-widest text-neutral-400">// LEITURA</dt>
+                            <dt className="mb-1 text-[9px] uppercase tracking-widest text-neutral-400">{'// LEITURA'}</dt>
                             <dd className="font-bold text-[#ccff00]">{article.readingMinutes} min</dd>
                         </div>
                         {article.updatedAt && (
                             <div className="border border-neutral-800 bg-neutral-900/60 p-3">
-                                <dt className="mb-1 text-[9px] uppercase tracking-widest text-neutral-400">// ATUALIZADO</dt>
+                                <dt className="mb-1 text-[9px] uppercase tracking-widest text-neutral-400">{'// ATUALIZADO'}</dt>
                                 <dd className="font-bold text-white">
                                     <time dateTime={article.updatedAt}>{formatDate(article.updatedAt)}</time>
                                 </dd>
@@ -87,7 +87,7 @@ export const ArticlePage = () => {
                         )}
                         {article.tags.length > 0 && (
                             <div className="col-span-2 border border-neutral-800 bg-neutral-900/60 p-3 sm:col-span-1">
-                                <dt className="mb-1 text-[9px] uppercase tracking-widest text-neutral-400">// TEMAS</dt>
+                                <dt className="mb-1 text-[9px] uppercase tracking-widest text-neutral-400">{'// TEMAS'}</dt>
                                 <dd className="font-bold text-[#00f0ff]">{article.tags.join(' · ')}</dd>
                             </div>
                         )}
