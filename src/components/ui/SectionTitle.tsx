@@ -39,7 +39,7 @@ export const SectionTitle = ({ children, subtitle, indexCode = "// SEC_01" }: Se
             <span className="px-1.5 py-0.5 bg-neutral-900 border border-[#ccff00]/30 text-[10px] font-bold">
                 {indexCode}
             </span>
-            <span className="text-neutral-500">//</span>
+            <span className="text-neutral-500">{'//'}</span>
             <span className="text-neutral-400">SECTION_SPECIFICATION</span>
         </div>
 
