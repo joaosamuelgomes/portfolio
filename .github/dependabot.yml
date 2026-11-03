@@ -8,6 +8,22 @@ updates:
     groups:
       npm:
         patterns: ["*"]
+    ignore:
+      # eslint-plugin-jsx-a11y 6.x only accepts eslint up to 9, so eslint 10 breaks npm ci.
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@eslint/js"
+        update-types: ["version-update:semver-major"]
+      # Types follow the Node version CI runs (24), not the latest Node.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      # Breaking majors: upgrade these by hand in a dedicated PR, not in the monthly group.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "vite"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@vitejs/plugin-react"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
