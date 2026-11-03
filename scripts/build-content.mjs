@@ -308,8 +308,9 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
         console.log(`Content snapshot (${snapshot.source}): ${snapshot.projects.length} projects, ${snapshot.articles.length} articles.`);
     } catch (error) {
         if (!(error instanceof ContentError)) throw error;
-        // The message can quote API data (slugs, titles); one line keeps it from forging log entries.
-        console.error(error.message.replace(/[\r\n\u001b]+/g, ' '));
+        // The message can quote API data (slugs, titles); dropping control characters keeps it
+        // on one line, so it cannot forge log entries or inject terminal escapes.
+        console.error(error.message.replace(/\p{Cc}+/gu, ' '));
         process.exitCode = 1;
     }
 }
