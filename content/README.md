@@ -35,3 +35,5 @@ imageAlt: Descrição da imagem
 
 O título do artigo já é o h1 da página, então o corpo começa em `##`.
 ```
+
+HTML escrito direto no Markdown passa por sanitização no build: tags e atributos que executam script (`<script>`, `onerror`, `javascript:`...) são removidos.
