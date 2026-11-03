@@ -1,5 +1,10 @@
 # Made by João Gomes
 
+[![CI](https://github.com/joaosamuelgomes/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/joaosamuelgomes/portfolio/actions/workflows/ci.yml)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=joaosamuelgomes_portfolio&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=joaosamuelgomes_portfolio)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=joaosamuelgomes_portfolio&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=joaosamuelgomes_portfolio)
+[![Storybook](https://img.shields.io/badge/Storybook-design%20system-ff4785?logo=storybook&logoColor=white)](https://joaosamuelgomes.github.io/portfolio/)
+
 Portfólio profissional e comercial de João Samuel Gomes, conectando produto, UX e engenharia da descoberta à implementação.
 
 ## Stack
