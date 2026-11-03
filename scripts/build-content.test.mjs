@@ -99,6 +99,16 @@ describe('buildContent', () => {
         expect(snapshot.pages['/artigos'].structuredData.blogPost).toHaveLength(1);
     });
 
+    it('strips script from the rendered Markdown and keeps the rest', async () => {
+        const body = '## Seção\n\n<img src="/x.png" alt="x" onerror="alert(1)"><script>alert(2)</script>\n\n```js\nconst a = 1;\n```';
+        await writeArticle('meu-artigo', article({ body }));
+
+        const [rendered] = (await build()).articles;
+        expect(rendered.html).not.toMatch(/<script|onerror/);
+        expect(rendered.html).toContain('<img src="/x.png" alt="x">');
+        expect(rendered.html).toContain('<pre tabindex="0"><code class="language-js">');
+    });
+
     it('skips the article index page when there are no articles', async () => {
         await writeProject('a', project());
 
@@ -212,6 +222,7 @@ describe('buildContent from the API', () => {
         ['an unknown schema version', apiSnapshot({ schemaVersion: 2 }), /schemaVersion 1, got 2/],
         ['a project without SEO image', apiSnapshot({ projects: [{ ...apiSnapshot().projects[0], seo: { ...project().seo, image: '' } }] }), /seo\.image/],
         ['an article with an h1', apiSnapshot({ articles: [{ ...apiSnapshot().articles[0], markdown: '# Título' }] }), /start body headings/],
+        ['an article slug that is not a slug', apiSnapshot({ articles: [{ ...apiSnapshot().articles[0], slug: '../../fora' }] }), /"slug" must be a lowercase slug/],
     ])('rejects %s', async (_, body, message) => {
         const { fetchImpl } = respond(json(body));
         await expect(build({ apiUrl: API_URL, fetchImpl })).rejects.toThrow(message);
