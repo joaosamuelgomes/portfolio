@@ -23,7 +23,9 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
+      # No dependency lifecycle scripts: nothing in the tree needs one, and they are the usual
+      # way a compromised package runs code in CI.
+      - run: npm ci --ignore-scripts
       - run: npm run build-storybook
       - uses: actions/upload-pages-artifact@v5
         with:

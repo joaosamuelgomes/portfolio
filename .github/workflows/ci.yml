@@ -23,7 +23,9 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
+      # No dependency lifecycle scripts: nothing in the tree needs one, and they are the usual
+      # way a compromised package runs code in CI.
+      - run: npm ci --ignore-scripts
       - run: npm run lint
       - run: npm test
       # Includes the content build, type-check, static SEO pages and their validation.
@@ -40,8 +42,9 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      - run: npm ci --ignore-scripts
+      # The Playwright CLI from the lockfile, never one fetched on demand by npx.
+      - run: ./node_modules/.bin/playwright install --with-deps chromium
       - run: npm run test:e2e
       - uses: actions/upload-artifact@v7
         if: failure()
